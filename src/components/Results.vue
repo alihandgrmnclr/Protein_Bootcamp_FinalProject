@@ -15,31 +15,31 @@ const props = defineProps([]);
                         class="seconds">saniye</span></span>
             </div>
             <div class="leaderboard__profile">
-                <span class="rank-second">2-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                <span class="rank-second">2-</span> <span>Şahbatur</span> <span class="time">15.6<span
                         class="seconds">saniye</span></span>
             </div>
             <div class="leaderboard__profile">
-                <span class="rank-third">3-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                <span class="rank-third">3-</span> <span>Bold Pilot</span> <span class="time">15.6<span
                         class="seconds">saniye</span></span>
             </div>
             <div class="leaderboard__profile">
-                <span class="rank">4-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                <span class="rank">4-</span> <span>Black Lightning</span> <span class="time">15.6<span
                         class="seconds">saniye</span></span>
             </div>
             <div class="leaderboard__profile">
-                <span class="rank">5-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                <span class="rank">5-</span> <span>Mucit Tay</span> <span class="time">15.6<span
                         class="seconds">saniye</span></span>
             </div>
             <div class="leaderboard__profile">
-                <span class="rank">6-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                <span class="rank">6-</span> <span>Barbaros</span> <span class="time">15.6<span
                         class="seconds">saniye</span></span>
             </div>
             <div class="leaderboard__profile">
-                <span class="rank">7-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                <span class="rank">7-</span> <span>Manas</span> <span class="time">15.6<span
                         class="seconds">saniye</span></span>
             </div>
             <div class="leaderboard__profile">
-                <span class="rank">8-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                <span class="rank">8-</span> <span>Sipahi</span> <span class="time">15.6<span
                         class="seconds">saniye</span></span>
             </div>
         </div>
@@ -67,8 +67,10 @@ const props = defineProps([]);
     &__rankings {
         @apply text-xl font-semibold;
     }
-
-    &__profile {}
+    
+    &__profile {
+        @apply flex w-full justify-between gap-3;
+    }
 
     .rank-first {
         @apply text-orange-600 text-2xl font-bold;
