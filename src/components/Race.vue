@@ -39,12 +39,7 @@ const images = [
 ];
 
 const randomSpeed = (min, max) => {
-    return Math.floor((Math.random() * (max - min)) + min);
-}
-// console.log(randomSpeed(20,40));
-
-const horseSelect = function () {
-    console.log(selectedHorse.value);
+    return Math.floor((Math.random() * (max - min)) + min); //20-40 aralığında random hız
 }
 
 
