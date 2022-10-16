@@ -14,4 +14,6 @@ import Bet from './components/Bet.vue';
 
 <style scoped>
 
+
+
 </style>
