@@ -4,34 +4,89 @@ const props = defineProps([]);
 </script>
 
 <template>
-    <div class="wrapper">
-        <img class="leaderboard-icon" src="https://cdn-icons-png.flaticon.com/512/744/744974.png" alt="">
-        <h1>Liderlik Tablosu</h1>
-        <div class="rankings">
-            <ul>
-                <li>1-</li>
-                <li>2-</li>
-                <li>3-</li>
-                <li>4-</li>
-                <li>5-</li>
-                <li>6-</li>
-                <li>7-</li>
-                <li>8-</li>
-            </ul>
+    <div class="leaderboard">
+        <div class="leaderboard__header">
+            <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/744/744974.png" alt="">
+            <h1 class="leaderboard__title">LIDERLIK TABLOSU</h1>
+        </div>
+        <div class="leaderboard__rankings">
+            <div class="leaderboard__profile">
+                <span class="rank-first">1-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
+            <div class="leaderboard__profile">
+                <span class="rank-second">2-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
+            <div class="leaderboard__profile">
+                <span class="rank-third">3-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
+            <div class="leaderboard__profile">
+                <span class="rank">4-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
+            <div class="leaderboard__profile">
+                <span class="rank">5-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
+            <div class="leaderboard__profile">
+                <span class="rank">6-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
+            <div class="leaderboard__profile">
+                <span class="rank">7-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
+            <div class="leaderboard__profile">
+                <span class="rank">8-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                        class="seconds">saniye</span></span>
+            </div>
         </div>
     </div>
 
 </template>
 
-<style scoped>
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+<style lang="scss" scoped>
+.leaderboard {
+    @apply flex flex-col justify-center items-center p-3 bg-gray-800 text-slate-50 w-96 rounded-xl;
+    font-family: 'Source Sans Pro', sans-serif;
 
-.leaderboard-icon {
-    width: 64px;
+    &__header {
+        @apply flex flex-col justify-center items-center;
+    }
+
+    &__icon {
+        @apply w-14;
+    }
+
+    &__title {
+        @apply text-3xl font-black;
+    }
+
+    &__rankings {
+        @apply text-xl font-semibold;
+    }
+
+    &__profile {}
+
+    .rank-first {
+        @apply text-orange-600 text-2xl font-bold;
+    }
+
+    .rank-second {
+        @apply text-yellow-500 text-2xl font-bold;
+    }
+
+    .rank-third {
+        @apply text-purple-600 text-2xl font-bold;
+    }
+    .time{
+        @apply text-green-600;
+    }
+
+    .seconds{
+        @apply text-sm;
+    }
 }
 </style>
