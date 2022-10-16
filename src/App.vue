@@ -1,7 +1,6 @@
 <script setup>
 import Race from './components/Race.vue';
 import Bet from './components/Bet.vue';
-import Results from './components/Results.vue';
 
 
 </script>
@@ -9,7 +8,6 @@ import Results from './components/Results.vue';
 <template>
   
   <Bet></Bet>
-  <Results></Results>
   <Race></Race>
 
 </template>

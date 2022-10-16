@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue';
+import Results from './Results.vue';
 const start = ref(false);
 
 const images = [
@@ -196,7 +197,7 @@ const raceStart = function () {
 <template>
     <button @click="raceStart">Başla</button>
     <template v-if="!start">
-
+        <Results></Results>
         <div class="track">
             <div v-for="horse in images" :key="horse.id">
                 <div class="finish"></div>
