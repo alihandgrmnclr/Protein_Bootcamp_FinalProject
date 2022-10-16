@@ -37,13 +37,10 @@ const images = [
     }
 
 ];
-var reqID;
-
 
 const randomSpeed = (min, max) => {
     return Math.floor((Math.random() * (max - min)) + min);
 }
-// console.log(randomSpeed(20,40));
 
 const raceStart = function () {
     let horse1 = document.querySelector("#horse-1");
@@ -64,27 +61,135 @@ const raceStart = function () {
     let position7 = 0;
     let position8 = 0;
 
-    let running = setInterval(function () {
+    
+    // let running = setInterval(function () {
+    //     position1 += randomSpeed(2, 8);
+    //     position2 += randomSpeed(2, 8);
+    //     position3 += randomSpeed(2, 8);
+    //     position4 += randomSpeed(2, 8);
+    //     position5 += randomSpeed(2, 8);
+    //     position6 += randomSpeed(2, 8);
+    //     position7 += randomSpeed(2, 8);
+    //     position8 += randomSpeed(2, 8);
+    //     horse1.style.left = position1 + "px";
+    //     horse2.style.left = position2 + "px";
+    //     horse3.style.left = position3 + "px";
+    //     horse4.style.left = position4 + "px";
+    //     horse5.style.left = position5 + "px";
+    //     horse6.style.left = position6 + "px";
+    //     horse7.style.left = position7 + "px";
+    //     horse8.style.left = position8 + "px";
+        
+        
+    //     if (position1 > 14400) {
+    //         idle();
+    //     }
+
+    //     console.log(sumPosition);
+    // }, 50)
+    let running1 = setInterval(()=>{
         position1 += randomSpeed(2, 8);
-        position2 += randomSpeed(2, 8);
-        position3 += randomSpeed(2, 8);
-        position4 += randomSpeed(2, 8);
-        position5 += randomSpeed(2, 8);
-        position6 += randomSpeed(2, 8);
-        position7 += randomSpeed(2, 8);
-        position8 += randomSpeed(2, 8);
         horse1.style.left = position1 + "px";
+
+        if (position1 > 1820) {
+            idle1();
+        }
+    },50)
+    let idle1 = () => {
+        clearInterval(running1);
+    }
+
+    let running2 = setInterval(()=>{
+        position2 += randomSpeed(2, 8);
         horse2.style.left = position2 + "px";
+
+        if (position2 > 1820) {
+            idle2();
+        }
+    },50)
+    let idle2 = () => {
+        clearInterval(running2);
+    }
+
+    let running3 = setInterval(()=>{
+        position3 += randomSpeed(2, 8);
         horse3.style.left = position3 + "px";
+
+        if (position3 > 1820) {
+            idle3();
+        }
+    },50)
+    let idle3 = () => {
+        clearInterval(running3);
+    }
+
+    let running4 = setInterval(()=>{
+        position4 += randomSpeed(2, 8);
         horse4.style.left = position4 + "px";
+
+        if (position4 > 1820) {
+            idle4();
+        }
+    },50)
+    let idle4 = () => {
+        clearInterval(running4);
+    }
+
+    let running5 = setInterval(()=>{
+        position5 += randomSpeed(2, 8);
         horse5.style.left = position5 + "px";
+
+        if (position5 > 1820) {
+            idle5();
+        }
+    },50)
+    let idle5 = () => {
+        clearInterval(running5);
+    }
+
+    let running6 = setInterval(()=>{
+        position6 += randomSpeed(2, 8);
         horse6.style.left = position6 + "px";
+
+        if (position6 > 1820) {
+            idle6();
+        }
+    },50)
+    let idle6 = () => {
+        clearInterval(running6);
+    }
+
+    let running7 = setInterval(()=>{
+        position7 += randomSpeed(2, 8);
         horse7.style.left = position7 + "px";
+
+        if (position7 > 1820) {
+            idle7();
+        }
+    },50)
+    let idle7 = () => {
+        clearInterval(running7);
+    }
+
+    let running8 = setInterval(()=>{
+        position8 += randomSpeed(2, 8);
         horse8.style.left = position8 + "px";
-      
-        console.log(position1, position2, position3, position4, position5, position6, position7, position8);
-    }, 50)
+
+        if (position8 > 1820) {
+            idle8();
+        }
+    },50)
+    let idle8 = () => {
+        clearInterval(running8);
+    }
+
+    // let idle = () => {
+    //     clearInterval(running);
+    // }
+
 }
+
+
 
 </script>
 
@@ -122,7 +227,7 @@ button {
 }
 
 .finish {
-    @apply absolute right-0 w-2 h-[102px] bg-white mr-10
+    @apply absolute right-0 w-2 h-[102px] bg-white mr-20
 }
 
 .line-wrapper {
