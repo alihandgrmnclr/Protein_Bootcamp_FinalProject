@@ -1,66 +1,151 @@
 <script setup>
-import { ref } from "vue"
-const balance = ref(150);
-const selectedHorse = ref();
-const betPrice = ref();
-const horseSelect = function () {
-    console.log(selectedHorse.value);
-}
-const checkBetPrice = function () {
-    console.log(betPrice.value);
-    if (betPrice.value < 1) {
-        betPrice.value = 1;
-    } else if (betPrice.value > balance.value) {
-        betPrice.value = 0;
-        betPrice.value = balance.value;
+import { onMounted, ref } from "vue"
+const props = defineProps(["horses", "balance"])
+
+const selectedHorse = ref("");
+const betAmount = ref(1);
+
+// bahis tutarı 1'den küçük olamaz bakiyeden büyük olamaz
+const checkAmount = () => {
+    if (betAmount.value > props.balance) {
+        betAmount.value = props.balance;
+    } else if (betAmount.value < 1) {
+        betAmount.value = 1;
     }
 }
 
 </script>
 
 <template>
-    <div class="input-wrapper">
-        <div class="bet">
-            <p>Bakiyeniz: {{balance}}₺</p>
-            <div>
-                Bir at seçiniz
-                <select name="" id="" v-model="selectedHorse">
-                    <option value="1">Horse 1</option>
-                    <option value="2">Horse 2</option>
-                    <option value="3">Horse 3</option>
-                    <option value="4">Horse 4</option>
-                    <option value="5">Horse 5</option>
-                    <option value="6">Horse 6</option>
-                    <option value="7">Horse 7</option>
-                    <option value="8">Horse 8</option>
-                </select>
+    <div class="bet">
+        <div class="bet__select">
+            <h1 class="bet-title">Bir at seçiniz</h1>
+            <ul class="bet-horse-wrapper">
+                <li class="bet-horse" v-for="horse in horses" :key="horse.id">{{horse.name}}
+                    <span> <input type="radio" name="horse" :value="horse.name" v-model="selectedHorse"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="bet__checkout">
+            <div class="bet-cash">
+                <h1 class="title">Bakiyeniz</h1>
+                <p class="balance">{{balance}}₺</p>
             </div>
-            <div>
-                Bahis tutarı giriniz
-                <input type="range" min="1" :max=balance @input="checkBetPrice" v-model="betPrice"
-                    placeholder="Bet amount...">{{betPrice}}
+            <div class="hr">
+                <hr>
             </div>
-            <button @click="horseSelect">Onayla</button>
+            <div class="bet-coupon">
+                <p>Seçilen At: <span class="amounts">{{selectedHorse}}</span></p>
+                <span>Bahis Tutarı: <input class="bet-amount" type="number" v-model="betAmount"
+                        @input="checkAmount"></span>
+                <p>Oran: <span class="amounts">5.00</span></p>
+                <p>Tahmini Kazanç: <span class="amounts">{{betAmount*5}}₺</span> </p>
+            </div>
+            <div class="submit">
+                <button class="submit__btn">Onayla</button>
+            </div>
         </div>
     </div>
 </template>
 
-<style scoped>
-select {
-    background-color: aquamarine;
-}
+<style lang="scss" scoped>
+.bet {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    gap: 5px;
+    
 
-option {
-    background-color: aquamarine;
-}
+    &__select {
+        width: 350px;
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        flex-direction: column;
+        background-color: #7b584e;
+        padding: 10px;
 
-input {
-    border: solid 1px;
-    color: black;
-}
+        .bet-title {
+            font-size: 28px;
+            color: white;
 
-button {
-    background-color: aqua;
-    padding: 5px;
+        }
+
+        .bet-horse-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .bet-horse {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: solid 1px;
+            color: black;
+        }
+    }
+
+    &__checkout {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #9b6753;
+        padding: 10px;
+        width: 350px;
+        gap: 5px;
+
+        .bet-amount {
+            width: 75px;
+            border-radius: 5px;
+        }
+
+        .bet-cash {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .title {
+                font-size: 36px;
+                font-weight: 600;
+                color: white;
+            }
+
+            .balance {
+                font-size: 36px;
+                font-weight: 600;
+                color: black;
+            }
+
+            .bet-coupon {}
+        }
+        .amounts {
+            font-weight: 900;
+        }
+
+        .submit {
+            display: flex;
+            justify-content: center;
+            background-color: #473e3a;
+            color: white;
+            border-radius: 10px;
+            
+            &__btn{
+                padding: 10px;
+                width: 100%;
+
+            }
+        }
+    }
+
+    .hr {
+        background-color: black;
+        width: 100%;
+    }
 }
 </style>
