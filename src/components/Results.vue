@@ -4,26 +4,26 @@ import { onMounted } from 'vue';
 const props = defineProps([]);
 
 // DRAGGABLE
-onMounted(() => {
-    const wrapper = document.querySelector(".wrapper"); // parent element of draggable div
-    const head = document.querySelector("#header"); // this is the draggable div
+// onMounted(() => {
+//     const wrapper = document.querySelector(".wrapper"); // parent element of draggable div
+//     const head = document.querySelector("#header"); // this is the draggable div
 
-    function onDrag({ movementX, movementY }) {
-        let getStyle = window.getComputedStyle(wrapper);
-        let leftVal = parseInt(getStyle.left);
-        let topVal = parseInt(getStyle.top);
-        wrapper.style.left = `${leftVal + movementX}px`;
-        wrapper.style.top = `${topVal + movementY}px`;
-    }
-    head.addEventListener("mousedown", () => {
-        head.classList.add("active");
-        head.addEventListener("mousemove", onDrag);
-    });
-    document.addEventListener("mouseup", () => {
-        head.classList.remove("active");
-        head.removeEventListener("mousemove", onDrag);
-    });
-})
+//     function onDrag({ movementX, movementY }) {
+//         let getStyle = window.getComputedStyle(wrapper);
+//         let leftVal = parseInt(getStyle.left);
+//         let topVal = parseInt(getStyle.top);
+//         wrapper.style.left = `${leftVal + movementX}px`;
+//         wrapper.style.top = `${topVal + movementY}px`;
+//     }
+//     head.addEventListener("mousedown", () => {
+//         head.classList.add("active");
+//         head.addEventListener("mousemove", onDrag);
+//     });
+//     document.addEventListener("mouseup", () => {
+//         head.classList.remove("active");
+//         head.removeEventListener("mousemove", onDrag);
+//     });
+// })
 
 </script>
 
