@@ -1,7 +1,19 @@
 <script setup>
 import { ref } from 'vue';
 import Results from './Results.vue';
+
 const start = ref(false);
+const positions = ref({
+    pos1: 0,
+    pos2: 0,
+    pos3: 0,
+    pos4: 0,
+    pos5: 0,
+    pos6: 0,
+    pos7: 0,
+    pos8: 0
+})
+
 
 const images = [
     {
@@ -53,14 +65,14 @@ const raceStart = function () {
     let horse7 = document.querySelector("#horse-7");
     let horse8 = document.querySelector("#horse-8");
 
-    let position1 = 0;
-    let position2 = 0;
-    let position3 = 0;
-    let position4 = 0;
-    let position5 = 0;
-    let position6 = 0;
-    let position7 = 0;
-    let position8 = 0;
+    // let position1 = 0;
+    // let position2 = 0;
+    // let position3 = 0;
+    // let position4 = 0;
+    // let position5 = 0;
+    // let position6 = 0;
+    // let position7 = 0;
+    // let position8 = 0;
 
     
     // let running = setInterval(function () {
@@ -89,10 +101,10 @@ const raceStart = function () {
     //     console.log(sumPosition);
     // }, 50)
     let running1 = setInterval(()=>{
-        position1 += randomSpeed(2, 8);
-        horse1.style.left = position1 + "px";
+        positions.value.pos1 += randomSpeed(2, 8);
+        horse1.style.left = positions.value.pos1 + "px";
 
-        if (position1 > 1820) {
+        if (positions.value.pos1 > 1820) {
             idle1();
         }
     },50)
@@ -101,10 +113,10 @@ const raceStart = function () {
     }
 
     let running2 = setInterval(()=>{
-        position2 += randomSpeed(2, 8);
-        horse2.style.left = position2 + "px";
+        positions.value.pos2 += randomSpeed(2, 8);
+        horse2.style.left = positions.value.pos2 + "px";
 
-        if (position2 > 1820) {
+        if (positions.value.pos2 > 1820) {
             idle2();
         }
     },50)
@@ -113,10 +125,10 @@ const raceStart = function () {
     }
 
     let running3 = setInterval(()=>{
-        position3 += randomSpeed(2, 8);
-        horse3.style.left = position3 + "px";
+        positions.value.pos3 += randomSpeed(2, 8);
+        horse3.style.left = positions.value.pos3 + "px";
 
-        if (position3 > 1820) {
+        if (positions.value.pos3 > 1820) {
             idle3();
         }
     },50)
@@ -125,10 +137,10 @@ const raceStart = function () {
     }
 
     let running4 = setInterval(()=>{
-        position4 += randomSpeed(2, 8);
-        horse4.style.left = position4 + "px";
+        positions.value.pos4 += randomSpeed(2, 8);
+        horse4.style.left = positions.value.pos4 + "px";
 
-        if (position4 > 1820) {
+        if (positions.value.pos4 > 1820) {
             idle4();
         }
     },50)
@@ -137,10 +149,10 @@ const raceStart = function () {
     }
 
     let running5 = setInterval(()=>{
-        position5 += randomSpeed(2, 8);
-        horse5.style.left = position5 + "px";
+        positions.value.pos5 += randomSpeed(2, 8);
+        horse5.style.left = positions.value.pos5 + "px";
 
-        if (position5 > 1820) {
+        if (positions.value.pos5 > 1820) {
             idle5();
         }
     },50)
@@ -149,10 +161,10 @@ const raceStart = function () {
     }
 
     let running6 = setInterval(()=>{
-        position6 += randomSpeed(2, 8);
-        horse6.style.left = position6 + "px";
+        positions.value.pos6 += randomSpeed(2, 8);
+        horse6.style.left = positions.value.pos6 + "px";
 
-        if (position6 > 1820) {
+        if (positions.value.pos6 > 1820) {
             idle6();
         }
     },50)
@@ -161,10 +173,10 @@ const raceStart = function () {
     }
 
     let running7 = setInterval(()=>{
-        position7 += randomSpeed(2, 8);
-        horse7.style.left = position7 + "px";
+        positions.value.pos7 += randomSpeed(2, 8);
+        horse7.style.left = positions.value.pos7 + "px";
 
-        if (position7 > 1820) {
+        if (positions.value.pos7 > 1820) {
             idle7();
         }
     },50)
@@ -173,10 +185,10 @@ const raceStart = function () {
     }
 
     let running8 = setInterval(()=>{
-        position8 += randomSpeed(2, 8);
-        horse8.style.left = position8 + "px";
+        positions.value.pos8 += randomSpeed(2, 8);
+        horse8.style.left = positions.value.pos8 + "px";
 
-        if (position8 > 1820) {
+        if (positions.value.pos8 > 1820) {
             idle8();
         }
     },50)
