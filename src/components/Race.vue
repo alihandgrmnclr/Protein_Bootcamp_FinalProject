@@ -18,35 +18,35 @@ const positions = ref({
 const images = [
     {
         id: 1,
-        link: "../../public/Images/Horses/H1.gif"
+        link: "../../Images/Horses/H1.gif"
     },
     {
         id: 2,
-        link: "../../public/Images/Horses/H2.gif"
+        link: "../../Images/Horses/H2.gif"
     },
     {
         id: 3,
-        link: "../../public/Images/Horses/H3.gif"
+        link: "../../Images/Horses/H3.gif"
     },
     {
         id: 4,
-        link: "../../public/Images/Horses/H4.gif"
+        link: "../../Images/Horses/H4.gif"
     },
     {
         id: 5,
-        link: "../../public/Images/Horses/H5.gif"
+        link: "../../Images/Horses/H5.gif"
     },
     {
         id: 6,
-        link: "../../public/Images/Horses/H6.gif"
+        link: "../../Images/Horses/H6.gif"
     },
     {
         id: 7,
-        link: "../../public/Images/Horses/H7.gif"
+        link: "../../Images/Horses/H7.gif"
     },
     {
         id: 8,
-        link: "../../public/Images/Horses/H8.gif"
+        link: "../../Images/Horses/H8.gif"
     }
 
 ];
@@ -55,7 +55,9 @@ const randomSpeed = (min, max) => {
     return Math.floor((Math.random() * (max - min)) + min);
 }
 
-const raceStart = function () {
+function raceStart() {
+    
+
     let horse1 = document.querySelector("#horse-1");
     let horse2 = document.querySelector("#horse-2");
     let horse3 = document.querySelector("#horse-3");
@@ -64,15 +66,6 @@ const raceStart = function () {
     let horse6 = document.querySelector("#horse-6");
     let horse7 = document.querySelector("#horse-7");
     let horse8 = document.querySelector("#horse-8");
-
-    // let position1 = 0;
-    // let position2 = 0;
-    // let position3 = 0;
-    // let position4 = 0;
-    // let position5 = 0;
-    // let position6 = 0;
-    // let position7 = 0;
-    // let position8 = 0;
 
     
     // let running = setInterval(function () {
@@ -100,6 +93,7 @@ const raceStart = function () {
 
     //     console.log(sumPosition);
     // }, 50)
+
     let running1 = setInterval(()=>{
         positions.value.pos1 += randomSpeed(2, 8);
         horse1.style.left = positions.value.pos1 + "px";
