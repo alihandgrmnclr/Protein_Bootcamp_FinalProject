@@ -76,9 +76,7 @@ const props = defineProps([]);
 
 <style lang="scss" scoped>
 .leaderboard {
-    opacity: .7;
-    @apply flex flex-col justify-center items-center p-3 bg-gray-800 text-slate-50 w-96 rounded-xl absolute z-10 cursor-move;
-    left: 30%;
+    @apply flex flex-col justify-center items-center p-3 bg-gray-800 text-slate-50 w-96 rounded-xl;
     font-family: 'Source Sans Pro', sans-serif;
 
     &__header {
