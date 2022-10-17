@@ -5,6 +5,11 @@ import Bet from './components/Bet.vue';
 
 const race = ref(false);
 const balance = ref(100);
+const bet = ref(false);
+
+const setBet = () => {
+  bet.value = true;
+}
 
 const horses = [
   {
@@ -53,9 +58,9 @@ const horses = [
 
 <template>
   <img src="" alt="">
-  <template v-if="!race">
+  <template v-if="!bet">
     <div class="bet-app">
-      <Bet :horses="horses" :balance="balance">
+      <Bet :horses="horses" :balance="balance" @submitBet="setBet">
       </Bet>
     </div>
   </template>

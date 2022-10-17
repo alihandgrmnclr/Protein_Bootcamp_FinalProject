@@ -1,6 +1,6 @@
 <script setup>
-import { onMounted, ref } from "vue"
-const props = defineProps(["horses", "balance"])
+import { ref } from "vue"
+const props = defineProps(["horses", "balance", "bet"])
 
 const selectedHorse = ref("");
 const betAmount = ref(1);
@@ -12,6 +12,12 @@ const checkAmount = () => {
     } else if (betAmount.value < 1) {
         betAmount.value = 1;
     }
+}
+
+const emit = defineEmits(["submitBet"])
+
+const submitCoupon = () => {
+    emit("submitBet", true);
 }
 
 </script>
@@ -42,7 +48,7 @@ const checkAmount = () => {
                 <p>Tahmini Kazanç: <span class="amounts">{{betAmount*5}}₺</span> </p>
             </div>
             <div class="submit">
-                <button class="submit__btn">Onayla</button>
+                <button class="submit__btn" @click="submitCoupon">Onayla</button>
             </div>
         </div>
     </div>
@@ -55,7 +61,8 @@ const checkAmount = () => {
     flex-direction: row;
     width: 600px;
     gap: 5px;
-    
+    box-shadow: 1rem 1rem 2rem hsl(0 0% 0% / 50%);
+
 
     &__select {
         width: 350px;
@@ -124,6 +131,7 @@ const checkAmount = () => {
 
             .bet-coupon {}
         }
+
         .amounts {
             font-weight: 900;
         }
@@ -134,8 +142,8 @@ const checkAmount = () => {
             background-color: #473e3a;
             color: white;
             border-radius: 10px;
-            
-            &__btn{
+
+            &__btn {
                 padding: 10px;
                 width: 100%;
 
