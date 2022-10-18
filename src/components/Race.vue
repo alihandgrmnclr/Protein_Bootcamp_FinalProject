@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import Results from './Results.vue';
 
+const props = defineProps(["horses"]);
+
 const start = ref(false);
-const positions = ref({
+const positions = reactive({
     pos1: 0,
     pos2: 0,
     pos3: 0,
@@ -11,8 +13,19 @@ const positions = ref({
     pos5: 0,
     pos6: 0,
     pos7: 0,
-    pos8: 0
-})
+    pos8: 0,
+});
+
+const leaderboard = reactive({
+    first: "",
+    second: "",
+    third: "",
+    fourth: "",
+    fifth: "",
+    sixth: "",
+    seventh: "",
+    eighth: "",
+});
 
 
 const images = [
@@ -51,6 +64,8 @@ const images = [
 
 ];
 
+
+
 const randomSpeed = (min, max) => {
     return Math.floor((Math.random() * (max - min)) + min);
 }
@@ -60,9 +75,10 @@ const restart = () => {
 };
 
 function raceStart() {
+    const finish = document.querySelector(".finish");
+    const finishPosition = finish.offsetLeft;   //finish çizgisinin pozisyonu
 
-
-    let horse1 = document.querySelector("#horse-1");
+    let horse1 = document.querySelector("#horse-1");    //her atın seçimi
     let horse2 = document.querySelector("#horse-2");
     let horse3 = document.querySelector("#horse-3");
     let horse4 = document.querySelector("#horse-4");
@@ -71,38 +87,59 @@ function raceStart() {
     let horse7 = document.querySelector("#horse-7");
     let horse8 = document.querySelector("#horse-8");
 
+    let allListPosition = setInterval(() => {
+        const horsePositions = [
+            {
+                name: "Gülbatur",
+                pos: positions.pos1
+            },
+            {
+                name: "Şahbatur",
+                pos: positions.pos2
+            },
+            {
+                name: "Bold Pilot",
+                pos: positions.pos3
+            },
+            {
+                name: "Black Lightning",
+                pos: positions.pos4
+            },
+            {
+                name: "Yadigar",
+                pos: positions.pos5
+            },
+            {
+                name: "Sipahi",
+                pos: positions.pos6
+            },
+            {
+                name: "Elkızı",
+                pos: positions.pos7
+            },
+            {
+                name: "Unicorn",
+                pos: positions.pos8
+            },
+        ]
+        const allPositions = horsePositions.map((item) => item);
+        const sortedPositions = allPositions.sort(function (first, second) {
+            return second.pos - first.pos;
+        });
+        leaderboard.first = sortedPositions[0];
+        leaderboard.second = sortedPositions[1];
+        leaderboard.third = sortedPositions[2];
+        leaderboard.fourth = sortedPositions[3];
+        leaderboard.fifth = sortedPositions[4];
+        leaderboard.sixth = sortedPositions[5];
+        leaderboard.seventh = sortedPositions[6];
+        leaderboard.eighth = sortedPositions[7];
+    }, 50)
 
-    // let running = setInterval(function () {
-    //     position1 += randomSpeed(2, 8);
-    //     position2 += randomSpeed(2, 8);
-    //     position3 += randomSpeed(2, 8);
-    //     position4 += randomSpeed(2, 8);
-    //     position5 += randomSpeed(2, 8);
-    //     position6 += randomSpeed(2, 8);
-    //     position7 += randomSpeed(2, 8);
-    //     position8 += randomSpeed(2, 8);
-    //     horse1.style.left = position1 + "px";
-    //     horse2.style.left = position2 + "px";
-    //     horse3.style.left = position3 + "px";
-    //     horse4.style.left = position4 + "px";
-    //     horse5.style.left = position5 + "px";
-    //     horse6.style.left = position6 + "px";
-    //     horse7.style.left = position7 + "px";
-    //     horse8.style.left = position8 + "px";
-
-
-    //     if (position1 > 14400) {
-    //         idle();
-    //     }
-
-    //     console.log(sumPosition);
-    // }, 50)
-
-    let running1 = setInterval(() => {
-        positions.value.pos1 += randomSpeed(2, 8);
-        horse1.style.left = positions.value.pos1 + "px";
-
-        if (positions.value.pos1 > 1820) {
+    let running1 = setInterval(() => {  
+        positions.pos1 += randomSpeed(2, 8);
+        horse1.style.left = positions.pos1 + "px";
+        if (positions.pos1 > finishPosition) {
             idle1();
         }
     }, 50)
@@ -111,10 +148,10 @@ function raceStart() {
     }
 
     let running2 = setInterval(() => {
-        positions.value.pos2 += randomSpeed(2, 8);
-        horse2.style.left = positions.value.pos2 + "px";
-
-        if (positions.value.pos2 > 1820) {
+        positions.pos2 += randomSpeed(2, 8);
+        horse2.style.left = positions.pos2 + "px";
+        if (positions.pos2 > finishPosition) {
+            console.log("2");
             idle2();
         }
     }, 50)
@@ -123,10 +160,10 @@ function raceStart() {
     }
 
     let running3 = setInterval(() => {
-        positions.value.pos3 += randomSpeed(2, 8);
-        horse3.style.left = positions.value.pos3 + "px";
-
-        if (positions.value.pos3 > 1820) {
+        positions.pos3 += randomSpeed(2, 8);
+        horse3.style.left = positions.pos3 + "px";
+        if (positions.pos3 > finishPosition) {
+            console.log("3");
             idle3();
         }
     }, 50)
@@ -135,10 +172,10 @@ function raceStart() {
     }
 
     let running4 = setInterval(() => {
-        positions.value.pos4 += randomSpeed(2, 8);
-        horse4.style.left = positions.value.pos4 + "px";
-
-        if (positions.value.pos4 > 1820) {
+        positions.pos4 += randomSpeed(2, 8);
+        horse4.style.left = positions.pos4 + "px";
+        if (positions.pos4 > finishPosition) {
+            console.log("4");
             idle4();
         }
     }, 50)
@@ -147,10 +184,10 @@ function raceStart() {
     }
 
     let running5 = setInterval(() => {
-        positions.value.pos5 += randomSpeed(2, 8);
-        horse5.style.left = positions.value.pos5 + "px";
-
-        if (positions.value.pos5 > 1820) {
+        positions.pos5 += randomSpeed(2, 8);
+        horse5.style.left = positions.pos5 + "px";
+        if (positions.pos5 > finishPosition) {
+            console.log("5");
             idle5();
         }
     }, 50)
@@ -159,10 +196,10 @@ function raceStart() {
     }
 
     let running6 = setInterval(() => {
-        positions.value.pos6 += randomSpeed(2, 8);
-        horse6.style.left = positions.value.pos6 + "px";
-
-        if (positions.value.pos6 > 1820) {
+        positions.pos6 += randomSpeed(2, 8);
+        horse6.style.left = positions.pos6 + "px";
+        if (positions.pos6 > finishPosition) {
+            console.log("6");
             idle6();
         }
     }, 50)
@@ -171,10 +208,10 @@ function raceStart() {
     }
 
     let running7 = setInterval(() => {
-        positions.value.pos7 += randomSpeed(2, 8);
-        horse7.style.left = positions.value.pos7 + "px";
-
-        if (positions.value.pos7 > 1820) {
+        positions.pos7 += randomSpeed(2, 8);
+        horse7.style.left = positions.pos7 + "px";
+        if (positions.pos7 > finishPosition) {
+            console.log("7");
             idle7();
         }
     }, 50)
@@ -183,10 +220,10 @@ function raceStart() {
     }
 
     let running8 = setInterval(() => {
-        positions.value.pos8 += randomSpeed(2, 8);
-        horse8.style.left = positions.value.pos8 + "px";
-
-        if (positions.value.pos8 > 1820) {
+        positions.pos8 += randomSpeed(2, 8);
+        horse8.style.left = positions.pos8 + "px";
+        if (positions.pos8 > finishPosition) {
+            console.log("8");
             idle8();
         }
     }, 50)
@@ -194,20 +231,14 @@ function raceStart() {
         clearInterval(running8);
     }
 
-    // let idle = () => {
-    //     clearInterval(running);
-    // }
-
 }
-
-
 
 </script>
 
 <template>
     <template v-if="!start">
         <div class="results">
-            <Results></Results>
+            <Results :horses="props.horses" :results="leaderboard"></Results>
         </div>
         <div class="track">
             <div v-for="horse in images" :key="horse.id">
@@ -216,7 +247,6 @@ function raceStart() {
                     {{horse.id}} <img class="horse" :src="horse.link" :id="'horse-'+horse.id">
                 </div>
             </div>
-
         </div>
         <div class="race-settings">
             <button class="start-btn" @click="raceStart">Başla</button>
@@ -238,6 +268,7 @@ function raceStart() {
 
 .track {
     @apply mt-5;
+    background-image: url(/Images/Pitch/Çim.png);
 }
 
 .horse {
@@ -250,13 +281,12 @@ function raceStart() {
 }
 
 .finish {
-    @apply absolute right-0 w-2 h-[102px] bg-white mr-20
+    @apply absolute right-0 w-2 h-[75px] bg-white mr-20
 }
 
 .line-wrapper {
-    background-color: rgba(37, 133, 32, 0.753);
-    border: 1px;
     border-bottom: solid;
+    border-color: rgba(240, 248, 255, 0.214);
 }
 
 .results {

@@ -20,3 +20,4 @@ export const setDefault = () => {
 	localStorage.setItem('cash', 100);
 	return;
 };
+

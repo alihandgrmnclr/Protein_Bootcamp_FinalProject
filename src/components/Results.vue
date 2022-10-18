@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 
-const props = defineProps([]);
+const props = defineProps(["horses", "results"]);
 
 // DRAGGABLE
 // onMounted(() => {
@@ -25,63 +25,53 @@ const props = defineProps([]);
 //     });
 // })
 
+
 </script>
 
 <template>
-    <div class="leaderboard wrapper">
-        <div id="header">
-            <div class="leaderboard__header">
-                <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/744/744974.png" alt="">
-                <h1 class="leaderboard__title">LIDERLIK TABLOSU</h1>
-            </div>
-        </div>
-        <div class="leaderboard__rankings">
-            <div class="leaderboard__rankings-triple">
-                <div class="leaderboard__profile">
-                    <span class="rank-first">1-</span> <span>Gülbatur</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
-                </div>
-                <div class="leaderboard__profile">
-                    <span class="rank-second">2-</span> <span>Şahbatur</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
-                </div>
-                <div class="leaderboard__profile">
-                    <span class="rank-third">3-</span> <span>Bold Pilot</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
+    <div class="results-wrapper">
+        <div class="leaderboard wrapper">
+            <div id="header">
+                <div class="leaderboard__header">
+                    <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/744/744974.png" alt="">
+                    <h1 class="leaderboard__title">LIDERLIK TABLOSU</h1>
                 </div>
             </div>
+            <div class="leaderboard__rankings">
+                <div class="leaderboard__rankings-triple">
+                    <div class="leaderboard__profile">
+                        <span class="rank-first">1-</span> <span>{{props.results.first.name}}</span> <span
+                            class="time">{{props.results.first.pos}} {{horses.id}}<span v-if="props.results.first.pos" class="seconds">m</span></span>
+                    </div>
+                    <div class="leaderboard__profile">
+                        <span class="rank-second">2-</span> <span>{{props.results.second.name}}</span> <span
+                            class="time">{{props.results.second.pos}}<span v-if="props.results.second.pos" class="seconds">m</span></span>
+                    </div>
+                    <div class="leaderboard__profile">
+                        <span class="rank-third">3-</span> <span>{{props.results.third.name}}</span> <span
+                            class="time">{{props.results.third.pos}}<span v-if="props.results.third.pos" class="seconds">m</span></span>
+                    </div>
+                </div>
 
-            <div class="leaderboard__rankings-remains">
-                <div class="leaderboard__profile">
-                    <span class="rank">4-</span> <span>Black Lightning</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
-                </div>
-                <div class="leaderboard__profile">
-                    <span class="rank">5-</span> <span>Mucit Tay</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
-                </div>
-                <div class="leaderboard__profile">
-                    <span class="rank">6-</span> <span>Barbaros</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
-                </div>
-                <div class="leaderboard__profile">
-                    <span class="rank">7-</span> <span>Manas</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
-                </div>
-                <div class="leaderboard__profile">
-                    <span class="rank">8-</span> <span>Sipahi</span> <span class="time">15.6<span
-                            class="seconds">saniye</span></span>
-                </div>
+                <!-- <div class="leaderboard__rankings-remains">
+                    <div class="leaderboard__profile" v-for="horse in props.horses">
+                        <span class="rank">{{horse.id}}</span> <span></span> <span
+                            class="time">15.6<span class="seconds">m</span></span>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>
-
 </template>
 
 <style lang="scss" scoped>
+.results-wrapper {
+    font-family: 'Source Sans Pro', sans-serif;
+    @apply flex w-full mt-5;
+}
+
 .leaderboard {
     @apply flex flex-col flex-wrap justify-center items-center p-3 bg-bgprimary text-slate-50 w-[800px] h-[200px] rounded-xl;
-    font-family: 'Source Sans Pro', sans-serif;
 
     &__header {
         @apply flex flex-col justify-center items-center w-full;
@@ -99,10 +89,11 @@ const props = defineProps([]);
         @apply flex gap-4 text-xl font-semibold;
     }
 
-    &__rankings-triple{
+    &__rankings-triple {
         @apply flex flex-col justify-center;
     }
-    &__rankings-remains{
+
+    &__rankings-remains {
         @apply text-base;
     }
 
