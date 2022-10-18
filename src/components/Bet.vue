@@ -28,8 +28,8 @@ const submitCoupon = () => {
         <div class="bet__select">
             <h1 class="bet-title">Bir at seçiniz</h1>
             <ul class="bet-horse-wrapper">
-                <li class="bet-horse" v-for="horse in horses" :key="horse.id">{{horse.name}}
-                    <span> <input type="radio" name="horse" :value="horse.name" v-model="selectedHorse"></span>
+                <li class="bet-horse" v-for="horse in horses" :key="horse.id"><label :for="horse.id">{{horse.name}}</label>
+                    <span> <input type="radio" :id="horse.id" name="horse" :value="horse.name" v-model="selectedHorse"></span>
                 </li>
             </ul>
         </div>

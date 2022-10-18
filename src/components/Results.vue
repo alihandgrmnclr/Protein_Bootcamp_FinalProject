@@ -36,47 +36,51 @@ const props = defineProps([]);
             </div>
         </div>
         <div class="leaderboard__rankings">
-            <div class="leaderboard__profile">
-                <span class="rank-first">1-</span> <span>Gülbatur</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
+            <div class="leaderboard__rankings-triple">
+                <div class="leaderboard__profile">
+                    <span class="rank-first">1-</span> <span>Gülbatur</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
+                <div class="leaderboard__profile">
+                    <span class="rank-second">2-</span> <span>Şahbatur</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
+                <div class="leaderboard__profile">
+                    <span class="rank-third">3-</span> <span>Bold Pilot</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
             </div>
-            <div class="leaderboard__profile">
-                <span class="rank-second">2-</span> <span>Şahbatur</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
-            </div>
-            <div class="leaderboard__profile">
-                <span class="rank-third">3-</span> <span>Bold Pilot</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
-            </div>
-            <div class="leaderboard__profile">
-                <span class="rank">4-</span> <span>Black Lightning</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
-            </div>
-            <div class="leaderboard__profile">
-                <span class="rank">5-</span> <span>Mucit Tay</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
-            </div>
-            <div class="leaderboard__profile">
-                <span class="rank">6-</span> <span>Barbaros</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
-            </div>
-            <div class="leaderboard__profile">
-                <span class="rank">7-</span> <span>Manas</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
-            </div>
-            <div class="leaderboard__profile">
-                <span class="rank">8-</span> <span>Sipahi</span> <span class="time">15.6<span
-                        class="seconds">saniye</span></span>
+
+            <div class="leaderboard__rankings-remains">
+                <div class="leaderboard__profile">
+                    <span class="rank">4-</span> <span>Black Lightning</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
+                <div class="leaderboard__profile">
+                    <span class="rank">5-</span> <span>Mucit Tay</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
+                <div class="leaderboard__profile">
+                    <span class="rank">6-</span> <span>Barbaros</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
+                <div class="leaderboard__profile">
+                    <span class="rank">7-</span> <span>Manas</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
+                <div class="leaderboard__profile">
+                    <span class="rank">8-</span> <span>Sipahi</span> <span class="time">15.6<span
+                            class="seconds">saniye</span></span>
+                </div>
             </div>
         </div>
-
     </div>
 
 </template>
 
 <style lang="scss" scoped>
 .leaderboard {
-    @apply flex flex-col justify-center items-center p-3 bg-gray-800 text-slate-50 w-96 rounded-xl;
+    @apply flex flex-col flex-wrap justify-center items-center p-3 bg-bgprimary text-slate-50 w-[800px] h-[200px] rounded-xl;
     font-family: 'Source Sans Pro', sans-serif;
 
     &__header {
@@ -92,7 +96,14 @@ const props = defineProps([]);
     }
 
     &__rankings {
-        @apply text-xl font-semibold;
+        @apply flex gap-4 text-xl font-semibold;
+    }
+
+    &__rankings-triple{
+        @apply flex flex-col justify-center;
+    }
+    &__rankings-remains{
+        @apply text-base;
     }
 
     &__profile {
@@ -108,11 +119,11 @@ const props = defineProps([]);
     }
 
     .rank-third {
-        @apply text-purple-600 text-2xl font-bold;
+        @apply text-purple-900 text-2xl font-bold;
     }
 
     .time {
-        @apply text-green-600;
+        @apply text-black;
     }
 
     .seconds {

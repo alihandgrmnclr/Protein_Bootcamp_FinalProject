@@ -55,8 +55,12 @@ const randomSpeed = (min, max) => {
     return Math.floor((Math.random() * (max - min)) + min);
 }
 
+const restart = () => {
+    window.location.reload();
+};
+
 function raceStart() {
-    
+
 
     let horse1 = document.querySelector("#horse-1");
     let horse2 = document.querySelector("#horse-2");
@@ -67,7 +71,7 @@ function raceStart() {
     let horse7 = document.querySelector("#horse-7");
     let horse8 = document.querySelector("#horse-8");
 
-    
+
     // let running = setInterval(function () {
     //     position1 += randomSpeed(2, 8);
     //     position2 += randomSpeed(2, 8);
@@ -85,8 +89,8 @@ function raceStart() {
     //     horse6.style.left = position6 + "px";
     //     horse7.style.left = position7 + "px";
     //     horse8.style.left = position8 + "px";
-        
-        
+
+
     //     if (position1 > 14400) {
     //         idle();
     //     }
@@ -94,98 +98,98 @@ function raceStart() {
     //     console.log(sumPosition);
     // }, 50)
 
-    let running1 = setInterval(()=>{
+    let running1 = setInterval(() => {
         positions.value.pos1 += randomSpeed(2, 8);
         horse1.style.left = positions.value.pos1 + "px";
 
         if (positions.value.pos1 > 1820) {
             idle1();
         }
-    },50)
+    }, 50)
     let idle1 = () => {
         clearInterval(running1);
     }
 
-    let running2 = setInterval(()=>{
+    let running2 = setInterval(() => {
         positions.value.pos2 += randomSpeed(2, 8);
         horse2.style.left = positions.value.pos2 + "px";
 
         if (positions.value.pos2 > 1820) {
             idle2();
         }
-    },50)
+    }, 50)
     let idle2 = () => {
         clearInterval(running2);
     }
 
-    let running3 = setInterval(()=>{
+    let running3 = setInterval(() => {
         positions.value.pos3 += randomSpeed(2, 8);
         horse3.style.left = positions.value.pos3 + "px";
 
         if (positions.value.pos3 > 1820) {
             idle3();
         }
-    },50)
+    }, 50)
     let idle3 = () => {
         clearInterval(running3);
     }
 
-    let running4 = setInterval(()=>{
+    let running4 = setInterval(() => {
         positions.value.pos4 += randomSpeed(2, 8);
         horse4.style.left = positions.value.pos4 + "px";
 
         if (positions.value.pos4 > 1820) {
             idle4();
         }
-    },50)
+    }, 50)
     let idle4 = () => {
         clearInterval(running4);
     }
 
-    let running5 = setInterval(()=>{
+    let running5 = setInterval(() => {
         positions.value.pos5 += randomSpeed(2, 8);
         horse5.style.left = positions.value.pos5 + "px";
 
         if (positions.value.pos5 > 1820) {
             idle5();
         }
-    },50)
+    }, 50)
     let idle5 = () => {
         clearInterval(running5);
     }
 
-    let running6 = setInterval(()=>{
+    let running6 = setInterval(() => {
         positions.value.pos6 += randomSpeed(2, 8);
         horse6.style.left = positions.value.pos6 + "px";
 
         if (positions.value.pos6 > 1820) {
             idle6();
         }
-    },50)
+    }, 50)
     let idle6 = () => {
         clearInterval(running6);
     }
 
-    let running7 = setInterval(()=>{
+    let running7 = setInterval(() => {
         positions.value.pos7 += randomSpeed(2, 8);
         horse7.style.left = positions.value.pos7 + "px";
 
         if (positions.value.pos7 > 1820) {
             idle7();
         }
-    },50)
+    }, 50)
     let idle7 = () => {
         clearInterval(running7);
     }
 
-    let running8 = setInterval(()=>{
+    let running8 = setInterval(() => {
         positions.value.pos8 += randomSpeed(2, 8);
         horse8.style.left = positions.value.pos8 + "px";
 
         if (positions.value.pos8 > 1820) {
             idle8();
         }
-    },50)
+    }, 50)
     let idle8 = () => {
         clearInterval(running8);
     }
@@ -201,9 +205,10 @@ function raceStart() {
 </script>
 
 <template>
-    <button @click="raceStart">Başla</button>
     <template v-if="!start">
-        <Results></Results>
+        <div class="results">
+            <Results></Results>
+        </div>
         <div class="track">
             <div v-for="horse in images" :key="horse.id">
                 <div class="finish"></div>
@@ -211,26 +216,37 @@ function raceStart() {
                     {{horse.id}} <img class="horse" :src="horse.link" :id="'horse-'+horse.id">
                 </div>
             </div>
+
+        </div>
+        <div class="race-settings">
+            <button class="start-btn" @click="raceStart">Başla</button>
+            <button class="restart-btn" @click="restart"><img class="restart-icon"
+                    src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
         </div>
     </template>
 </template>
 
 <style scoped>
-button {
-    background-color: aquamarine;
-    padding: 5px;
-    border-radius: 5px;
+.start-btn,
+.restart-btn {
+    @apply bg-btnprimary text-white p-[5px] rounded-md;
+}
+
+.restart-icon {
+    @apply w-6;
 }
 
 .track {
-    margin-top: 20px;
+    @apply mt-5;
 }
 
 .horse {
-    display: flex;
-    height: 50px;
-    position: relative;
+    @apply flex h-12 relative;
 
+}
+
+.race-settings {
+    @apply flex justify-center items-center mt-5 gap-3;
 }
 
 .finish {
@@ -241,6 +257,10 @@ button {
     background-color: rgba(37, 133, 32, 0.753);
     border: 1px;
     border-bottom: solid;
+}
+
+.results {
+    @apply flex justify-end;
 }
 
 /* .running-horse {
