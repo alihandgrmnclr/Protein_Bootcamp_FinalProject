@@ -1,14 +1,15 @@
 <script setup>
-import { ref } from "vue"
-const props = defineProps(["horses", "balance", "bet"])
+import { onMounted, ref } from "vue"
+import { addCash } from "../service/service"
+const props = defineProps(["horses", "cash", "bet"])
 
 const selectedHorse = ref("");
 const betAmount = ref(1);
 
 // bahis tutarı 1'den küçük olamaz bakiyeden büyük olamaz
 const checkAmount = () => {
-    if (betAmount.value > props.balance) {
-        betAmount.value = props.balance;
+    if (betAmount.value > props.cash) {
+        betAmount.value = props.cash;
     } else if (betAmount.value < 1) {
         betAmount.value = 1;
     }
@@ -35,7 +36,7 @@ const submitCoupon = () => {
         <div class="bet__checkout">
             <div class="bet-cash">
                 <h1 class="title">Bakiyeniz</h1>
-                <p class="balance">{{balance}}₺</p>
+                <p class="balance">{{props.cash}}₺</p>
             </div>
             <div class="hr">
                 <hr>
@@ -52,108 +53,79 @@ const submitCoupon = () => {
             </div>
         </div>
     </div>
+    <template v-if="props.cash>2">
+        <div class="addCash">
+            <button class="addCash-btn">Bakiye Ekle 100₺</button>
+        </div>
+    </template>
 </template>
 
 <style lang="scss" scoped>
 .bet {
     font-family: 'Courier New', Courier, monospace;
-    display: flex;
-    flex-direction: row;
-    width: 600px;
-    gap: 5px;
+    @apply flex flex-row w-[600px] gap-[5px];
     box-shadow: 1rem 1rem 2rem hsl(0 0% 0% / 50%);
 
-
     &__select {
-        width: 350px;
-        font-size: 20px;
-        font-weight: 600;
-        display: flex;
-        flex-direction: column;
-        background-color: #7b584e;
-        padding: 10px;
+        @apply flex flex-col w-[350px] font-semibold bg-bgprimary p-[10px];
 
         .bet-title {
-            font-size: 28px;
-            color: white;
-
+            @apply text-[28px] text-white;
         }
 
         .bet-horse-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
+            @apply flex flex-col items-center justify-center w-full;
         }
 
         .bet-horse {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: solid 1px;
-            color: black;
+            @apply flex justify-between w-full text-black border-b border-black;
         }
     }
 
     &__checkout {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: #9b6753;
-        padding: 10px;
-        width: 350px;
-        gap: 5px;
+        @apply flex flex-col justify-center items-center bg-bgsecondary p-[10px] w-[350px] gap-[5px];
 
         .bet-amount {
-            width: 75px;
-            border-radius: 5px;
+            @apply w-[75px] rounded-[5px];
         }
 
         .bet-cash {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
+            @apply flex flex-col justify-center items-center;
+         
             .title {
-                font-size: 36px;
-                font-weight: 600;
-                color: white;
+                @apply text-[36px] font-semibold text-white;
             }
 
             .balance {
-                font-size: 36px;
-                font-weight: 600;
-                color: black;
+                @apply text-[36px] font-semibold text-black;
             }
 
             .bet-coupon {}
         }
 
         .amounts {
-            font-weight: 900;
+            @apply font-black;
         }
 
         .submit {
-            display: flex;
-            justify-content: center;
-            background-color: #473e3a;
-            color: white;
-            border-radius: 10px;
+            @apply flex justify-center bg-btnprimary text-white rounded-[10px];
 
             &__btn {
-                padding: 10px;
-                width: 100%;
-
+                @apply text-white p-[10px] w-full;
             }
         }
     }
 
     .hr {
-        background-color: black;
-        width: 100%;
+        @apply bg-black w-full;
+    }
+}
+
+.addCash {
+    @apply flex absolute bottom-0 bg-btnprimary;
+
+    .addCash-btn {
+        @apply text-white p-[10px];
     }
 }
 </style>

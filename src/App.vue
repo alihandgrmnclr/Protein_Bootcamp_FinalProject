@@ -1,11 +1,26 @@
 <script setup>
-import { ref } from "vue"
+import { onMounted, ref } from "vue"
+import { getLocalWallet, saveLocalWallet } from "./service/service"
 import Race from './components/Race.vue';
 import Bet from './components/Bet.vue';
 
 const race = ref(false);
-const balance = ref(100);
 const bet = ref(false);
+const cash = ref(null);
+
+onMounted(() => {
+  const walletData = getLocalWallet() || false; // walletData null gelirse false olarak alıyoruz
+  // console.log(walletData); false
+  checkWallet(walletData);
+});
+
+function checkWallet(walletData) {
+  cash.value = getLocalWallet();
+  if (walletData) return;  // walletData true gelirse çalışmaması gerekiyor
+  saveLocalWallet(10);  // walletData yoksa bakiye olarak girilen değeri ekliyorum
+  cash.value = getLocalWallet();
+}
+
 
 const setBet = () => {
   bet.value = true;
@@ -60,7 +75,7 @@ const horses = [
   <img src="" alt="">
   <template v-if="!bet">
     <div class="bet-app">
-      <Bet :horses="horses" :balance="balance" @submitBet="setBet">
+      <Bet :horses="horses" :cash="cash" @submitBet="setBet">
       </Bet>
     </div>
   </template>
