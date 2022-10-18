@@ -17,7 +17,7 @@ onMounted(() => {
 function checkWallet(walletData) {
   cash.value = getLocalWallet();
   if (walletData) return;  // walletData true gelirse çalışmaması gerekiyor
-  saveLocalWallet(10);  // walletData yoksa bakiye olarak girilen değeri ekliyorum
+  saveLocalWallet(100);  // walletData yoksa bakiye olarak girilen değeri ekliyorum
   cash.value = getLocalWallet();
 }
 

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue"
-import { addCash } from "../service/service"
+import { setDefault, getLocalWallet } from "../service/service"
 const props = defineProps(["horses", "cash", "bet"])
 
 const selectedHorse = ref("");
@@ -17,8 +17,13 @@ const checkAmount = () => {
 
 const emit = defineEmits(["submitBet"])
 
+const setDefaultValues = () => {
+    setDefault();
+    window.location.reload();
+}
+
 const submitCoupon = () => {
-    emit("submitBet", true);
+    emit("submitBet");
 }
 
 </script>
@@ -28,8 +33,10 @@ const submitCoupon = () => {
         <div class="bet__select">
             <h1 class="bet-title">Bir at seçiniz</h1>
             <ul class="bet-horse-wrapper">
-                <li class="bet-horse" v-for="horse in horses" :key="horse.id"><label :for="horse.id">{{horse.name}}</label>
-                    <span> <input type="radio" :id="horse.id" name="horse" :value="horse.name" v-model="selectedHorse"></span>
+                <li class="bet-horse" v-for="horse in horses" :key="horse.id"><label
+                        :for="horse.id">{{horse.name}}</label>
+                    <span> <input type="radio" :id="horse.id" name="horse" :value="horse.name"
+                            v-model="selectedHorse"></span>
                 </li>
             </ul>
         </div>
@@ -54,8 +61,14 @@ const submitCoupon = () => {
         </div>
     </div>
     <template v-if="props.cash>2">
-        <div class="addCash">
-            <button class="addCash-btn">Bakiye Ekle 100₺</button>
+        <div class="restart">
+            <div class="restart-btn-wrapper">
+                <button class="restart-btn" @click="setDefaultValues"><img class="restart-icon"
+                        src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
+            </div>
+            <div class="restart-description">
+                <span class="restart-game">Oyunu baştan başlat. Bakiyeniz 100₺'ye döner ve ilerlemeniz sıfırlanır</span>
+            </div>
         </div>
     </template>
 </template>
@@ -91,7 +104,7 @@ const submitCoupon = () => {
 
         .bet-cash {
             @apply flex flex-col justify-center items-center;
-         
+
             .title {
                 @apply text-[36px] font-semibold text-white;
             }
@@ -121,11 +134,18 @@ const submitCoupon = () => {
     }
 }
 
-.addCash {
-    @apply flex absolute bottom-0 bg-btnprimary;
+.restart {
+    @apply flex flex-col items-center absolute bottom-0 text-white bg-btnprimary p-5 h-[100px];
 
-    .addCash-btn {
-        @apply text-white p-[10px];
+    .restart-btn-wrapper {
+        .restart-btn {
+            @apply text-white w-full;
+        }
+
+        .restart-icon {
+            @apply w-6 hover:scale-150;
+        }
     }
+
 }
 </style>

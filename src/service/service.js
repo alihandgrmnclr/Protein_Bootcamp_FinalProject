@@ -10,7 +10,13 @@ export const saveLocalWallet = (value) => {
 	return;
 };
 
-export const addCash = () => {
+export const addCash = (value) => {	//iddiayı kazandığı zaman çalışacak
+	const wallet = getLocalWallet();
+	saveLocalWallet(wallet + value)
+	return;
+};
+
+export const setDefault = () => {
 	localStorage.setItem('cash', 100);
 	return;
 };
