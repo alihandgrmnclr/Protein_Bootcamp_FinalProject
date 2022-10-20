@@ -1,6 +1,6 @@
 <script setup>
-import { onMounted, ref } from "vue"
-import { setDefault, getLocalWallet } from "../service/service"
+import { ref } from "vue"
+import { setDefault } from "../service/service"
 const props = defineProps(["horses", "cash", "bet"])
 
 const selectedHorse = ref("");

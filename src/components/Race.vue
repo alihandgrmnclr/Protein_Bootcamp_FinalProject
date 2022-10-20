@@ -40,7 +40,7 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
 <template>
     <template v-if="!start">
         <div class="results">
-            <Results :horses="props.horses" :results="leaderboard"></Results>
+            <Results :horses="props.horses"></Results>
         </div>
         <template v-if="countDownTimer<1">
             <div class="track">

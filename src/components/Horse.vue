@@ -14,6 +14,7 @@ onMounted(() => {
         horseRef.value.pos = horseRef.value.pos + randomSpeed();
         emits("updateHorse", horseRef.value); // horseref'in pozisyonunu değiştirip obje olarak yolluyoruz
         if (props.horse.pos >= 95) {
+            console.log(horseRef.value.id);
             idle();
         }
     }, 50)

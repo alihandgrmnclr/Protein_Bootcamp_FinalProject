@@ -17,7 +17,7 @@ const rankClasses = computed(() => {
 <template>
     <div class="leaderboard__profile">
         <span :class="rankClasses">{{props.rank+1}}-</span>
-        <span>{{props.horse.name}}</span>
+        <span>{{props.horse.name}}({{props.horse.id}})</span>
         <span class="time"> {{(props.horse.pos).toFixed(1)}}
             <span v-if="props.horse.pos" class="seconds">m</span>
         </span>

@@ -4,13 +4,12 @@ import { getLocalWallet, saveLocalWallet, horseData } from "./service/service"
 import Race from './components/Race.vue';
 import Bet from './components/Bet.vue';
 
-const horses = ref(horseData()); // ATLAR BURDA
+const horses = ref(horseData()); // horse data yı ekliyorum
 const bet = ref(false);
 const cash = ref(null);
 
 onMounted(() => {
   const walletData = getLocalWallet() || false; // walletData null gelirse false olarak alıyoruz
-  // console.log(walletData); false
   checkWallet(walletData);
 });
 
@@ -41,15 +40,13 @@ const setBet = () => {
     </div>
   </template>
   <template v-else>
-      <Race :horses="horses" @updateHorse="updateHorseHandler"></Race>
+    <Race :horses="horses" @updateHorse="updateHorseHandler"></Race>
   </template>
 </template>
 
 <style scoped>
 .bet-app {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @apply flex justify-center items-center h-full;
+
 }
 </style>
