@@ -1,10 +1,10 @@
 <script setup>
 import { onMounted, ref } from "vue"
-import { getLocalWallet, saveLocalWallet } from "./service/service"
+import { getLocalWallet, saveLocalWallet, horseData } from "./service/service"
 import Race from './components/Race.vue';
 import Bet from './components/Bet.vue';
 
-const race = ref(false);
+const horses = ref(horseData()); // ATLAR BURDA
 const bet = ref(false);
 const cash = ref(null);
 
@@ -21,53 +21,14 @@ function checkWallet(walletData) {
   cash.value = getLocalWallet();
 }
 
+const updateHorseHandler = (updatedHorseData) => {
+  const horseIndex = horses.value.findIndex(horse => horse.id === updatedHorseData.id); //  gelen veriyi indexi ile eşleştirip, horses objesini güncelledik
+  horses.value[horseIndex] = updatedHorseData;
+}
 
 const setBet = () => {
   bet.value = true;
 }
-
-const horses = [
-  {
-    id: 1,
-    name: "Gülbatur",
-    img: "../public/Images/Horses/H1.gif"
-  },
-  {
-    id: 2,
-    name: "Şahbatur",
-    img: "../public/Images/Horses/H2.gif"
-  },
-  {
-    id: 3,
-    name: "Bold Pilot",
-    img: "../public/Images/Horses/H3.gif"
-  },
-  {
-    id: 4,
-    name: "Black Lightning",
-    img: "../public/Images/Horses/H4.gif"
-  },
-  {
-    id: 5,
-    name: "Yadigar",
-    img: "../public/Images/Horses/H5.gif"
-  },
-  {
-    id: 6,
-    name: "Sipahi",
-    img: "../public/Images/Horses/H6.gif"
-  },
-  {
-    id: 7,
-    name: "Elkızı",
-    img: "../public/Images/Horses/H7.gif"
-  },
-  {
-    id: 8,
-    name: "Unicorn",
-    img: "../public/Images/Horses/H8.gif"
-  }
-]
 
 </script>
 
@@ -80,7 +41,7 @@ const horses = [
     </div>
   </template>
   <template v-else>
-      <Race :horses="horses"></Race>
+      <Race :horses="horses" @updateHorse="updateHorseHandler"></Race>
   </template>
 </template>
 

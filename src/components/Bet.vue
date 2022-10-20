@@ -55,9 +55,11 @@ const submitCoupon = () => {
                 <p>Oran: <span class="amounts">5.00</span></p>
                 <p>Tahmini Kazanç: <span class="amounts">{{betAmount*5}}₺</span> </p>
             </div>
-            <div class="submit">
-                <button class="submit__btn" @click="submitCoupon">Onayla</button>
-            </div>
+            <template v-if="selectedHorse.length>1">
+                <div class="submit">
+                    <button class="submit__btn" @click="submitCoupon">Onayla</button>
+                </div>
+            </template>
         </div>
     </div>
     <template v-if="props.cash>2">
