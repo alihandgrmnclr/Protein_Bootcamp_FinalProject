@@ -26,7 +26,8 @@ const leaderboard = reactive({
     seventh: "",
     eighth: "",
 });
-
+const countDownShow = ref(false);
+const countDownTimer = ref(3);
 
 const images = [
     {
@@ -64,6 +65,20 @@ const images = [
 
 ];
 
+const delay = (ms) => { // 3 saniyelik bir countdown
+    countDownShow.value = true;
+    const countDown = setInterval(() => {
+       if(countDownTimer.value <= 1) {
+            clearInterval(countDown);
+            countDownShow.value = false;
+        } 
+        countDownTimer.value--;
+    }, 1000);
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
 
 
 const randomSpeed = (min, max) => {
@@ -74,11 +89,14 @@ const restart = () => {
     window.location.reload();
 };
 
-function raceStart() {
-    const finish = document.querySelector(".finish");
-    const finishPosition = finish.offsetLeft;   //finish çizgisinin pozisyonu
+async function raceStart() {
 
-    let horse1 = document.querySelector("#horse-1");    //her atın seçimi
+    await delay(4000);  // delay fonksiyonu bitmeden yarış başlamıyor
+    
+    const finish = document.querySelector(".finish");
+    const finishPosition = finish.offsetLeft;   // finish çizgisinin pozisyonu
+
+    let horse1 = document.querySelector("#horse-1");    // her atın seçimi
     let horse2 = document.querySelector("#horse-2");
     let horse3 = document.querySelector("#horse-3");
     let horse4 = document.querySelector("#horse-4");
@@ -136,7 +154,7 @@ function raceStart() {
         leaderboard.eighth = sortedPositions[7];
     }, 50)
 
-    let running1 = setInterval(() => {  
+    let running1 = setInterval(() => {
         positions.pos1 += randomSpeed(2, 8);
         horse1.style.left = positions.pos1 + "px";
         if (positions.pos1 > finishPosition) {
@@ -240,14 +258,19 @@ function raceStart() {
         <div class="results">
             <Results :horses="props.horses" :results="leaderboard"></Results>
         </div>
-        <div class="track">
-            <div v-for="horse in images" :key="horse.id">
-                <div class="finish"></div>
-                <div class="line-wrapper">
-                    {{horse.id}} <img class="horse" :src="horse.link" :id="'horse-'+horse.id">
+        <template v-if="countDownTimer<1">
+            <div class="track">
+                <div v-for="horse in images" :key="horse.id">
+                    <div class="finish"></div>
+                    <div class="line-wrapper">
+                        {{horse.id}} <img class="horse" :src="horse.link" :id="'horse-'+horse.id">
+                    </div>
                 </div>
             </div>
-        </div>
+        </template>
+        <template v-if="countDownShow">
+            <p class="countdown-timer">{{countDownTimer}}</p>
+        </template>
         <div class="race-settings">
             <button class="start-btn" @click="raceStart">Başla</button>
             <button class="restart-btn" @click="restart"><img class="restart-icon"
@@ -264,6 +287,10 @@ function raceStart() {
 
 .restart-icon {
     @apply w-6;
+}
+
+.countdown-timer{
+    @apply flex justify-center text-[36px];
 }
 
 .track {

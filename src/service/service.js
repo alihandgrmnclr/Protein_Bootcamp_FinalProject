@@ -11,8 +11,9 @@ export const saveLocalWallet = (value) => {
 };
 
 export const addCash = (value) => {	//iddiayı kazandığı zaman çalışacak
-	const wallet = getLocalWallet();
-	saveLocalWallet(wallet + value)
+	const wallet = localStorage.getItem('cash');
+	const data = JSON.stringify(value);
+	localStorage.setItem('cash', wallet + data);
 	return;
 };
 

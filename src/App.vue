@@ -80,9 +80,8 @@ const horses = [
     </div>
   </template>
   <template v-else>
-    <Race :horses="horses"></Race>
+      <Race :horses="horses"></Race>
   </template>
-
 </template>
 
 <style scoped>
