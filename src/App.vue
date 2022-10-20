@@ -1,16 +1,17 @@
 <script setup>
-import { onMounted, ref } from "vue"
-import { getLocalWallet, saveLocalWallet, horseData } from "./service/service"
+import { computed, onMounted, ref } from "vue"
+import { getLocalWallet, saveLocalWallet, horseData, saveBet, clearBet } from "./service/service"
 import Race from './components/Race.vue';
 import Bet from './components/Bet.vue';
 
 const horses = ref(horseData()); // horse data yı ekliyorum
-const bet = ref(false);
-const cash = ref(null);
+const bet = ref(false); // bet true olmadan, yarış ekranı gelmiyor
+const cash = ref(getLocalWallet());
 
 onMounted(() => {
   const walletData = getLocalWallet() || false; // walletData null gelirse false olarak alıyoruz
   checkWallet(walletData);
+  clearBet();
 });
 
 function checkWallet(walletData) {
@@ -25,18 +26,18 @@ const updateHorseHandler = (updatedHorseData) => {
   horses.value[horseIndex] = updatedHorseData;
 }
 
-const setBet = () => {
+const setBet = (betValue, betHorse) => {
   bet.value = true;
+  saveBet(betValue, betHorse);
+  return;
 }
 
 </script>
 
 <template>
-  <img src="" alt="">
   <template v-if="!bet">
     <div class="bet-app">
-      <Bet :horses="horses" :cash="cash" @submitBet="setBet">
-      </Bet>
+      <Bet :horses="horses" :cash="cash" @submitBet="setBet"></Bet>
     </div>
   </template>
   <template v-else>

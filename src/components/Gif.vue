@@ -2,12 +2,12 @@
 
 const props = defineProps(["img"]);
 
-const path = `../../Images/Horses/${props.img}.gif`
+const runningPath = `../../Images/Horses/${props.img}.gif`
 
 </script>
 
 <template>
-    <img class="horse" :src="path" alt="">
+        <img class="horse" :src="runningPath" alt="">
 </template>
 
 <style scoped>

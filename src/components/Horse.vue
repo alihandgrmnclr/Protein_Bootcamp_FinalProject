@@ -1,20 +1,22 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { randomSpeed } from "../service/service"
+import { randomSpeed, saveLeaderboard, getLeaderboard } from "../service/service"
 import Gif from './Gif.vue';
 
 const props = defineProps(["horse", "countdown"]);
 const emits = defineEmits(["updateHorse"]);
 const horseRef = ref(props.horse);  // prop olanı değiştirmeyip kopyasında işlem yapıp emit olarak yolluyoruz
 
-
 onMounted(() => {
 
     let running = setInterval(() => {
-        horseRef.value.pos = horseRef.value.pos + randomSpeed();
-        emits("updateHorse", horseRef.value); // horseref'in pozisyonunu değiştirip obje olarak yolluyoruz
+        if (horseRef.value.pos <= 95) {
+            horseRef.value.pos = horseRef.value.pos + randomSpeed();
+            emits("updateHorse", horseRef.value); // horseref'in pozisyonunu değiştirip obje olarak yolluyoruz
+        }
+
         if (props.horse.pos >= 95) {
-            console.log(horseRef.value.id);
+            saveLeaderboard(horseRef.value.name);
             idle();
         }
     }, 50)

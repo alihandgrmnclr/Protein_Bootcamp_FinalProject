@@ -1,9 +1,11 @@
 <script setup>
 import { computed } from 'vue';
+import { getLeaderboard } from '../service/service';
+
 
 const props = defineProps(["horse", "rank"]);
 
-const rankClasses = computed(() => {
+const rankClasses = computed(() => {    // eşleşen class'ları verdim
     return {
         "rank-first": props.rank == 0,
         "rank-second": props.rank == 1,
@@ -16,11 +18,17 @@ const rankClasses = computed(() => {
 
 <template>
     <div class="leaderboard__profile">
-        <span :class="rankClasses">{{props.rank+1}}-</span>
-        <span>{{props.horse.name}}({{props.horse.id}})</span>
-        <span class="time"> {{(props.horse.pos).toFixed(1)}}
-            <span v-if="props.horse.pos" class="seconds">m</span>
-        </span>
+        <template v-if="getLeaderboard().length<7">
+            <span :class="rankClasses">{{props.rank+1}}-</span>
+            <span>{{props.horse.name}}({{props.horse.id}})</span>
+            <span class="time"> {{(props.horse.pos).toFixed(1)}}
+                <span v-if="props.horse.pos" class="seconds">m</span>
+            </span>
+        </template>
+        <template v-else>
+            <span :class="rankClasses">-</span>
+            <span>{{getLeaderboard()[0]}}</span>
+        </template>
     </div>
 </template>
 

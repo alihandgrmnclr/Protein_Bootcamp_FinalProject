@@ -23,7 +23,7 @@ const setDefaultValues = () => {
 }
 
 const submitCoupon = () => {
-    emit("submitBet");
+    emit("submitBet", betAmount.value, selectedHorse.value);
 }
 
 </script>

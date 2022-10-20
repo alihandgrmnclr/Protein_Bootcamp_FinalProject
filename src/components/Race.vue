@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Results from './Results.vue';
 import Horse from './Horse.vue';
-const props = defineProps(["horses"]);
+const props = defineProps(["horses", "bet"]);
 const emits = defineEmits(["updateHorse"]);
 const start = ref(false);
 
@@ -53,6 +53,13 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
                 </div>
             </div>
         </template>
+        <template v-else>
+            <div class="empty">
+                <div class="empty__track">
+                    <div class="empty__finish"></div>
+                </div>
+            </div>
+        </template>
         <template v-if="countDownShow">
             <p class="countdown-timer">{{countDownTimer}}</p>
         </template>
@@ -62,9 +69,10 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
                     src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
         </div>
     </template>
+
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .start-btn,
 .restart-btn {
     @apply bg-btnprimary text-white p-[5px] rounded-md;
@@ -79,8 +87,21 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
 }
 
 .track {
-    @apply mt-5;
+    @apply mt-5 overflow-hidden;
     background-image: url(/Images/Pitch/Çim.png);
+}
+
+.empty {
+
+    &__track {
+        @apply mt-5 h-[600px];
+        background-image: url(/Images/Pitch/Çim.png);
+    }
+
+    &__finish {
+        @apply h-[600px] absolute right-0 w-2 bg-white mr-20;;
+        
+    }
 }
 
 .horse {
@@ -93,7 +114,7 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
 }
 
 .finish {
-    @apply absolute right-0 w-2 h-[75px] bg-white mr-20
+    @apply absolute right-0 w-2 h-[75px] bg-white mr-20;
 }
 
 .line-wrapper {

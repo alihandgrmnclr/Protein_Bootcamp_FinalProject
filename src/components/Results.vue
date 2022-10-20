@@ -1,12 +1,13 @@
 <script setup>
-import { computed } from '@vue/reactivity';
+import { computed, ref } from '@vue/reactivity';
+import { getBet, getLeaderboard } from "../service/service"
 import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results"]);
 
 const sortedHorses = computed(() => { // sort işlemini takip etmek için computed kullandık
     const sortedData = [...props.horses].sort((a, b) => {
-        return a.pos - b.pos;
+        return b.pos - a.pos;
     });
     return sortedData;
 });
@@ -15,6 +16,10 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
 
 <template>
     <div class="leaderboard">
+        Bahis Yapılan At: {{getBet().selectedHorse}} <br>
+        Bahis Tutarı: {{getBet().betAmount}}₺ <br>
+        Olası Kazanç: {{getBet().betAmount*5}}₺
+        <br>
         <div id="header">
             <div class="leaderboard__header">
                 <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/744/744974.png" alt="">
