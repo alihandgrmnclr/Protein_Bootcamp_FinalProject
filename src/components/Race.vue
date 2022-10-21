@@ -36,10 +36,8 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
     emits("updateHorse", horse); // yukarı gönderiyoruz (app)
 }
 
-const updateLeaderboardHandler = (leaderboard) => {
-    emits("updateLeaderboard", leaderboard);
-    finalLeaderboard.value.push(leaderboard);
-    console.log(finalLeaderboard.value);
+const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tablosu -> results'a yolluyorum
+    finalLeaderboard.value.push(horse);
 };
 
 </script>
@@ -47,7 +45,7 @@ const updateLeaderboardHandler = (leaderboard) => {
 <template>
     <template v-if="!start">
         <div class="results">
-            <Results :horses="props.horses" :leaderboard="finalLeaderboard.value"></Results>
+            <Results :horses="props.horses" :leaderboard="finalLeaderboard"></Results>
         </div>
         <template v-if="countDownTimer<1">
             <div class="track">
@@ -106,7 +104,7 @@ const updateLeaderboardHandler = (leaderboard) => {
 .empty {
 
     &__track {
-        @apply mt-5 h-[600px];
+        @apply w-full mt-5 h-[600px];
         background-image: url(/Images/Pitch/Çim.png);
     }
 

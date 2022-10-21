@@ -1,15 +1,22 @@
 <script setup>
-import { computed, ref } from '@vue/reactivity';
+import { computed } from '@vue/reactivity';
 import { getBet } from "../service/service"
 import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results", "leaderboard"]);
 
 const sortedHorses = computed(() => { // sort işlemini takip etmek için computed kullandık
-    const sortedData = [...props.horses].sort((a, b) => {
-        return b.pos - a.pos;
-    });
-    return sortedData;
+
+    const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // tüm atlar 95'i geçti mi? bu bize t/f dönüyor
+
+    if (isRaceFinished) {   
+        return props.leaderboard;
+    } else {    // anlık yarışı izliyoruz
+        const sortedData = [...props.horses].sort((a, b) => {
+            return b.pos - a.pos;
+        });
+        return sortedData;
+    }
 });
 </script>
 
@@ -27,7 +34,8 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
         </div>
 
         <div class="leaderboard__rankings">
-            <LeaderboardItem v-for="(horse,index) in sortedHorses" :horse="horse" :rank="index" :leaderboard="props.leaderboard"></LeaderboardItem>
+            <LeaderboardItem v-for="(horse,index) in sortedHorses" :horse="horse" :rank="index"
+                :leaderboard="props.leaderboard"></LeaderboardItem>
         </div>
     </div>
 </template>
