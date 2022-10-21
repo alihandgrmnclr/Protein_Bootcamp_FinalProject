@@ -20,7 +20,7 @@ const delay = (ms) => { // 3 saniyelik bir countdown
         }
         countDownTimer.value--;
     }, 1000);
-    return new Promise(resolve => {
+    return new Promise(resolve => { // ms kadar bekliyor
         setTimeout(resolve, ms);
     });
 }
@@ -112,8 +112,6 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 
     &__finish {
         @apply h-[600px] absolute right-0 w-2 bg-white mr-20;
-        ;
-
     }
 }
 

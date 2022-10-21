@@ -78,11 +78,11 @@ const submitCoupon = () => {
 <style lang="scss" scoped>
 .bet {
     font-family: 'Courier New', Courier, monospace;
-    @apply flex flex-row w-[600px] gap-[5px];
+    @apply flex flex-col sm:flex-row sm:w-[600px] gap-[5px] sm:h-[300px] items-center mb-20 sm:mb-1;
     box-shadow: 1rem 1rem 2rem hsl(0 0% 0% / 50%);
 
     &__select {
-        @apply flex flex-col w-[350px] font-semibold bg-bgprimary p-[10px];
+        @apply flex flex-col h-full w-[350px] font-semibold bg-bgprimary p-[10px];
 
         .bet-title {
             @apply text-[28px] text-white;
@@ -98,8 +98,7 @@ const submitCoupon = () => {
     }
 
     &__checkout {
-        @apply flex flex-col justify-center items-center bg-bgsecondary p-[10px] w-[350px] gap-[5px];
-
+        @apply flex flex-col h-full justify-center items-center bg-bgsecondary p-[10px] w-[350px] gap-[5px];
         .bet-amount {
             @apply w-[75px] rounded-[5px];
         }
@@ -137,7 +136,7 @@ const submitCoupon = () => {
 }
 
 .restart {
-    @apply flex flex-col items-center absolute bottom-0 text-white bg-btnprimary p-5 h-[100px];
+    @apply flex flex-col items-center justify-center absolute bottom-0 text-white bg-btnprimary p-5 h-[100px];
 
     .restart-btn-wrapper {
         .restart-btn {
@@ -148,6 +147,5 @@ const submitCoupon = () => {
             @apply w-6 hover:scale-150;
         }
     }
-
 }
 </style>
