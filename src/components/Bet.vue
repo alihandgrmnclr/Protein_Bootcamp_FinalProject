@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue"
-import { setDefault } from "../service/service"
+import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../service/service"
 const props = defineProps(["horses", "cash", "bet"])
 
 const selectedHorse = ref("");
@@ -24,6 +24,9 @@ const setDefaultValues = () => {
 
 const submitCoupon = () => {
     emit("submitBet", betAmount.value, selectedHorse.value);
+    const cash = getLocalWallet() - betAmount.value;
+    saveLocalWallet(cash);
+    saveBet(betAmount.value, selectedHorse.value);
 }
 
 </script>
@@ -52,8 +55,8 @@ const submitCoupon = () => {
                 <p>Seçilen At: <span class="amounts">{{selectedHorse}}</span></p>
                 <span>Bahis Tutarı: <input class="bet-amount" type="number" v-model="betAmount"
                         @input="checkAmount"></span>
-                <p>Oran: <span class="amounts">5.00</span></p>
-                <p>Tahmini Kazanç: <span class="amounts">{{betAmount*5}}₺</span> </p>
+                <p>Oran: <span class="amounts">{{betX}}x</span></p>
+                <p>Tahmini Kazanç: <span class="amounts">{{betAmount*10}}₺</span> </p>
             </div>
             <template v-if="selectedHorse.length>1">
                 <div class="submit">

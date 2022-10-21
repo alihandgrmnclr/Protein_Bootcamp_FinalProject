@@ -1,3 +1,5 @@
+export const betX = 10;
+
 export const getLocalWallet = () => {	// localStorage'dan bakiyeyi alıyor
 	const data = localStorage.getItem('cash');
 	const cash = JSON.parse(data);

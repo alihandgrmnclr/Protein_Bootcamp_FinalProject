@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from '@vue/reactivity';
-import { getBet } from "../service/service"
+import { getBet, saveLocalWallet, betX } from "../service/service"
 import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results", "leaderboard"]);
@@ -9,7 +9,12 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
 
     const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // tüm atlar 95'i geçti mi? bu bize t/f dönüyor
 
-    if (isRaceFinished) {   
+    if (isRaceFinished) {
+        console.log(props.leaderboard[0].name);
+        if (getBet().selectedHorse == props.leaderboard[0].name) {   // iddia kazanma durumu
+            saveLocalWallet(getBet().betAmount * betX);
+            console.log(`TEBRIKLER`);
+        }
         return props.leaderboard;
     } else {    // anlık yarışı izliyoruz
         const sortedData = [...props.horses].sort((a, b) => {
@@ -24,7 +29,7 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
     <div class="leaderboard">
         Bahis Yapılan At: {{getBet().selectedHorse}} <br>
         Bahis Tutarı: {{getBet().betAmount}}₺ <br>
-        Olası Kazanç: {{getBet().betAmount*5}}₺
+        Olası Kazanç: {{getBet().betAmount*betX}}₺
         <br>
         <div id="header">
             <div class="leaderboard__header">
