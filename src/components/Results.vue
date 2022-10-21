@@ -1,9 +1,9 @@
 <script setup>
 import { computed, ref } from '@vue/reactivity';
-import { getBet, getLeaderboard } from "../service/service"
+import { getBet } from "../service/service"
 import LeaderboardItem from './LeaderboardItem.vue';
 
-const props = defineProps(["horses", "results"]);
+const props = defineProps(["horses", "results", "leaderboard"]);
 
 const sortedHorses = computed(() => { // sort işlemini takip etmek için computed kullandık
     const sortedData = [...props.horses].sort((a, b) => {
@@ -11,7 +11,6 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
     });
     return sortedData;
 });
-
 </script>
 
 <template>
@@ -26,8 +25,9 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
                 <h1 class="leaderboard__title">LIDERLIK TABLOSU</h1>
             </div>
         </div>
+
         <div class="leaderboard__rankings">
-            <LeaderboardItem v-for="(horse,index) in sortedHorses" :horse="horse" :rank="index"></LeaderboardItem>
+            <LeaderboardItem v-for="(horse,index) in sortedHorses" :horse="horse" :rank="index" :leaderboard="props.leaderboard"></LeaderboardItem>
         </div>
     </div>
 </template>

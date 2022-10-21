@@ -3,11 +3,12 @@ import { ref } from 'vue';
 import Results from './Results.vue';
 import Horse from './Horse.vue';
 const props = defineProps(["horses", "bet"]);
-const emits = defineEmits(["updateHorse"]);
-const start = ref(false);
+const emits = defineEmits(["updateHorse","updateLeaderboard"]);
 
+const start = ref(false);
 const countDownShow = ref(false);
 const countDownTimer = ref(3);
+const finalLeaderboard = ref([]);
 
 const delay = (ms) => { // 3 saniyelik bir countdown
     countDownShow.value = true;
@@ -35,20 +36,31 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
     emits("updateHorse", horse); // yukarı gönderiyoruz (app)
 }
 
+const updateLeaderboardHandler = (leaderboard) => {
+    emits("updateLeaderboard", leaderboard);
+    finalLeaderboard.value.push(leaderboard);
+    console.log(finalLeaderboard.value);
+};
+
 </script>
 
 <template>
     <template v-if="!start">
         <div class="results">
-            <Results :horses="props.horses"></Results>
+            <Results :horses="props.horses" :leaderboard="finalLeaderboard.value"></Results>
         </div>
         <template v-if="countDownTimer<1">
             <div class="track">
                 <div v-for="horse in props.horses" :key="horse.id">
                     <div class="finish"></div>
                     <div class="line-wrapper">
-                        {{horse.id}} <Horse @updateHorse="updateHorseHandler" :horse="horse"
-                            :countdown="countDownTimer"></Horse>
+                        {{horse.id}} 
+                        <Horse 
+                            @updateHorse="updateHorseHandler"
+                            @updateLeaderboard="updateLeaderboardHandler" 
+                            :horse="horse"
+                            :countdown="countDownTimer">
+                        </Horse>
                     </div>
                 </div>
             </div>
@@ -99,8 +111,9 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
     }
 
     &__finish {
-        @apply h-[600px] absolute right-0 w-2 bg-white mr-20;;
-        
+        @apply h-[600px] absolute right-0 w-2 bg-white mr-20;
+        ;
+
     }
 }
 

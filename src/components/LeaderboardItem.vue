@@ -1,9 +1,8 @@
 <script setup>
-import { computed } from 'vue';
-import { getLeaderboard } from '../service/service';
+import { computed, onUpdated, ref } from 'vue';
 
-
-const props = defineProps(["horse", "rank"]);
+const props = defineProps(["horse", "rank", "leaderboard"]);
+const results = ref(props.leaderboard);
 
 const rankClasses = computed(() => {    // eşleşen class'ları verdim
     return {
@@ -14,21 +13,17 @@ const rankClasses = computed(() => {    // eşleşen class'ları verdim
     }
 });
 
+
 </script>
 
 <template>
+    {{results}}
     <div class="leaderboard__profile">
-        <template v-if="getLeaderboard().length<7">
-            <span :class="rankClasses">{{props.rank+1}}-</span>
-            <span>{{props.horse.name}}({{props.horse.id}})</span>
-            <span class="time"> {{(props.horse.pos).toFixed(1)}}
-                <span v-if="props.horse.pos" class="seconds">m</span>
-            </span>
-        </template>
-        <template v-else>
-            <span :class="rankClasses">-</span>
-            <span>{{getLeaderboard()[0]}}</span>
-        </template>
+        <span :class="rankClasses">{{props.rank+1}}-</span>
+        <span>{{props.horse.name}}({{props.horse.id}})</span>
+        <span class="time"> {{(props.horse.pos).toFixed(1)}}
+            <span v-if="props.horse.pos" class="seconds">m</span>
+        </span>
     </div>
 </template>
 
