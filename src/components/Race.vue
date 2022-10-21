@@ -3,9 +3,10 @@ import { ref } from 'vue';
 import Results from './Results.vue';
 import Horse from './Horse.vue';
 const props = defineProps(["horses", "bet"]);
-const emits = defineEmits(["updateHorse","updateLeaderboard"]);
+const emits = defineEmits(["updateHorse", "updateLeaderboard"]);
 
 const start = ref(false);
+const isFinished = ref(false);
 const countDownShow = ref(false);
 const countDownTimer = ref(3);
 const finalLeaderboard = ref([]);
@@ -29,7 +30,8 @@ const restart = () => {
 };
 
 async function raceStart() {
-    await delay(4000);  // delay fonksiyonu bitmeden yarış başlamıyor
+    await delay(3000);  // delay fonksiyonu bitmeden yarış başlamıyor
+    start.value = true;
 }
 
 const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakalıyoruz
@@ -38,47 +40,47 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
 
 const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tablosu -> results'a yolluyorum
     finalLeaderboard.value.push(horse);
+    isFinished.value = true; // restart butonu gözükmesi için
 };
 
 </script>
 
 <template>
-    <template v-if="!start">
-        <div class="results">
-            <Results :horses="props.horses" :leaderboard="finalLeaderboard"></Results>
-        </div>
-        <template v-if="countDownTimer<1">
-            <div class="track">
-                <div v-for="horse in props.horses" :key="horse.id">
-                    <div class="finish"></div>
-                    <div class="line-wrapper">
-                        {{horse.id}} 
-                        <Horse 
-                            @updateHorse="updateHorseHandler"
-                            @updateLeaderboard="updateLeaderboardHandler" 
-                            :horse="horse"
-                            :countdown="countDownTimer">
-                        </Horse>
-                    </div>
+    <div class="results">
+        <Results :horses="props.horses" :leaderboard="finalLeaderboard"></Results>
+    </div>
+    <template v-if="countDownTimer<1">
+        <div class="track">
+            <div v-for="horse in props.horses" :key="horse.id">
+                <div class="finish"></div>
+                <div class="line-wrapper">
+                    {{horse.id}}
+                    <Horse @updateHorse="updateHorseHandler" @updateLeaderboard="updateLeaderboardHandler"
+                        :horse="horse" :countdown="countDownTimer">
+                    </Horse>
                 </div>
             </div>
-        </template>
-        <template v-else>
-            <div class="empty">
-                <div class="empty__track">
-                    <div class="empty__finish"></div>
-                </div>
-            </div>
-        </template>
-        <template v-if="countDownShow">
-            <p class="countdown-timer">{{countDownTimer}}</p>
-        </template>
-        <div class="race-settings">
-            <button class="start-btn" @click="raceStart">Başla</button>
-            <button class="restart-btn" @click="restart"><img class="restart-icon"
-                    src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
         </div>
     </template>
+    <template v-else>
+        <div class="empty">
+            <div class="empty__track">
+                <div class="empty__finish"></div>
+            </div>
+        </div>
+    </template>
+    <template v-if="countDownShow">
+        <p class="countdown-timer">{{countDownTimer}}</p>
+    </template>
+    <div class="race-settings">
+        <template v-if="!start">
+            <button class="start-btn" @click="raceStart">Başla</button>
+        </template>
+        <template v-if="isFinished">
+            <button class="restart-btn" @click="restart"><img class="restart-icon"
+                    src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
+        </template>
+    </div>
 
 </template>
 
