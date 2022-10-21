@@ -18,7 +18,7 @@ const rankClasses = computed(() => {    // eşleşen class'ları verdim
     
     <div class="leaderboard__profile">
         <span :class="rankClasses">{{props.rank+1}}-</span>
-        <span>{{props.horse.name}}({{props.horse.id}})</span>
+        <span>{{props.horse.name}} <span class="horse-id">({{props.horse.id}})</span></span>
         <span class="time"> {{(props.horse.pos).toFixed(1)}}
             <span v-if="props.horse.pos" class="seconds">sn</span>
         </span>
@@ -49,5 +49,9 @@ const rankClasses = computed(() => {    // eşleşen class'ları verdim
 
 .seconds {
     @apply text-sm;
+}
+
+.horse-id{
+    
 }
 </style>

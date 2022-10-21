@@ -11,9 +11,7 @@ let running = setInterval(() => {
     if (horseRef.value.pos <= 95) {
         horseRef.value.pos = horseRef.value.pos + randomSpeed();
         emits("updateHorse", horseRef.value); // horseref'in pozisyonunu değiştirip obje olarak yolluyoruz
-    }
-
-    else {
+    }else {
         emits("updateLeaderboard", horseRef.value);
         idle();
     }

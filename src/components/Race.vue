@@ -54,7 +54,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
             <div v-for="horse in props.horses" :key="horse.id">
                 <div class="finish"></div>
                 <div class="line-wrapper">
-                    {{horse.id}}
+                    <p class="line-id">{{horse.id}}</p>
                     <Horse @updateHorse="updateHorseHandler" @updateLeaderboard="updateLeaderboardHandler"
                         :horse="horse" :countdown="countDownTimer">
                     </Horse>
@@ -100,14 +100,19 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 
 .track {
     @apply mt-5 overflow-hidden;
-    background-image: url(/Images/Pitch/Çim.png);
+    background-image: url(/Images/Pitch/Bushes.png);
+    background-size: cover;
+}
+
+.line-id{
+    @apply flex text-white font-bold ml-2;
 }
 
 .empty {
 
     &__track {
         @apply w-full mt-5 h-[600px];
-        background-image: url(/Images/Pitch/Çim.png);
+        background-image: url(/Images/Pitch/Bushes.png);
     }
 
     &__finish {
@@ -131,6 +136,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 .line-wrapper {
     @apply relative;
     border-bottom: solid;
+    // background: rgb(125, 196, 125);
     border-color: rgba(240, 248, 255, 0.214);
 }
 

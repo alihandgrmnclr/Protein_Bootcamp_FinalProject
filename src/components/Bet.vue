@@ -65,7 +65,7 @@ const submitCoupon = () => {
             </template>
         </div>
     </div>
-    <template v-if="props.cash>2">
+    <template v-if="props.cash">
         <div class="restart">
             <div class="restart-btn-wrapper">
                 <button class="restart-btn" @click="setDefaultValues"><img class="restart-icon"

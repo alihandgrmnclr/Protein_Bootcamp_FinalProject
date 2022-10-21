@@ -16,4 +16,5 @@ const runningPath = `../../Images/Horses/${props.img}.gif`
     @apply w-[75px]
 }
 
+
 </style>

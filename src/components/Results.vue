@@ -1,19 +1,19 @@
 <script setup>
-import { computed } from '@vue/reactivity';
+import { computed, ref } from '@vue/reactivity';
 import { getBet, saveLocalWallet, betX } from "../service/service"
 import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results", "leaderboard"]);
+const isBetWin = ref(false);
 
 const sortedHorses = computed(() => { // sort işlemini takip etmek için computed kullandık
 
     const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // tüm atlar 95'i geçti mi? bu bize t/f dönüyor
 
     if (isRaceFinished) {
-        console.log(props.leaderboard[0].name);
         if (getBet().selectedHorse == props.leaderboard[0].name) {   // iddia kazanma durumu
             saveLocalWallet(getBet().betAmount * betX);
-            console.log(`TEBRIKLER`);
+            isBetWin.value = true;
         }
         return props.leaderboard;
     } else {    // anlık yarışı izliyoruz
@@ -43,6 +43,12 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
                 :leaderboard="props.leaderboard"></LeaderboardItem>
         </div>
     </div>
+    <template v-if="isBetWin">
+        <div class="betwin">
+            <img class="money-rain" src="https://media.tenor.com/ZDe0dPKLr3AAAAAi/raining-money-money.gif" alt="">
+            <p>TEBRIKLER {{getBet().betAmount*betX}}₺ KAZANDINIZ</p>
+        </div>
+    </template>
 </template>
 
 <style lang="scss" scoped>
@@ -65,6 +71,13 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
     &__rankings {
         @apply flex flex-col flex-wrap h-full gap-2 text-xl font-semibold gap-x-8;
     }
+}
 
+.betwin {
+    @apply absolute ml-auto mr-auto left-0 right-0 text-center mt-[50vh] text-[36px] h-[100px] text-white;
+    
+    .money-rain{
+        @apply absolute ml-auto mr-auto left-0 right-0;
+    }
 }
 </style>
