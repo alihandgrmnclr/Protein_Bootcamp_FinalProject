@@ -1,18 +1,37 @@
 <script setup>
 import { computed, ref } from '@vue/reactivity';
-import { getBet, saveLocalWallet, betX } from "../service/service"
+import { getBet, saveLocalWallet, betX, horseData, addCash } from "../service/service"
 import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results", "leaderboard"]);
+
+const horseRef = ref(props.horses);
 const isBetWin = ref(false);
+const finishTime = ref(0);
+
+const chronometer = computed(()=>{
+    
+    const isHorseFinished = horseRef.value.filter((horse) => horse.pos >= 95)
+    
+    if (isHorseFinished.length > 0) {
+        console.log(isHorseFinished);
+    }
+    // if (isHorseFinished) {
+    //     finishTime.value = new Date();
+    //     horseRef.finish = finishTime.value;
+    //     console.log("bitirdi", isHorseFinished);
+    // }
+    return;
+});
 
 const sortedHorses = computed(() => { // sort işlemini takip etmek için computed kullandık
 
     const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // tüm atlar 95'i geçti mi? bu bize t/f dönüyor
 
     if (isRaceFinished) {
+
         if (getBet().selectedHorse == props.leaderboard[0].name) {   // iddia kazanma durumu
-            saveLocalWallet(getBet().betAmount * betX);
+            addCash(getBet().betAmount * betX);
             isBetWin.value = true;
         }
         return props.leaderboard;
@@ -27,10 +46,7 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
 
 <template>
     <div class="leaderboard">
-        Bahis Yapılan At: {{getBet().selectedHorse}} <br>
-        Bahis Tutarı: {{getBet().betAmount}}₺ <br>
-        Olası Kazanç: {{getBet().betAmount*betX}}₺
-        <br>
+               
         <div id="header">
             <div class="leaderboard__header">
                 <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/744/744974.png" alt="">
@@ -40,7 +56,8 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
 
         <div class="leaderboard__rankings">
             <LeaderboardItem v-for="(horse,index) in sortedHorses" :horse="horse" :rank="index"
-                :leaderboard="props.leaderboard"></LeaderboardItem>
+                :leaderboard="props.leaderboard" :chronometer="chronometer">
+            </LeaderboardItem>
         </div>
     </div>
     <template v-if="isBetWin">
@@ -54,10 +71,10 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
 <style lang="scss" scoped>
 .leaderboard {
     font-family: 'Source Sans Pro', sans-serif;
-    @apply flex flex-wrap justify-around items-center p-3 bg-bgprimary text-slate-50 w-full h-[200px] rounded-xl;
+    @apply flex justify-around items-center p-3 bg-bgprimary text-slate-50 w-full h-[200px] rounded-xl;
 
     &__header {
-        @apply flex flex-col justify-center items-center w-full;
+        @apply hidden md:flex flex-col justify-center items-center w-1/2;
     }
 
     &__icon {
@@ -69,14 +86,15 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
     }
 
     &__rankings {
-        @apply flex flex-col flex-wrap h-full gap-2 text-xl font-semibold gap-x-8;
+        @apply w-full text-sm font-semibold flex flex-col flex-wrap items-center justify-center content-around h-full gap-x-3 gap-y-2;
+        @apply md:w-1/2 md:text-lg lg:items-start;
     }
 }
 
 .betwin {
     @apply absolute ml-auto mr-auto left-0 right-0 text-center mt-[50vh] text-[36px] h-[100px] text-white;
-    
-    .money-rain{
+
+    .money-rain {
         @apply absolute ml-auto mr-auto left-0 right-0;
     }
 }

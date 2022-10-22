@@ -139,15 +139,15 @@ const submitCoupon = () => {
 }
 
 .restart {
-    @apply flex flex-col items-center justify-center absolute bottom-0 text-white bg-btnprimary p-5 h-[100px];
-
+    @apply flex flex-col items-center justify-center absolute bottom-0 text-white bg-btnprimary p-5 h-[70px];
+    
     .restart-btn-wrapper {
         .restart-btn {
             @apply text-white w-full;
         }
 
         .restart-icon {
-            @apply w-6 hover:scale-150;
+            @apply w-4 hover:scale-150;
         }
     }
 }

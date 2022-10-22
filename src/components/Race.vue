@@ -2,21 +2,24 @@
 import { ref } from 'vue';
 import Results from './Results.vue';
 import Horse from './Horse.vue';
+import { betX, getBet } from '../service/service';
 const props = defineProps(["horses", "bet"]);
 const emits = defineEmits(["updateHorse", "updateLeaderboard"]);
 
+const horseRef = ref(props.horses);
 const start = ref(false);
 const isFinished = ref(false);
-const countDownShow = ref(false);
+const isCountDown = ref(false);
 const countDownTimer = ref(3);
 const finalLeaderboard = ref([]);
+const startTime = ref(0);
 
 const delay = (ms) => { // 3 saniyelik bir countdown
-    countDownShow.value = true;
+    isCountDown.value = true;
     const countDown = setInterval(() => {
         if (countDownTimer.value <= 1) {
             clearInterval(countDown);
-            countDownShow.value = false;
+            isCountDown.value = false;
         }
         countDownTimer.value--;
     }, 1000);
@@ -32,6 +35,9 @@ const restart = () => {
 async function raceStart() {
     await delay(3000);  // delay fonksiyonu bitmeden yarış başlamıyor
     start.value = true;
+    startTime.value = new Date();
+    horseRef.value.map((item) => item.start = startTime.value)
+    console.log("horseref", horseRef.value);
 }
 
 const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakalıyoruz
@@ -47,7 +53,8 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 
 <template>
     <div class="results">
-        <Results :horses="props.horses" :leaderboard="finalLeaderboard"></Results>
+        <!-- <Results :horses="props.horses" :leaderboard="finalLeaderboard"></Results> -->
+        <Results :horses="horseRef" :leaderboard="finalLeaderboard"></Results>
     </div>
     <template v-if="countDownTimer<1">
         <div class="track">
@@ -69,7 +76,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
             </div>
         </div>
     </template>
-    <template v-if="countDownShow">
+    <template v-if="isCountDown">
         <p class="countdown-timer">{{countDownTimer}}</p>
     </template>
     <div class="race-settings">
@@ -80,6 +87,11 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
             <button class="restart-btn" @click="restart"><img class="restart-icon"
                     src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
         </template>
+        <div class="bet-options">
+            <p class="bet-opt">Bahis Yapılan At: <span class="bet-select">{{getBet().selectedHorse}}</span></p>
+            <p class="bet-opt">Bahis Tutarı: <span class="bet-select">{{getBet().betAmount}}₺</span></p>
+            <p class="bet-opt">Olası Kazanç: <span class="bet-select">{{getBet().betAmount*betX}}₺</span></p>
+        </div>
     </div>
 
 </template>
@@ -95,28 +107,28 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 }
 
 .countdown-timer {
-    @apply flex justify-center text-[36px];
+    @apply absolute left-[50%] bottom-[50%] translate-y-[50%] text-[6rem];
+   
 }
 
 .track {
-    @apply mt-5 overflow-hidden;
+    @apply mt-5 w-full h-[600px] bg-no-repeat bg-cover overflow-hidden;
     background-image: url(/Images/Pitch/Bushes.png);
-    background-size: cover;
 }
 
-.line-id{
+.line-id {
     @apply flex text-white font-bold ml-2;
 }
 
 .empty {
 
     &__track {
-        @apply w-full mt-5 h-[600px];
+        @apply w-full mt-5 h-[600px] bg-no-repeat bg-cover;
         background-image: url(/Images/Pitch/Bushes.png);
     }
 
     &__finish {
-        @apply h-[600px] absolute right-0 w-2 bg-white mr-20;
+        @apply h-[600px] absolute right-0 w-2 bg-white mr-[5vw];
     }
 }
 
@@ -126,11 +138,11 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 }
 
 .race-settings {
-    @apply flex justify-center items-center mt-5 gap-3;
+    @apply flex flex-col justify-center items-center mt-5 gap-3;
 }
 
 .finish {
-    @apply absolute right-0 w-2 h-[75px] bg-white mr-20;
+    @apply absolute right-0 w-2 h-[75px] bg-white mr-[5vw];
 }
 
 .line-wrapper {
@@ -139,8 +151,17 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
     // background: rgb(125, 196, 125);
     border-color: rgba(240, 248, 255, 0.214);
 }
-
 .results {
     @apply flex justify-end;
+}
+.bet-options{
+    @apply flex flex-col;
+
+    .bet-opt{
+        @apply flex justify-between w-[200px];
+    }
+    .bet-select{
+        @apply font-bold;
+    }
 }
 </style>

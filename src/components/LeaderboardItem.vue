@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onUpdated, ref } from 'vue';
+import { computed } from 'vue';
 
 const props = defineProps(["horse", "rank", "leaderboard"]);
 
@@ -17,38 +17,41 @@ const rankClasses = computed(() => {    // eşleşen class'ları verdim
 <template>
     
     <div class="leaderboard__profile">
-        <span :class="rankClasses">{{props.rank+1}}-</span>
-        <span>{{props.horse.name}} <span class="horse-id">({{props.horse.id}})</span></span>
-        <span class="time"> {{(props.horse.pos).toFixed(1)}}
-            <span v-if="props.horse.pos" class="seconds">sn</span>
-        </span>
+        <p :class="rankClasses">{{props.rank+1}}-</p>
+        <p class="horse-name">{{props.horse.name}} <p class="horse-id">({{props.horse.id}})</p></p>
+        <p class="time"> {{(props.horse.pos).toFixed(1)}}
+            <p v-if="props.horse.pos" class="seconds">sn</p>
+        </p>
     </div>
 
 </template>
 
 <style>
 .leaderboard__profile {
-    @apply flex w-full items-center justify-between;
+    @apply flex w-[100px] items-center justify-between;
+    @apply sm:w-[180px];
 }
-
+.horse-name{
+    @apply flex justify-center items-center;
+}
 .rank-first {
-    @apply text-orange-600 text-2xl font-bold py-2;
+    @apply flex justify-center items-center text-orange-600 text-2xl font-bold py-2;
 }
 
 .rank-second {
-    @apply text-yellow-500 text-2xl font-bold py-2;
+    @apply flex justify-center items-center text-yellow-500 text-2xl font-bold py-2;
 }
 
 .rank-third {
-    @apply text-purple-900 text-2xl font-bold py-2;
+    @apply flex justify-center items-center text-purple-900 text-2xl font-bold py-2;
 }
 
 .time {
-    @apply text-black text-sm ml-4;
+    @apply flex justify-center items-center text-black text-sm ml-4;
 }
 
 .seconds {
-    @apply text-sm;
+    @apply flex justify-center items-center text-sm;
 }
 
 .horse-id{

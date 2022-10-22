@@ -35,8 +35,7 @@ export const clearBet = () => {
 
 export const addCash = (value) => {	// iddiayı kazandığı zaman çalışacak
 	const wallet = localStorage.getItem('cash');
-	const data = JSON.stringify(value);
-	localStorage.setItem('cash', wallet + data);
+	localStorage.setItem('cash', (value + Number(wallet)));
 	return;
 };
 
@@ -52,7 +51,7 @@ export const horseData = (count = 8) => {	// at verilerini oluşturuyorum
 		const horse = {
 			name: names[i],
 			start: 0,
-			finish: "",
+			finish: null,
 			pos: 0,
 			id: i + 1,
 			img: `H${i + 1}`,
