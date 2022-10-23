@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../utils/wallet"
 import { clickSound } from "../utils/sounds"
 
@@ -9,21 +9,25 @@ const props = defineProps(["horses", "cash", "bet"])
 const selectedHorse = ref("");
 const betAmount = ref(1);
 
-// bahis tutarı 1'den küçük olamaz bakiyeden büyük olamaz
+// bahis tutarı 0'dan küçük olamaz bakiyeden büyük olamaz
 const checkAmount = () => {
     if (betAmount.value > props.cash) {
         betAmount.value = props.cash;
-    } else if (betAmount.value < 1) {
-        betAmount.value = 1;
+    } else if (betAmount.value < 0) {
+        betAmount.value = 0;
     }
 }
 
 const emit = defineEmits(["submitBet"])
 
-const setDefaultValues = () => {
+// const setDefaultValues = () => {
+//     setDefault();
+// }
+
+const setDefaultValues = computed(()=>{
     setDefault();
     window.location.reload();
-}
+})
 
 const submitCoupon = () => {
     emit("submitBet", betAmount.value, selectedHorse.value);
@@ -59,7 +63,7 @@ const submitCoupon = () => {
                 <span>Bahis Tutarı: <input class="bet-amount" type="number" v-model="betAmount"
                         @input="checkAmount"></span>
                 <p>Oran: <span class="amounts">{{betX}}x</span></p>
-                <p>Tahmini Kazanç: <span class="amounts">{{betAmount*10}}₺</span> </p>
+                <p>Tahmini Kazanc: <span class="amounts">{{betAmount*10}}₺</span> </p>
             </div>
             <template v-if="selectedHorse.length>1">
                 <div class="submit">
@@ -68,7 +72,7 @@ const submitCoupon = () => {
             </template>
         </div>
     </div>
-    <template v-if="props.cash">
+    <template v-if="props.cash>-1">
         <div class="restart">
             <div class="restart-btn-wrapper">
                 <button class="restart-btn" @click="setDefaultValues"><img class="restart-icon"

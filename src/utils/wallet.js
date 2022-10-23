@@ -34,8 +34,11 @@ export const clearBet = () => {
 }
 
 export const addCash = (value) => {	// iddiayı kazandığı zaman çalışacak
-	const wallet = localStorage.getItem('cash');
-	localStorage.setItem('cash', (value + Number(wallet)));
+	let wallet = localStorage.getItem('cash');
+	wallet = Number(wallet);
+	wallet = value + wallet;
+	console.log("cash add"+wallet);
+	localStorage.setItem('cash', wallet);
 	return;
 };
 

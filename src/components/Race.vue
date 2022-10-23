@@ -142,7 +142,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 }
 
 .race-settings {
-    @apply flex flex-col justify-center items-center mt-5 gap-3;
+    @apply flex flex-col justify-center items-center mt-5 gap-3 h-[120px];
 }
 
 .finish {
@@ -163,7 +163,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 }
 
 .bet-options {
-    @apply flex flex-col items-center bg-bgprimary text-white w-full h-full;
+    @apply flex flex-col items-center justify-center bg-bgprimary text-white w-full h-full;
 
     .bet-opt {
         @apply flex justify-between w-[250px];

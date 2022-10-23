@@ -13,13 +13,10 @@
 
 html,
 #app {
-    height: 100%;
+    @apply h-full bg-neutral-300;
     font-family: 'Pixel';
 }
 
 body {
-    padding: 3px;
-    height: 100%;
+    @apply h-full;
 }
-
-/* The palette has 5 colors which are Goldenrod Light Color (#ef912d), Rosy Brown Dark Color (#9b6753), Dim Gray Dark Color (#473e3a), Black Dark Color (#20211a), Dim Gray Dark Color(#7b584e), */
