@@ -12,7 +12,10 @@ module.exports = {
         'bgsecondary': '#9b6753',
         'gold':'#ef912d',
         'blackdark':'#9b6753',
-      }
+      },
+      fontFamily:{
+        Pixel : ["Pixel"],
+      },
     },
   },
   plugins: [],

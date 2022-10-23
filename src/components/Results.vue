@@ -49,7 +49,7 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
                
         <div id="header">
             <div class="leaderboard__header">
-                <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/744/744974.png" alt="">
+                <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/6514/6514964.png" alt="">
                 <h1 class="leaderboard__title">LIDERLIK TABLOSU</h1>
             </div>
         </div>
@@ -62,7 +62,6 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
     </div>
     <template v-if="isBetWin">
         <div class="betwin">
-            <img class="money-rain" src="https://media.tenor.com/ZDe0dPKLr3AAAAAi/raining-money-money.gif" alt="">
             <p>TEBRIKLER {{getBet().betAmount*betX}}₺ KAZANDINIZ</p>
         </div>
     </template>
@@ -70,8 +69,7 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
 
 <style lang="scss" scoped>
 .leaderboard {
-    font-family: 'Source Sans Pro', sans-serif;
-    @apply flex justify-around items-center p-3 bg-bgprimary text-slate-50 w-full h-[200px] rounded-xl;
+    @apply flex justify-center items-center p-3 bg-bgprimary text-slate-50 w-full h-[200px];
 
     &__header {
         @apply hidden md:flex flex-col justify-center items-center w-1/2;

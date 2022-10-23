@@ -34,7 +34,7 @@ const submitCoupon = () => {
 <template>
     <div class="bet">
         <div class="bet__select">
-            <h1 class="bet-title">Bir at seçiniz</h1>
+            <h1 class="bet-title">Bir at seciniz</h1>
             <ul class="bet-horse-wrapper">
                 <li class="bet-horse" v-for="horse in horses" :key="horse.id"><label
                         :for="horse.id">{{horse.name}}</label>
@@ -79,13 +79,13 @@ const submitCoupon = () => {
 </template>
 
 <style lang="scss" scoped>
+
 .bet {
-    font-family: 'Courier New', Courier, monospace;
     @apply flex flex-col sm:flex-row sm:w-[600px] gap-[5px] sm:h-[300px] items-center mb-20 sm:mb-1;
     box-shadow: 1rem 1rem 2rem hsl(0 0% 0% / 50%);
 
     &__select {
-        @apply flex flex-col h-full w-[350px] font-semibold bg-bgprimary p-[10px];
+        @apply flex flex-col justify-center h-full w-[350px] font-semibold bg-bgprimary p-[10px];
 
         .bet-title {
             @apply text-[28px] text-white;

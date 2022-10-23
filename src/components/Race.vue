@@ -56,12 +56,12 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
         <!-- <Results :horses="props.horses" :leaderboard="finalLeaderboard"></Results> -->
         <Results :horses="horseRef" :leaderboard="finalLeaderboard"></Results>
     </div>
-    <template v-if="countDownTimer<1">
+    <template v-if="countDownTimer < 1">
         <div class="track">
             <div v-for="horse in props.horses" :key="horse.id">
                 <div class="finish"></div>
                 <div class="line-wrapper">
-                    <p class="line-id">{{horse.id}}</p>
+                    <p class="line-id">{{ horse.id }}</p>
                     <Horse @updateHorse="updateHorseHandler" @updateLeaderboard="updateLeaderboardHandler"
                         :horse="horse" :countdown="countDownTimer">
                     </Horse>
@@ -77,7 +77,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
         </div>
     </template>
     <template v-if="isCountDown">
-        <p class="countdown-timer">{{countDownTimer}}</p>
+        <p class="countdown-timer">{{ countDownTimer }}</p>
     </template>
     <div class="race-settings">
         <template v-if="!start">
@@ -88,9 +88,9 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
                     src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
         </template>
         <div class="bet-options">
-            <p class="bet-opt">Bahis Yapılan At: <span class="bet-select">{{getBet().selectedHorse}}</span></p>
-            <p class="bet-opt">Bahis Tutarı: <span class="bet-select">{{getBet().betAmount}}₺</span></p>
-            <p class="bet-opt">Olası Kazanç: <span class="bet-select">{{getBet().betAmount*betX}}₺</span></p>
+            <p class="bet-opt">Bahis Yapılan At: <span class="bet-select">{{ getBet().selectedHorse }}</span></p>
+            <p class="bet-opt">Bahis Tutarı: <span class="bet-select">{{ getBet().betAmount }}₺</span></p>
+            <p class="bet-opt">Olası Kazanç: <span class="bet-select">{{ getBet().betAmount * betX }}₺</span></p>
         </div>
     </div>
 
@@ -108,7 +108,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 
 .countdown-timer {
     @apply absolute left-[50%] bottom-[50%] translate-y-[50%] text-[6rem];
-   
+
 }
 
 .track {
@@ -129,6 +129,8 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 
     &__finish {
         @apply h-[600px] absolute right-0 w-2 bg-white mr-[5vw];
+        background-image: url(https://i.pinimg.com/originals/9f/66/4e/9f664e48cb3436b6a664141f92c1baad.png);
+        background-size: 60px;
     }
 }
 
@@ -143,6 +145,8 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 
 .finish {
     @apply absolute right-0 w-2 h-[75px] bg-white mr-[5vw];
+    background-image: url(https://i.pinimg.com/originals/9f/66/4e/9f664e48cb3436b6a664141f92c1baad.png);
+    background-size: 60px;
 }
 
 .line-wrapper {
@@ -151,16 +155,19 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
     // background: rgb(125, 196, 125);
     border-color: rgba(240, 248, 255, 0.214);
 }
+
 .results {
     @apply flex justify-end;
 }
-.bet-options{
-    @apply flex flex-col;
 
-    .bet-opt{
-        @apply flex justify-between w-[200px];
+.bet-options {
+    @apply flex flex-col items-center bg-bgprimary text-white w-full h-full;
+
+    .bet-opt {
+        @apply flex justify-between w-[250px];
     }
-    .bet-select{
+
+    .bet-select {
         @apply font-bold;
     }
 }

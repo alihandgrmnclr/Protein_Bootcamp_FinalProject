@@ -19,7 +19,7 @@ const rankClasses = computed(() => {    // eşleşen class'ları verdim
     <div class="leaderboard__profile">
         <p :class="rankClasses">{{props.rank+1}}-</p>
         <p class="horse-name">{{props.horse.name}} <p class="horse-id">({{props.horse.id}})</p></p>
-        <p class="time"> {{(props.horse.pos).toFixed(1)}}
+        <p class="time"> {{(props.horse.finish)}}
             <p v-if="props.horse.pos" class="seconds">sn</p>
         </p>
     </div>
@@ -28,8 +28,9 @@ const rankClasses = computed(() => {    // eşleşen class'ları verdim
 
 <style>
 .leaderboard__profile {
-    @apply flex w-[100px] items-center justify-between;
-    @apply sm:w-[180px];
+    font-family: 'Pixel';
+    @apply flex w-[45%] items-center justify-between;
+    @apply sm:w-[200px];
 }
 .horse-name{
     @apply flex justify-center items-center;

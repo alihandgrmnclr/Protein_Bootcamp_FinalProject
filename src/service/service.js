@@ -46,7 +46,7 @@ export const setDefault = () => { // default hale getiriyorum
 
 export const horseData = (count = 8) => {	// at verilerini oluşturuyorum
 	const horses = [];
-	const names = ["Gülbatur", "Şahbatur", "Bold Pilot", "Yagız", "Yadigar", "Sipahi", "Elkızı", "Unicorn"];
+	const names = ["Gülbatur", "Sahbatur", "Bold Pilot", "Yagız", "Yadigar", "Sipahi", "Elkızı", "Unicorn"];
 	for (let i = 0; i < count; i++) {
 		const horse = {
 			name: names[i],
@@ -69,13 +69,3 @@ export const randomSpeed = (min = 1, max = 5) => {	// random hız fonksiyonu
 	return result;
 };
 
-// const lastLeaderboard = [];
-// export const saveLeaderboard = (name) => {
-// 	lastLeaderboard.push(name);
-// 	console.log(lastLeaderboard);
-// 	return lastLeaderboard;
-// };
-
-// export const getLeaderboard = () => {
-// 	return lastLeaderboard;
-// };
