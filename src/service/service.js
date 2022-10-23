@@ -69,3 +69,15 @@ export const randomSpeed = (min = 1, max = 5) => {	// random hız fonksiyonu
 	return result;
 };
 
+
+export const clickSound = () => {
+	const audio = new Audio();
+	audio.src = "sounds/blip.wav";
+	return audio.play();
+};
+
+export const countDownSound = () => {
+	const audio = new Audio();
+	audio.src = "sounds/countdown.wav";
+	return audio.play();
+};

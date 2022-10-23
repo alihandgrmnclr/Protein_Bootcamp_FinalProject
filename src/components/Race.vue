@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import Results from './Results.vue';
 import Horse from './Horse.vue';
-import { betX, getBet } from '../service/service';
+import { betX, countDownSound, getBet } from '../service/service';
 const props = defineProps(["horses", "bet"]);
 const emits = defineEmits(["updateHorse", "updateLeaderboard"]);
 
@@ -81,7 +81,7 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
     </template>
     <div class="race-settings">
         <template v-if="!start">
-            <button class="start-btn" @click="raceStart">Başla</button>
+            <button class="start-btn" @click="raceStart(), countDownSound()">Başla</button>
         </template>
         <template v-if="isFinished">
             <button class="restart-btn" @click="restart"><img class="restart-icon"

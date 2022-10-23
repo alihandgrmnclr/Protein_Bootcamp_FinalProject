@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue"
-import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../service/service"
+import { betX, clickSound, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../service/service"
 const props = defineProps(["horses", "cash", "bet"])
 
 const selectedHorse = ref("");
@@ -60,7 +60,7 @@ const submitCoupon = () => {
             </div>
             <template v-if="selectedHorse.length>1">
                 <div class="submit">
-                    <button class="submit__btn" @click="submitCoupon">Onayla</button>
+                    <button class="submit__btn" @click="submitCoupon(), clickSound()" >Onayla</button>
                 </div>
             </template>
         </div>
