@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from "vue"
-import { betX, clickSound, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../service/service"
+import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../utils/wallet"
+import { clickSound } from "../utils/sounds"
+
+
 const props = defineProps(["horses", "cash", "bet"])
 
 const selectedHorse = ref("");

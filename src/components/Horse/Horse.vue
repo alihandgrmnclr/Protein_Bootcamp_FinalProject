@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
-import { randomSpeed } from "../service/service"
-import Gif from './Gif.vue';
+import { randomSpeed } from "../../utils/race"
+import Gif from './HorseGif.vue';
 
 const props = defineProps(["horse", "countdown"]);
 const emits = defineEmits(["updateHorse", "updateLeaderboard"]);

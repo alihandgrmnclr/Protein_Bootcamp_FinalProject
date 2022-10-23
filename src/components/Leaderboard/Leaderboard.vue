@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from '@vue/reactivity';
-import { getBet, saveLocalWallet, betX, horseData, addCash } from "../service/service"
+import { getBet, betX,  addCash } from "../../utils/wallet"
 import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results", "leaderboard"]);

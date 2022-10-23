@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from 'vue';
-import Results from './Results.vue';
-import Horse from './Horse.vue';
-import { betX, countDownSound, getBet } from '../service/service';
+import Results from './Leaderboard/Leaderboard.vue';
+import Horse from './Horse/Horse.vue';
+import { betX, getBet } from '../utils/wallet';
+import { countDownSound } from '../utils/sounds';
+
 const props = defineProps(["horses", "bet"]);
 const emits = defineEmits(["updateHorse", "updateLeaderboard"]);
 
