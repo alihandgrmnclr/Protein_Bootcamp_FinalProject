@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from '@vue/reactivity';
-import { getBet, betX,  addCash } from "../../utils/wallet"
+import { getBet, betX, addCash } from "../../utils/wallet"
 import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results", "leaderboard"]);
@@ -9,11 +9,12 @@ const horseRef = ref(props.horses);
 const isBetWin = ref(false);
 const finishTime = ref(0);
 
+
 const chronometer = computed(()=>{
     
-    const isHorseFinished = horseRef.value.filter((horse) => horse.pos >= 95)
-    
-    if (isHorseFinished.length > 0) {
+    const isHorseFinished = horseRef.value.filter((horse) => horse.pos >= 95);
+
+    if (isHorseFinished) {
         console.log(isHorseFinished);
     }
     // if (isHorseFinished) {
@@ -23,6 +24,7 @@ const chronometer = computed(()=>{
     // }
     return;
 });
+
 
 const sortedHorses = computed(() => { // sort işlemini takip etmek için computed kullandık
 
@@ -46,11 +48,10 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
 
 <template>
     <div class="leaderboard">
-               
         <div id="header">
             <div class="leaderboard__header">
                 <img class="leaderboard__icon" src="https://cdn-icons-png.flaticon.com/512/6514/6514964.png" alt="">
-                <h1 class="leaderboard__title">LIDERLIK TABLOSU</h1>
+                <h1 class="leaderboard__title">LEADERBOARD</h1>
             </div>
         </div>
 
@@ -62,7 +63,7 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
     </div>
     <template v-if="isBetWin">
         <div class="betwin">
-            <p>TEBRIKLER {{getBet().betAmount*betX}}₺ KAZANDINIZ</p>
+            <p>CONGRATULATIONS, YOU WIN {{getBet().betAmount*betX}}$</p>
         </div>
     </template>
 </template>

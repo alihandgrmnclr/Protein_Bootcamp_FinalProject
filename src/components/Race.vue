@@ -55,7 +55,6 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
 
 <template>
     <div class="results">
-        <!-- <Results :horses="props.horses" :leaderboard="finalLeaderboard"></Results> -->
         <Results :horses="horseRef" :leaderboard="finalLeaderboard"></Results>
     </div>
     <template v-if="countDownTimer < 1">
@@ -90,9 +89,9 @@ const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tabl
                     src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
         </template>
         <div class="bet-options">
-            <p class="bet-opt">Bahis Yapılan At: <span class="bet-select">{{ getBet().selectedHorse }}</span></p>
-            <p class="bet-opt">Bahis Tutarı: <span class="bet-select">{{ getBet().betAmount }}₺</span></p>
-            <p class="bet-opt">Olası Kazanç: <span class="bet-select">{{ getBet().betAmount * betX }}₺</span></p>
+            <p class="bet-opt">Selected Horse: <span class="bet-select">{{ getBet().selectedHorse }}</span></p>
+            <p class="bet-opt">Bet Amount: <span class="bet-select">{{ getBet().betAmount }}$</span></p>
+            <p class="bet-opt">Reward Claim: <span class="bet-select">{{ getBet().betAmount * betX }}$</span></p>
         </div>
     </div>
 

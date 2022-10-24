@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue';
 
-const props = defineProps(["horse", "rank", "leaderboard"]);
+const props = defineProps(["horse", "rank", "leaderboard","chronometer"]);
 
 const rankClasses = computed(() => {    // eşleşen class'ları verdim
     return {
@@ -12,16 +12,19 @@ const rankClasses = computed(() => {    // eşleşen class'ları verdim
     }
 });
 
+const seconds = computed(() => {
+console.log(props.chronometer);
+});
+
 </script>
 
 <template>
-    
     <div class="leaderboard__profile">
         <p :class="rankClasses">{{props.rank+1}}-</p>
         <p class="horse-name">{{props.horse.name}} <p class="horse-id">({{props.horse.id}})</p></p>
-        <p class="time"> {{(props.horse.finish)}}
-            <p v-if="props.horse.pos" class="seconds">sn</p>
-        </p>
+        <!-- <p class="time"> {{(props.horse.finish)}}
+            <p v-if="props.horse.pos" class="seconds">{{seconds}}sn</p>
+        </p> -->
     </div>
 
 </template>

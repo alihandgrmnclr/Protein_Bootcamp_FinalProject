@@ -1,4 +1,4 @@
-export const betX = 10;
+export const betX = 10;	// bahis oranı
 
 export const getLocalWallet = () => {	// localStorage'dan bakiyeyi alıyor
 	const data = localStorage.getItem('cash');
@@ -31,13 +31,13 @@ export const getBet = () => {
 export const clearBet = () => {
 	localStorage.removeItem("betAmount");
 	localStorage.removeItem("selectedHorse");
+	return;
 }
 
 export const addCash = (value) => {	// iddiayı kazandığı zaman çalışacak
 	let wallet = localStorage.getItem('cash');
 	wallet = Number(wallet);
 	wallet = value + wallet;
-	console.log("cash add"+wallet);
 	localStorage.setItem('cash', wallet);
 	return;
 };

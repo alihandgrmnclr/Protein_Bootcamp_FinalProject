@@ -16,6 +16,7 @@ let running = setInterval(() => {
         idle();
     }
 }, 50)
+
 let idle = () => {
     clearInterval(running);
 }

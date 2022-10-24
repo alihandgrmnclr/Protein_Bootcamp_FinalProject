@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue"
-import { getLocalWallet, saveLocalWallet, saveBet, clearBet } from "./utils/wallet"
+import { getLocalWallet, saveBet, clearBet } from "./utils/wallet"
 import { horseData } from "./utils/race"
 
 import Race from './components/Race.vue';
