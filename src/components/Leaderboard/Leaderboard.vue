@@ -26,18 +26,17 @@ const chronometer = computed(()=>{
 });
 
 
-const sortedHorses = computed(() => { // sort işlemini takip etmek için computed kullandık
+const sortedHorses = computed(() => { // we are following the sorting 
 
-    const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // tüm atlar 95'i geçti mi? bu bize t/f dönüyor
+    const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // if all horses pos >= 95 then return true
 
     if (isRaceFinished) {
-
-        if (getBet().selectedHorse == props.leaderboard[0].name) {   // iddia kazanma durumu
+        if (getBet().selectedHorse == props.leaderboard[0].name) {   // bet winning
             addCash(getBet().betAmount * betX);
             isBetWin.value = true;
         }
         return props.leaderboard;
-    } else {    // anlık yarışı izliyoruz
+    } else {    // sorting continue till race finish
         const sortedData = [...props.horses].sort((a, b) => {
             return b.pos - a.pos;
         });
@@ -63,7 +62,7 @@ const sortedHorses = computed(() => { // sort işlemini takip etmek için comput
     </div>
     <template v-if="isBetWin">
         <div class="betwin">
-            <p>CONGRATULATIONS, YOU WIN {{getBet().betAmount*betX}}$</p>
+            <p>CONGRATULATIONS, YOU WON {{getBet().betAmount*betX}}$</p>
         </div>
     </template>
 </template>

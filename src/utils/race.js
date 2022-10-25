@@ -1,4 +1,4 @@
-export const horseData = (count = 8) => {	// at verilerini oluşturuyorum
+export const horseData = (count = 8) => {	// horse data
 	const horses = [];
 	const names = ["Gulbatur", "Sahbatur", "Bold Pilot", "Yagiz", "Yadigar", "Sipahi", "Elkizi", "Unicorn"];
 	for (let i = 0; i < count; i++) {
@@ -15,7 +15,7 @@ export const horseData = (count = 8) => {	// at verilerini oluşturuyorum
 	return horses;
 };
 
-export const randomSpeed = (min = 1, max = 5) => {	// random hız fonksiyonu
+export const randomSpeed = (min = 1, max = 5) => {	// random speed function
 	const diff = max - min;
 	const random = Math.random() * diff;
 	const result = Math.round(random + min) / 10;

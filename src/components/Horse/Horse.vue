@@ -5,12 +5,13 @@ import Gif from './HorseGif.vue';
 
 const props = defineProps(["horse", "countdown"]);
 const emits = defineEmits(["updateHorse", "updateLeaderboard"]);
-const horseRef = ref(props.horse);  // prop olanı değiştirmeyip kopyasında işlem yapıp emit olarak yolluyoruz (props, readonly)
+
+const horseRef = ref(props.horse);  // horse clone, sending it as emit (props, readonly)
 
 let running = setInterval(() => {
     if (horseRef.value.pos <= 95) {
-        horseRef.value.pos = horseRef.value.pos + randomSpeed();
-        emits("updateHorse", horseRef.value); // horseref'in pozisyonunu değiştirip obje olarak yolluyoruz
+        horseRef.value.pos = horseRef.value.pos + randomSpeed();    // horse positions change depending on the random speed value
+        emits("updateHorse", horseRef.value); 
     }else {
         emits("updateLeaderboard", horseRef.value);
         idle();
@@ -24,8 +25,7 @@ let idle = () => {
 </script>
 
 <template>
-    <Gif class="gif" :style="{left:`${props.horse.pos}%`}" :img="horse.img"></Gif>
-    <!-- atı hareket ettiren style burada -->
+    <Gif class="gif" :style="{left:`${props.horse.pos}%`}" :img="horse.img"></Gif> <!-- :style moves the horse -->
 </template>
 
 <style scoped>

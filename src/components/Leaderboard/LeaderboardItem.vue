@@ -3,7 +3,7 @@ import { computed } from 'vue';
 
 const props = defineProps(["horse", "rank", "leaderboard","chronometer"]);
 
-const rankClasses = computed(() => {    // eşleşen class'ları verdim
+const rankClasses = computed(() => {    // class name matching with the ranking
     return {
         "rank-first": props.rank == 0,
         "rank-second": props.rank == 1,

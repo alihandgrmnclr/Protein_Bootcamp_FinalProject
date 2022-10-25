@@ -1,26 +1,25 @@
 <script setup>
 import { onMounted, ref } from "vue"
-import { getLocalWallet, saveBet, clearBet } from "./utils/wallet"
+import { getLocalWallet, saveBet, clearBet, saveLocalWallet } from "./utils/wallet"
 import { horseData } from "./utils/race"
 
 import Race from './components/Race.vue';
 import Bet from './components/Bet.vue';
 
-const horses = ref(horseData()); // horse data yı ekliyorum
-const bet = ref(false); // bet true olmadan, yarış ekranı gelmiyor
+const horses = ref(horseData()); // horse data here
+const bet = ref(false); // if the bet value is true, the race screen loads 
 const cash = ref(getLocalWallet());
 
 onMounted(() => {
-  const walletData = getLocalWallet() || false; // walletData null gelirse false olarak alıyoruz
+  const walletData = getLocalWallet() || false; // if walletData == null -> false
   checkWallet(walletData);
   clearBet();
 });
 
 function checkWallet(walletData) {
-  cash.value = getLocalWallet();
+  // cash.value = getLocalWallet();
   if (walletData) return;  // walletData true gelirse çalışmaması gerekiyor
-  // saveLocalWallet(100);  // walletData yoksa bakiye olarak girilen değeri ekliyorum
-  cash.value = getLocalWallet();
+  cash.value = saveLocalWallet(0);
 }
 
 const updateHorseHandler = (updatedHorseData) => {
@@ -28,7 +27,7 @@ const updateHorseHandler = (updatedHorseData) => {
   horses.value[horseIndex] = updatedHorseData;
 }
 
-const setBet = (betValue, betHorse) => {
+const setBet = (betValue, betHorse) => {  // setting the bet
   bet.value = true;
   saveBet(betValue, betHorse);
   return;
@@ -39,11 +38,18 @@ const setBet = (betValue, betHorse) => {
 <template>
   <template v-if="!bet">
     <div class="bet-app">
-      <Bet :horses="horses" :cash="cash" @submitBet="setBet"></Bet>
+      <Bet
+        :horses="horses"
+        :cash="cash"
+        @submitBet="setBet">
+      </Bet>
     </div>
   </template>
   <template v-else>
-    <Race :horses="horses" @updateHorse="updateHorseHandler"></Race>
+    <Race
+      :horses="horses"
+      @updateHorse="updateHorseHandler">
+    </Race>
   </template>
 </template>
 

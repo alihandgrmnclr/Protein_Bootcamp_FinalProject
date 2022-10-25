@@ -16,7 +16,7 @@ const countDownTimer = ref(3);
 const finalLeaderboard = ref([]);
 const startTime = ref(0);
 
-const delay = (ms) => { // 3 saniyelik bir countdown
+const delay = (ms) => { // 3 seconds countDown
     isCountDown.value = true;
     const countDown = setInterval(() => {
         if (countDownTimer.value <= 1) {
@@ -25,30 +25,34 @@ const delay = (ms) => { // 3 saniyelik bir countdown
         }
         countDownTimer.value--;
     }, 1000);
-    return new Promise(resolve => { // ms kadar bekliyor
+    return new Promise(resolve => { // waits till given seconds
         setTimeout(resolve, ms);
     });
 }
 
 const restart = () => {
     window.location.reload();
+    return;
 };
 
 async function raceStart() {
-    await delay(3000);  // delay fonksiyonu bitmeden yarış başlamıyor
+    await delay(3000);  // race will not start before delay function
     start.value = true;
     startTime.value = new Date();
     horseRef.value.map((item) => item.start = startTime.value)
     console.log("horseref", horseRef.value);
+    return;
 }
 
 const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakalıyoruz
-    emits("updateHorse", horse); // yukarı gönderiyoruz (app)
+    emits("updateHorse", horse); 
+    return;
 }
 
-const updateLeaderboardHandler = (horse) => {   // finish sonrası liderlik tablosu -> results'a yolluyorum
+const updateLeaderboardHandler = (horse) => {   // leaderboard after race end -> it goes to results
     finalLeaderboard.value.push(horse);
-    isFinished.value = true; // restart butonu gözükmesi için
+    isFinished.value = true; // for restart button
+    return;
 };
 
 </script>

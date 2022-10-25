@@ -3,33 +3,37 @@ import { computed, ref } from "vue"
 import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../utils/wallet"
 import { clickSound } from "../utils/sounds"
 
-
 const props = defineProps(["horses", "cash", "bet"])
 const emit = defineEmits(["submitBet"])
 
 const selectedHorse = ref("");
 const betAmount = ref(1);
 
-// bahis tutarı 0'dan küçük olamaz bakiyeden büyük olamaz
-const checkAmount = () => {
-    if (betAmount.value > props.cash) {
+const checkAmount = () => { // checking the bet amount (depends on the cash)
+    if (betAmount.value >= props.cash) {   
         betAmount.value = props.cash;
-    } else if (betAmount.value < 0) {
+    } else if (betAmount.value < 1) {
+        betAmount.value = 0;
+    } else if (!props.cash) {
         betAmount.value = 0;
     }
-}
+    return;
+};
 
-const setDefaultValues = () => {
+const setDefaultValues = () => {    // setting the default values
     setDefault();
     window.location.reload();
+    return;
 };
 
 const submitCoupon = () => {
     if (getLocalWallet() < 1) return alert("GAME OVER");
+
     emit("submitBet", betAmount.value, selectedHorse.value);
     const cash = getLocalWallet() - betAmount.value;
     saveLocalWallet(cash);
     saveBet(betAmount.value, selectedHorse.value);
+    return;
 }
 
 </script>
@@ -39,10 +43,11 @@ const submitCoupon = () => {
         <div class="bet__select">
             <h1 class="bet-title">Select a horse</h1>
             <ul class="bet-horse-wrapper">
-                <li class="bet-horse" v-for="horse in horses" :key="horse.id"><label
-                        :for="horse.id">{{ horse.name }}</label>
-                    <span> <input type="radio" :id="horse.id" name="horse" :value="horse.name"
-                            v-model="selectedHorse"></span>
+                <li class="bet-horse" v-for="horse in horses" :key="horse.id">
+                    <label :for="horse.id">{{ horse.name }}</label>
+                    <span>
+                        <input type="radio" :id="horse.id" name="horse" :value="horse.name" v-model="selectedHorse">
+                    </span>
                 </li>
             </ul>
         </div>
@@ -56,26 +61,36 @@ const submitCoupon = () => {
             </div>
             <div class="bet-coupon">
                 <p>Selected Horse: <span class="amounts">{{ selectedHorse }}</span></p>
-                <span>Bet Amount: <input class="bet-amount" type="number" v-model="betAmount"
-                        @input="checkAmount"></span>
+                <span>Bet Amount: <input
+                  class="bet-amount"
+                  type="number"
+                  v-model="betAmount"
+                  @input="checkAmount"></span>
                 <p>Bet Rate: <span class="amounts">{{ betX }}x</span></p>
                 <p>Claim Reward: <span class="amounts">{{ betAmount * 10 }}$</span> </p>
             </div>
             <template v-if="selectedHorse.length > 1">
                 <div class="submit">
-                    <button class="submit__btn" @click="submitCoupon(), clickSound()">Accept</button>
+                    <button
+                      class="submit__btn"
+                      @click="submitCoupon(), clickSound()">Accept</button>
                 </div>
             </template>
         </div>
     </div>
-    <template v-if="props.cash < 1">
+    <template v-if="props.cash < 0 || !props.cash ">
         <div class="restart">
             <div class="restart-btn-wrapper">
-                <button class="restart-btn" @click="setDefaultValues"><img class="restart-icon"
-                        src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
+                <button
+                  class="restart-btn"
+                  @click="setDefaultValues"><img
+                  class="restart-icon"
+                  src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png"
+                  alt="restart"></button>
             </div>
             <div class="restart-description">
-                <span class="restart-game">Restart the game. Your balance will return to 100$ and your progress will be reset</span>
+                <span class="restart-game">Restart the game. Your balance will return to 100$ and your progress will be
+                    reset</span>
             </div>
         </div>
     </template>
