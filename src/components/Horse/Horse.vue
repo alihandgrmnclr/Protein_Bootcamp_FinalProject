@@ -25,7 +25,12 @@ let idle = () => {
 </script>
 
 <template>
-    <Gif class="gif" :style="{left:`${props.horse.pos}%`}" :img="horse.img"></Gif> <!-- :style moves the horse -->
+    <!-- :style moves the horse -->
+    <Gif
+      class="gif"
+      :style="{left:`${props.horse.pos}%`}"
+      :img="horse.img">
+    </Gif> 
 </template>
 
 <style scoped>

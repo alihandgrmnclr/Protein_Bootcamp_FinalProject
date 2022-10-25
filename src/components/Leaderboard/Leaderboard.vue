@@ -10,8 +10,8 @@ const isBetWin = ref(false);
 const finishTime = ref(0);
 
 
-const chronometer = computed(()=>{
-    
+const chronometer = computed(() => {
+
     const isHorseFinished = horseRef.value.filter((horse) => horse.pos >= 95);
 
     if (isHorseFinished) {
@@ -55,14 +55,18 @@ const sortedHorses = computed(() => { // we are following the sorting
         </div>
 
         <div class="leaderboard__rankings">
-            <LeaderboardItem v-for="(horse,index) in sortedHorses" :horse="horse" :rank="index"
-                :leaderboard="props.leaderboard" :chronometer="chronometer">
-            </LeaderboardItem>
+            <LeaderboardItem
+              v-for="(horse, index) in sortedHorses"
+              :horse="horse"
+              :rank="index"
+              :leaderboard="props.leaderboard"
+              :chronometer="chronometer">
+              </LeaderboardItem>
         </div>
     </div>
     <template v-if="isBetWin">
         <div class="betwin">
-            <p>CONGRATULATIONS, YOU WON {{getBet().betAmount*betX}}$</p>
+            <p>CONGRATULATIONS, YOU WON {{ getBet().betAmount * betX }}$</p>
         </div>
     </template>
 </template>

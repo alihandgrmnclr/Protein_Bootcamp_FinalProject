@@ -18,12 +18,12 @@ onMounted(() => {
 
 function checkWallet(walletData) {
   // cash.value = getLocalWallet();
-  if (walletData) return;  // walletData true gelirse çalışmaması gerekiyor
+  if (walletData) return;
   cash.value = saveLocalWallet(0);
 }
 
 const updateHorseHandler = (updatedHorseData) => {
-  const horseIndex = horses.value.findIndex(horse => horse.id === updatedHorseData.id); //  gelen veriyi indexi ile eşleştirip, horses objesini güncelledik
+  const horseIndex = horses.value.findIndex(horse => horse.id === updatedHorseData.id); // updating the data (matching the indexes)
   horses.value[horseIndex] = updatedHorseData;
 }
 
