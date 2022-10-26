@@ -2,6 +2,7 @@
 import { computed, ref } from "vue"
 import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../utils/wallet"
 import { clickSound } from "../utils/sounds"
+import ButtonComp from "./ButtonComp.vue";
 
 const props = defineProps(["horses", "cash", "bet"])
 const emit = defineEmits(["submitBet"])
@@ -46,7 +47,12 @@ const submitCoupon = () => {
                 <li class="bet-horse" v-for="horse in horses" :key="horse.id">
                     <label :for="horse.id">{{ horse.name }}</label>
                     <span>
-                        <input type="radio" :id="horse.id" name="horse" :value="horse.name" v-model="selectedHorse">
+                        <input
+                          type="radio"
+                          :id="horse.id"
+                          name="horse"
+                          :value="horse.name"
+                          v-model="selectedHorse">
                     </span>
                 </li>
             </ul>
@@ -71,9 +77,13 @@ const submitCoupon = () => {
             </div>
             <template v-if="selectedHorse.length > 1">
                 <div class="submit">
-                    <button
+                    <!-- <button
                       class="submit__btn"
-                      @click="submitCoupon(), clickSound()">Accept</button>
+                      @click="submitCoupon(), clickSound()">Accept</button> -->
+                      <ButtonComp
+                        :text="'Accept'"
+                        class="submit__btn"
+                        @click="submitCoupon(), clickSound()"></ButtonComp>
                 </div>
             </template>
         </div>
@@ -143,11 +153,8 @@ const submitCoupon = () => {
         }
 
         .submit {
-            @apply flex justify-center bg-btnprimary text-white rounded-[10px];
-
-            &__btn {
-                @apply text-white p-[10px] w-full;
-            }
+            @apply flex justify-center;
+            
         }
     }
 

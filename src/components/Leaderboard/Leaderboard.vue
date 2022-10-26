@@ -9,20 +9,23 @@ const horseRef = ref(props.horses);
 const isBetWin = ref(false);
 const finishTime = ref(0);
 
-
 const chronometer = computed(() => {
 
-    const isHorseFinished = horseRef.value.filter((horse) => horse.pos >= 95);
+    const isHorseFinished = props.horses.filter((horse) => horse.pos >= 95);
+    const isRaceFinished = props.horses.every((horse) => horse.pos >= 95)
 
-    if (isHorseFinished) {
-        console.log(isHorseFinished);
+    if (isHorseFinished.length > 0) {
+        finishTime.value = new Date();
+        horseRef.finish = finishTime.value;
+        horseRef.value.map((item) => item.finish = finishTime.value)
     }
-    // if (isHorseFinished) {
-    //     finishTime.value = new Date();
-    //     horseRef.finish = finishTime.value;
-    //     console.log("bitirdi", isHorseFinished);
-    // }
-    return;
+    if (isRaceFinished) {
+        const sortedFinishList = [...new Set(props.horses)].sort((a,b)=>{
+            return a.finish - b.finish ;
+        })
+        console.log(sortedFinishList);
+        return sortedFinishList;
+    }
 });
 
 
@@ -55,13 +58,9 @@ const sortedHorses = computed(() => { // we are following the sorting
         </div>
 
         <div class="leaderboard__rankings">
-            <LeaderboardItem
-              v-for="(horse, index) in sortedHorses"
-              :horse="horse"
-              :rank="index"
-              :leaderboard="props.leaderboard"
-              :chronometer="chronometer">
-              </LeaderboardItem>
+            <LeaderboardItem v-for="(horse, index) in sortedHorses" :horse="horse" :rank="index"
+                :leaderboard="props.leaderboard" :chronometer="chronometer">
+            </LeaderboardItem>
         </div>
     </div>
     <template v-if="isBetWin">

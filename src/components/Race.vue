@@ -2,8 +2,9 @@
 import { ref } from 'vue';
 import Results from './Leaderboard/Leaderboard.vue';
 import Horse from './Horse/Horse.vue';
+import ButtonComp from './ButtonComp.vue';
 import { betX, getBet } from '../utils/wallet';
-import { countDownSound } from '../utils/sounds';
+import { clickSound, countDownSound } from '../utils/sounds';
 
 const props = defineProps(["horses", "bet"]);
 const emits = defineEmits(["updateHorse", "updateLeaderboard"]);
@@ -15,6 +16,7 @@ const isCountDown = ref(false);
 const countDownTimer = ref(3);
 const finalLeaderboard = ref([]);
 const startTime = ref(0);
+const finishTime = ref(0);
 
 const delay = (ms) => { // 3 seconds countDown
     isCountDown.value = true;
@@ -40,7 +42,6 @@ async function raceStart() {
     start.value = true;
     startTime.value = new Date();
     horseRef.value.map((item) => item.start = startTime.value)
-    console.log("horseref", horseRef.value);
     return;
 }
 
@@ -59,7 +60,9 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 
 <template>
     <div class="results">
-        <Results :horses="horseRef" :leaderboard="finalLeaderboard"></Results>
+        <Results
+          :horses="horseRef"
+          :leaderboard="finalLeaderboard"></Results>
     </div>
     <template v-if="countDownTimer < 1">
         <div class="track">
@@ -67,9 +70,12 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
                 <div class="finish"></div>
                 <div class="line-wrapper">
                     <p class="line-id">{{ horse.id }}</p>
-                    <Horse @updateHorse="updateHorseHandler" @updateLeaderboard="updateLeaderboardHandler"
-                        :horse="horse" :countdown="countDownTimer">
-                    </Horse>
+                    <Horse
+                      @updateHorse="updateHorseHandler"
+                      @updateLeaderboard="updateLeaderboardHandler"
+                      :horse="horse"
+                      :countdown="countDownTimer">
+                      </Horse>
                 </div>
             </div>
         </div>
@@ -86,11 +92,18 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     </template>
     <div class="race-settings">
         <template v-if="!start">
-            <button class="start-btn" @click="raceStart(), countDownSound()">Başla</button>
+            <ButtonComp
+              class="start-btn"
+              @click="raceStart(), countDownSound()"
+              :text="'Start'"></ButtonComp>
+            <!-- <button class="start-btn" @click="raceStart(), countDownSound()">Başla</button> -->
         </template>
         <template v-if="isFinished">
-            <button class="restart-btn" @click="restart"><img class="restart-icon"
-                    src="https://cdn-icons-png.flaticon.com/512/5565/5565918.png" alt=""></button>
+            <ButtonComp
+              class="start-btn"
+              @click="restart(), clickSound()"
+              :text="'Restart'"
+              ></ButtonComp>
         </template>
         <div class="bet-options">
             <p class="bet-opt">Selected Horse: <span class="bet-select">{{ getBet().selectedHorse }}</span></p>
@@ -102,15 +115,6 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 </template>
 
 <style lang="scss" scoped>
-.start-btn,
-.restart-btn {
-    @apply bg-btnprimary text-white p-[5px] rounded-md;
-}
-
-.restart-icon {
-    @apply w-6;
-}
-
 .countdown-timer {
     @apply absolute left-[50%] bottom-[50%] translate-y-[50%] text-[6rem];
 
@@ -145,7 +149,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 }
 
 .race-settings {
-    @apply flex flex-col justify-center items-center mt-5 gap-3 h-[120px];
+    @apply flex flex-col justify-center items-center mt-4 gap-3 h-[120px];
 }
 
 .finish {

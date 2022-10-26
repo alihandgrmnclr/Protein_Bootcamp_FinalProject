@@ -10,7 +10,7 @@ const horseRef = ref(props.horse);  // horse clone, sending it as emit (props, r
 
 let running = setInterval(() => {
     if (horseRef.value.pos <= 95) {
-        horseRef.value.pos = horseRef.value.pos + randomSpeed();    // horse positions change depending on the random speed value
+        horseRef.value.pos = horseRef.value.pos + randomSpeed(1,8);    // horse positions change depending on the random speed value
         emits("updateHorse", horseRef.value); 
     }else {
         emits("updateLeaderboard", horseRef.value);
