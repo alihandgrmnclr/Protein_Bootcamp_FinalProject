@@ -44,7 +44,7 @@ async function raceStart() {
     return;
 }
 
-const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakalıyoruz
+const updateHorseHandler = (horse) => { // horse data is updated
     emits("updateHorse", horse);
     return;
 }
@@ -68,21 +68,34 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
             <div v-for="horse in props.horses" :key="horse.id">
                 <div class="finish"></div>
                 <div class="line-wrapper">
-                    <p class="line-id">{{ horse.id }}</p>
+                    <p class="line-id">{{ horse.id }}- <span>{{horse.name}}</span> </p>
                     <Horse
                       @updateHorse="updateHorseHandler"
                       @updateLeaderboard="updateLeaderboardHandler"
                       :horse="horse"
-                      :countdown="countDownTimer">
+                      :start="start">
                       </Horse>
                 </div>
             </div>
         </div>
     </template>
     <template v-else>
-        <div class="empty">
+        <!-- <div class="empty">
             <div class="empty__track">
                 <div class="empty__finish"></div>
+            </div>
+        </div> -->
+        <div class="track">
+            <div v-for="horse in props.horses" :key="horse.id">
+                <div class="finish"></div>
+                <div class="line-wrapper">
+                    <p class="line-id">{{ horse.id }}- <span>{{horse.name}}</span> </p>
+                    <Horse
+                      :start="start"
+                      :horse="horse"
+                      :countdown="countDownTimer">
+                      </Horse>
+                </div>
             </div>
         </div>
     </template>
@@ -120,18 +133,27 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 
 .track {
     @apply mt-5 w-full h-[600px] bg-no-repeat bg-cover overflow-hidden;
-    background-image: url(/Images/Pitch/Bushes.png);
+    // background-image: url(/Images/Pitch/Bushes.png);
+    background: rgb(17, 150, 17);
+}
+.line-wrapper {
+    @apply relative flex items-center h-[75px];
+    border-bottom: solid;
+    border-color: rgba(240, 248, 255, 0.214);
 }
 
 .line-id {
-    @apply flex text-white font-bold ml-2;
+    @apply flex text-white font-bold ml-2 w-0 text-3xl opacity-50;
+    text-transform: uppercase;
+    letter-spacing: 5px;
 }
 
 .empty {
 
     &__track {
         @apply w-full mt-5 h-[600px] bg-no-repeat bg-cover;
-        background-image: url(/Images/Pitch/Bushes.png);
+        // background-image: url(/Images/Pitch/Bushes.png);
+        background: rgb(17, 150, 17);
     }
 
     &__finish {
@@ -156,11 +178,6 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     background-size: 60px;
 }
 
-.line-wrapper {
-    @apply relative;
-    border-bottom: solid;
-    border-color: rgba(240, 248, 255, 0.214);
-}
 
 .results {
     @apply flex justify-end;

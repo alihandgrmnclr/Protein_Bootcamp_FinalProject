@@ -4,7 +4,7 @@ export const horseData = (count = 8) => {
   const names = [
     "Gulbatur",
     "Sahbatur",
-    "Bold Pilot",
+    "BoldPilot",
     "Yagiz",
     "Yadigar",
     "Sipahi",
@@ -19,6 +19,7 @@ export const horseData = (count = 8) => {
       pos: 0,
       id: i + 1,
       img: `H${i + 1}`,
+      running: false,
     };
     horses.push(horse);
   }
