@@ -66,7 +66,8 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     <template v-if="countDownTimer < 1">
         <div class="track">
             <div v-for="horse in props.horses" :key="horse.id">
-                <div class="finish"></div>
+                <div class="start-line"></div>
+                <div class="finish-line"></div>
                 <div class="line-wrapper">
                     <p class="line-id">{{ horse.id }}- <span>{{horse.name}}</span> </p>
                     <Horse
@@ -87,7 +88,8 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
         </div> -->
         <div class="track">
             <div v-for="horse in props.horses" :key="horse.id">
-                <div class="finish"></div>
+                <div class="finish-line"></div>
+                <div class="start-line"></div>
                 <div class="line-wrapper">
                     <p class="line-id">{{ horse.id }}- <span>{{horse.name}}</span> </p>
                     <Horse
@@ -143,9 +145,9 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 }
 
 .line-id {
-    @apply flex text-white font-bold ml-2 w-0 text-3xl opacity-50;
+    @apply flex text-white font-bold ml-8 w-0 text-3xl opacity-50;
     text-transform: uppercase;
-    letter-spacing: 5px;
+    letter-spacing: 10px;
 }
 
 .empty {
@@ -157,7 +159,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     }
 
     &__finish {
-        @apply h-[600px] absolute right-0 w-2 bg-white mr-[5vw];
+        @apply h-[600px] absolute right-0 w-2 bg-white;
         background-image: url(/Images/Pitch/finish.png);
         background-size: 60px;
     }
@@ -172,10 +174,13 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     @apply flex flex-col justify-center items-center mt-4 gap-3 h-[120px];
 }
 
-.finish {
-    @apply absolute right-0 w-2 h-[75px] bg-white mr-[5vw];
+.finish-line {
+    @apply absolute right-0 w-2 h-[75px] bg-white;
     background-image: url(/Images/Pitch/finish.png);
     background-size: 60px;
+}
+.start-line{
+    @apply absolute left-0 ml-[75px] w-1 h-[75px] bg-white opacity-30;
 }
 
 

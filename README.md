@@ -12,6 +12,14 @@ In this project, I developed a live-time horse race game that ran 8 horses and 8
 - SASS
 - Tailwind CSS
 
+### Color Palette
+```
+- 'btnprimary':'#473e3a',
+- 'bgprimary': '#7b584e',
+- 'bgsecondary': '#9b6753',
+- 'gold':'#ef912d',
+- 'blackdark':'#9b6753',
+```
 
 ## Live Demo
 

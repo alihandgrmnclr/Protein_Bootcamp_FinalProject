@@ -12,7 +12,7 @@ const horseRef = ref(props.horse);  // horse clone, sending it as emit (props, r
 const raceStart = computed(() => {
     if (props.start) {
         let running = setInterval(() => {
-            if (horseRef.value.pos <= 95) {
+            if (horseRef.value.pos <= 100) {
                 horseRef.value.pos = horseRef.value.pos + randomSpeed(1, 4);    // horse positions change depending on the random speed value
                 emits("updateHorse", horseRef.value);
             } else {
