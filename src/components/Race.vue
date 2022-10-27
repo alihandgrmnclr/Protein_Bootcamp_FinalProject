@@ -51,7 +51,9 @@ const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakal
 
 const updateLeaderboardHandler = (horse) => {   // leaderboard after race end -> it goes to results
     finalLeaderboard.value.push(horse);
-    isFinished.value = true; // for restart button
+    if(finalLeaderboard.value.length>7){
+        isFinished.value = true; // for restart button
+    } 
     return;
 };
 

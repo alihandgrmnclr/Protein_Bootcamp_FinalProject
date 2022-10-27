@@ -1,5 +1,18 @@
 # Patika Protein Vuejs Bootcamp Final Project
 
+## Project Description
+In this project, I developed a live-time horse race game that ran 8 horses and 8 straight lines. Before the race starts, you must select a horse and enter the bet amount. If you are out of cash, you can start the game from the beginning by pressing the restart button. After pressing the start button, 3 seconds countdown counts when finished the horses start running. During the run, the speed of the horses is determined randomly at specific intervals. This way, who will win is always determined by the luck factor. There is a leaderboard that changes instantly depending on the position of the horses during the race. The race that starts before all horses cross the line is not over. When the last horse crosses the finish line and the race ends, there is a restart button shows and when it is clicked, the race is ready to start again.
+
+## Instructions
+- npm install
+- npm run dev
+
+### Techonologies
+- Vite - Vue
+- SASS
+- Tailwind CSS
+
+
 ## Live Demo
 
 
