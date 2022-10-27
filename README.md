@@ -35,3 +35,7 @@ After finishing the race you can see the finish times and final leaderboard.
 
 (This is <b>2x times faster</b> than the normal speed)
 ![race](./public/ReadmeAssets/race.gif)
+
+If your selected horse win the race, you can see how much money you won! <b>GOOD LUCK!</b>
+
+![winning](./public/ReadmeAssets/Betwin.png)
