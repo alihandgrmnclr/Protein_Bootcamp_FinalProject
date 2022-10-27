@@ -5,35 +5,15 @@ import LeaderboardItem from './LeaderboardItem.vue';
 
 const props = defineProps(["horses", "results", "leaderboard"]);
 
-const horseRef = ref(props.horses);
+const raceFinished = ref(false);
 const isBetWin = ref(false);
-const finishTime = ref(0);
-
-const chronometer = computed(() => {
-
-    const isHorseFinished = props.horses.filter((horse) => horse.pos >= 95);
-    const isRaceFinished = props.horses.every((horse) => horse.pos >= 95)
-
-    if (isHorseFinished.length > 0) {
-        finishTime.value = new Date();
-        horseRef.finish = finishTime.value;
-        horseRef.value.map((item) => item.finish = finishTime.value)
-    }
-    if (isRaceFinished) {
-        const sortedFinishList = [...new Set(props.horses)].sort((a,b)=>{
-            return a.finish - b.finish ;
-        })
-        console.log(sortedFinishList);
-        return sortedFinishList;
-    }
-});
-
 
 const sortedHorses = computed(() => { // we are following the sorting 
 
     const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // if all horses pos >= 95 then return true
 
     if (isRaceFinished) {
+        raceFinished.value = true;
         if (getBet().selectedHorse == props.leaderboard[0].name) {   // bet winning
             addCash(getBet().betAmount * betX);
             isBetWin.value = true;
@@ -58,9 +38,15 @@ const sortedHorses = computed(() => { // we are following the sorting
         </div>
 
         <div class="leaderboard__rankings">
-            <LeaderboardItem v-for="(horse, index) in sortedHorses" :horse="horse" :rank="index"
-                :leaderboard="props.leaderboard" :chronometer="chronometer">
-            </LeaderboardItem>
+            <LeaderboardItem
+              v-for="(horse, index) in sortedHorses"
+              :key="horse.id"
+              :horse="horse"
+              :rank="index"
+              :leaderboard="props.leaderboard"
+              :raceFinished="raceFinished"
+              >
+              </LeaderboardItem>
         </div>
     </div>
     <template v-if="isBetWin">
@@ -94,9 +80,5 @@ const sortedHorses = computed(() => { // we are following the sorting
 
 .betwin {
     @apply absolute ml-auto mr-auto left-0 right-0 text-center mt-[50vh] text-[36px] h-[100px] text-white;
-
-    .money-rain {
-        @apply absolute ml-auto mr-auto left-0 right-0;
-    }
 }
 </style>

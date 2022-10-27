@@ -1,13 +1,13 @@
 <script setup>
 import { ref } from 'vue';
-import Results from './Leaderboard/Leaderboard.vue';
+import Leaderboard from './Leaderboard/Leaderboard.vue';
 import Horse from './Horse/Horse.vue';
 import ButtonComp from './ButtonComp.vue';
 import { betX, getBet } from '../utils/wallet';
 import { clickSound, countDownSound } from '../utils/sounds';
 
 const props = defineProps(["horses", "bet"]);
-const emits = defineEmits(["updateHorse", "updateLeaderboard"]);
+const emits = defineEmits(["updateHorse", "updateLeaderboard", "finishTime"]);
 
 const horseRef = ref(props.horses);
 const start = ref(false);
@@ -16,7 +16,6 @@ const isCountDown = ref(false);
 const countDownTimer = ref(3);
 const finalLeaderboard = ref([]);
 const startTime = ref(0);
-const finishTime = ref(0);
 
 const delay = (ms) => { // 3 seconds countDown
     isCountDown.value = true;
@@ -40,13 +39,13 @@ const restart = () => {
 async function raceStart() {
     await delay(3000);  // race will not start before delay function
     start.value = true;
-    startTime.value = new Date();
+    startTime.value = Date.now();
     horseRef.value.map((item) => item.start = startTime.value)
     return;
 }
 
 const updateHorseHandler = (horse) => { // @updateHorse çalıştığında yakalıyoruz
-    emits("updateHorse", horse); 
+    emits("updateHorse", horse);
     return;
 }
 
@@ -60,9 +59,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 
 <template>
     <div class="results">
-        <Results
-          :horses="horseRef"
-          :leaderboard="finalLeaderboard"></Results>
+        <Leaderboard :horses="horseRef" :leaderboard="finalLeaderboard"></Leaderboard>
     </div>
     <template v-if="countDownTimer < 1">
         <div class="track">
@@ -102,8 +99,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
             <ButtonComp
               class="start-btn"
               @click="restart(), clickSound()"
-              :text="'Restart'"
-              ></ButtonComp>
+              :text="'Restart'"></ButtonComp>
         </template>
         <div class="bet-options">
             <p class="bet-opt">Selected Horse: <span class="bet-select">{{ getBet().selectedHorse }}</span></p>
@@ -161,7 +157,6 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 .line-wrapper {
     @apply relative;
     border-bottom: solid;
-    // background: rgb(125, 196, 125);
     border-color: rgba(240, 248, 255, 0.214);
 }
 

@@ -1,7 +1,8 @@
 <script setup>
 import { computed } from 'vue';
+import { getFinishTime } from "../../utils/race"
 
-const props = defineProps(["horse", "rank", "leaderboard","chronometer"]);
+const props = defineProps(["horse", "rank", "leaderboard","raceFinished"]);
 
 const rankClasses = computed(() => {    // class name matching with the ranking
     return {
@@ -12,53 +13,43 @@ const rankClasses = computed(() => {    // class name matching with the ranking
     }
 });
 
-const seconds = computed(() => {
-console.log(props.chronometer);
-});
-
 </script>
 
 <template>
     <div class="leaderboard__profile">
         <p :class="rankClasses">{{props.rank+1}}-</p>
-        <p class="horse-name">{{props.horse.name}} <p class="horse-id">({{props.horse.id}})</p></p>
-        <!-- <p class="time"> {{(props.horse.finish)}}
-            <p v-if="props.horse.pos" class="seconds">{{seconds}}sn</p>
-        </p> -->
+        <p class="horse-name">{{props.horse.name}}({{props.horse.id}})</p>
+        <template v-if="props.raceFinished">
+            <p class="seconds">{{getFinishTime(props.horse.start, props.horse.finish)}}sn</p>
+        </template>
     </div>
 
 </template>
 
 <style>
 .leaderboard__profile {
-    font-family: 'Pixel';
     @apply flex w-[45%] items-center justify-between;
-    @apply sm:w-[200px];
+    @apply sm:w-[250px];
 }
 .horse-name{
-    @apply flex justify-center items-center;
+    @apply flex flex-1 justify-center items-center;
 }
 .rank-first {
     @apply flex justify-center items-center text-orange-600 text-2xl font-bold py-2;
+    @apply sm:text-2xl;
 }
 
 .rank-second {
     @apply flex justify-center items-center text-yellow-500 text-2xl font-bold py-2;
+    @apply sm:text-2xl;
 }
 
 .rank-third {
     @apply flex justify-center items-center text-purple-900 text-2xl font-bold py-2;
+    @apply sm:text-2xl;
 }
 
-.time {
-    @apply flex justify-center items-center text-black text-sm ml-4;
-}
-
-.seconds {
-    @apply flex justify-center items-center text-sm;
-}
-
-.horse-id{
-    
+.seconds{
+    @apply text-right;
 }
 </style>
