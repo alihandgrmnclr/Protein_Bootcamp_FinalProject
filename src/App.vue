@@ -17,7 +17,6 @@ onMounted(() => {
 });
 
 function checkWallet(walletData) {
-  // cash.value = getLocalWallet();
   if (walletData) return;
   cash.value = saveLocalWallet(0);
 }

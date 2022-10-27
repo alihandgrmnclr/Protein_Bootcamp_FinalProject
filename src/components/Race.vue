@@ -134,7 +134,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 
     &__finish {
         @apply h-[600px] absolute right-0 w-2 bg-white mr-[5vw];
-        background-image: url(https://i.pinimg.com/originals/9f/66/4e/9f664e48cb3436b6a664141f92c1baad.png);
+        background-image: url(/Images/Pitch/finish.png);
         background-size: 60px;
     }
 }
@@ -150,7 +150,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 
 .finish {
     @apply absolute right-0 w-2 h-[75px] bg-white mr-[5vw];
-    background-image: url(https://i.pinimg.com/originals/9f/66/4e/9f664e48cb3436b6a664141f92c1baad.png);
+    background-image: url(/Images/Pitch/finish.png);
     background-size: 60px;
 }
 

@@ -42,7 +42,7 @@ export const addCash = (value) => {	// works when you win the bet, adding cash t
 	return;
 };
 
-export const setDefault = () => { // setting wallet default value
-	localStorage.setItem('cash', 100);
+export const setDefault = (value) => { // setting wallet default value
+	localStorage.setItem('cash', value);
 	return;
 };

@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue"
+import { ref } from "vue"
 import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../utils/wallet"
 import { clickSound } from "../utils/sounds"
 import ButtonComp from "./ButtonComp.vue";
@@ -14,7 +14,7 @@ const checkAmount = () => { // checking the bet amount (depends on the cash)
     if (betAmount.value >= props.cash) {   
         betAmount.value = props.cash;
     } else if (betAmount.value < 1) {
-        betAmount.value = 0;
+        betAmount.value = getLocalWallet() - ( getLocalWallet() - 1 );
     } else if (!props.cash) {
         betAmount.value = 0;
     }
@@ -22,7 +22,7 @@ const checkAmount = () => { // checking the bet amount (depends on the cash)
 };
 
 const setDefaultValues = () => {    // setting the default values
-    setDefault();
+    setDefault(10);
     window.location.reload();
     return;
 };
@@ -77,9 +77,6 @@ const submitCoupon = () => {
             </div>
             <template v-if="selectedHorse.length > 1">
                 <div class="submit">
-                    <!-- <button
-                      class="submit__btn"
-                      @click="submitCoupon(), clickSound()">Accept</button> -->
                       <ButtonComp
                         :text="'Accept'"
                         class="submit__btn"
@@ -88,7 +85,7 @@ const submitCoupon = () => {
             </template>
         </div>
     </div>
-    <template v-if="props.cash < 0 || !props.cash ">
+    <template v-if="props.cash < 1 || !props.cash ">
         <div class="restart">
             <div class="restart-btn-wrapper">
                 <button
@@ -99,8 +96,7 @@ const submitCoupon = () => {
                   alt="restart"></button>
             </div>
             <div class="restart-description">
-                <span class="restart-game">Restart the game. Your balance will return to 100$ and your progress will be
-                    reset</span>
+                <span class="restart-game">Restart the game. Your balance will return to 10$ and your progress will be reset</span>
             </div>
         </div>
     </template>
