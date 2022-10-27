@@ -10,7 +10,7 @@ const isBetWin = ref(false);
 
 const sortedHorses = computed(() => { // we are following the sorting 
 
-    const isRaceFinished = props.horses.every((horse) => horse.pos >= 95) // if all horses pos >= 95 then return true
+    const isRaceFinished = props.horses.every((horse) => horse.pos >= 100) // if all horses pos >= 95 then return true
 
     if (isRaceFinished) {
         raceFinished.value = true;

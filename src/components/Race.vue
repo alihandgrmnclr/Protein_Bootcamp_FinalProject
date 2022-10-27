@@ -81,11 +81,6 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
         </div>
     </template>
     <template v-else>
-        <!-- <div class="empty">
-            <div class="empty__track">
-                <div class="empty__finish"></div>
-            </div>
-        </div> -->
         <div class="track">
             <div v-for="horse in props.horses" :key="horse.id">
                 <div class="finish-line"></div>
@@ -95,7 +90,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
                     <Horse
                       :start="start"
                       :horse="horse"
-                      :countdown="countDownTimer">
+                      >
                       </Horse>
                 </div>
             </div>
