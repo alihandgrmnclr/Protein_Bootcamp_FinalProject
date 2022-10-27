@@ -17,11 +17,11 @@ Before the race start, you can select the horse that you think wins. <b>You can'
     2. You can see the possible reward
 3. Click the accept button
 
-![betscreen](/horse/public/ReadmeAssets/Bet.png)
+![betscreen](./public/ReadmeAssets/Bet.png)
 
 If you are <b>out of cash</b>, you can <b>restart the game</b> clicking the restart icon. In this way, the game will be restarted again.
 
-![restart](/horse/public/ReadmeAssets/Cash0.png)
+![restart](./public/ReadmeAssets/Cash0.png)
 
 <hr>
 
@@ -29,9 +29,9 @@ If you are <b>out of cash</b>, you can <b>restart the game</b> clicking the rest
 
 Top of the screen you can see the leaderboard. At the bottom side, your bet shows. After clicking the start button 3 seconds countdown starts and the race begins.
 
-![race](/horse/public/ReadmeAssets/Hippodrome.png)
+![race](./public/ReadmeAssets/Hippodrome.png)
 
 After finishing the race you can see the finish times and final leaderboard.
 
 (This is <b>2x times faster</b> than the normal speed)
-![race](/horse/public/ReadmeAssets/race.gif)
+![race](./public/ReadmeAssets/race.gif)
