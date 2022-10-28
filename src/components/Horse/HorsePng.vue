@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(["img"]);
 
-const imgPath = `../../Images/HorsesGif/${props.img}.gif`
+const imgPath = `../../Images/HorsesPng/${props.img}.png`
 
 </script>
 

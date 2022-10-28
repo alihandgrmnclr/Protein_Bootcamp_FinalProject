@@ -19,7 +19,6 @@ export const horseData = (count = 8) => {
       pos: 0,
       id: i + 1,
       img: `H${i + 1}`,
-      running: false,
     };
     horses.push(horse);
   }

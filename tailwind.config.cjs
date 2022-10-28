@@ -10,6 +10,7 @@ module.exports = {
         'btnprimary':'#473e3a',
         'bgprimary': '#7b584e',
         'bgsecondary': '#9b6753',
+        'bggreen': '#328827f0',
         'gold':'#ef912d',
         'blackdark':'#9b6753',
       },

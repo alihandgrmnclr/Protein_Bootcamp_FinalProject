@@ -129,9 +129,9 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 }
 
 .track {
-    @apply mt-5 w-full h-[600px] bg-no-repeat bg-cover overflow-hidden;
+    @apply mt-5 w-full h-[600px] bg-no-repeat bg-cover overflow-hidden bg-bggreen;
     // background-image: url(/Images/Pitch/Bushes.png);
-    background: rgb(17, 150, 17);
+    // background: #328827f0;
 }
 .line-wrapper {
     @apply relative flex items-center h-[75px];
@@ -143,26 +143,6 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     @apply flex text-white font-bold ml-8 w-0 text-3xl opacity-50;
     text-transform: uppercase;
     letter-spacing: 10px;
-}
-
-.empty {
-
-    &__track {
-        @apply w-full mt-5 h-[600px] bg-no-repeat bg-cover;
-        // background-image: url(/Images/Pitch/Bushes.png);
-        background: rgb(17, 150, 17);
-    }
-
-    &__finish {
-        @apply h-[600px] absolute right-0 w-2 bg-white;
-        background-image: url(/Images/Pitch/finish.png);
-        background-size: 60px;
-    }
-}
-
-.horse {
-    @apply flex h-12 relative;
-
 }
 
 .race-settings {
