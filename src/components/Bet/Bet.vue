@@ -32,6 +32,7 @@ const setDefaultValues = () => {    // setting the default values
 
 const isModalOpen = () =>{
     isModalDisplay.value = true;
+    return;
 };
 
 const submitCoupon = (isAccepted) => {
@@ -83,15 +84,15 @@ const submitCoupon = (isAccepted) => {
                 <hr>
             </div>
             <div class="bet-coupon">
-                <p>Selected Horse: <span class="amounts">{{ selectedHorse }}</span></p>
+                <p class="details">Selected Horse: <span class="amounts">{{ selectedHorse }}</span></p>
                 <span>Bet Amount: <input
                   class="bet-amount"
                   type="number"
                   v-model="betAmount"
                   @focusout="checkAmount"
                   ></span>
-                <p>Bet Rate: <span class="amounts">{{ betX }}x</span></p>
-                <p>Claim Reward: <span class="amounts">{{ betAmount * 10 }}$</span> </p>
+                <p class="details">Bet Rate: <span class="amounts">{{ betX }}x</span></p>
+                <p class="details">Claim Reward: <span class="amounts">{{ betAmount * 10 }}$</span> </p>
             </div>
             <template v-if="selectedHorse.length > 1">
                 <div class="submit">
@@ -159,9 +160,13 @@ const submitCoupon = (isAccepted) => {
                 @apply text-[36px] font-semibold text-black;
             }
 
-            .bet-coupon {}
+            .bet-coupon {
+                @apply max-w-full max-h-full;
+                
+                
         }
-
+        
+        }
         .amounts {
             @apply font-black;
         }
