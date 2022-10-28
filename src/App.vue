@@ -4,7 +4,7 @@ import { getLocalWallet, saveBet, clearBet, saveLocalWallet } from "./utils/wall
 import { horseData } from "./utils/race"
 
 import Race from './components/Race.vue';
-import Bet from './components/Bet.vue';
+import Bet from './components/Bet/Bet.vue';
 
 const horses = ref(horseData()); // horse data here
 const bet = ref(false); // if the bet value is true, the race screen loads 
@@ -31,7 +31,6 @@ const setBet = (betValue, betHorse) => {  // setting the bet
   saveBet(betValue, betHorse);
   return;
 }
-
 </script>
 
 <template>

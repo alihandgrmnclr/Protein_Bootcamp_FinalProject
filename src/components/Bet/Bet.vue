@@ -1,14 +1,17 @@
 <script setup>
 import { ref } from "vue"
-import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../utils/wallet"
-import { clickSound } from "../utils/sounds"
-import ButtonComp from "./ButtonComp.vue";
+import { betX, getLocalWallet, saveBet, saveLocalWallet, setDefault } from "../../utils/wallet"
+import { clickSound } from "../../utils/sounds"
+import ButtonComp from "../ButtonComp.vue";
+import BetModal from "../Bet/BetModal.vue";
 
 const props = defineProps(["horses", "cash", "bet"])
 const emit = defineEmits(["submitBet"])
 
 const selectedHorse = ref("");
 const betAmount = ref(1);
+const isModalDisplay = ref(false);
+const isBetAccepted = ref(false);
 
 const checkAmount = () => { // checking the bet amount (depends on the cash)
     if (betAmount.value >= props.cash) {   
@@ -27,19 +30,33 @@ const setDefaultValues = () => {    // setting the default values
     return;
 };
 
-const submitCoupon = () => {
-    if (getLocalWallet() < 1) return alert("GAME OVER");
+const isModalOpen = () =>{
+    isModalDisplay.value = true;
+};
 
+const submitCoupon = (isAccepted) => {
+    
+    isModalDisplay.value = false;
+    if (getLocalWallet() < 1) return alert("GAME OVER");
+    if (!isAccepted) return; 
+    
     emit("submitBet", betAmount.value, selectedHorse.value);
+    
     const cash = getLocalWallet() - betAmount.value;
     saveLocalWallet(cash);
     saveBet(betAmount.value, selectedHorse.value);
+    isBetAccepted.value = true;
     return;
 }
 
 </script>
 
 <template>
+    <BetModal
+      :isModalDisplay="isModalDisplay"
+      :bet="betAmount"
+      :selected="selectedHorse"
+      @accepted="submitCoupon"></BetModal>
     <div class="bet">
         <div class="bet__select">
             <h1 class="bet-title">Select a horse</h1>
@@ -71,7 +88,8 @@ const submitCoupon = () => {
                   class="bet-amount"
                   type="number"
                   v-model="betAmount"
-                  @input="checkAmount"></span>
+                  @focusout="checkAmount"
+                  ></span>
                 <p>Bet Rate: <span class="amounts">{{ betX }}x</span></p>
                 <p>Claim Reward: <span class="amounts">{{ betAmount * 10 }}$</span> </p>
             </div>
@@ -80,7 +98,7 @@ const submitCoupon = () => {
                       <ButtonComp
                         :text="'Accept'"
                         class="submit__btn"
-                        @click="submitCoupon(), clickSound()"></ButtonComp>
+                        @click="isModalOpen(), clickSound()"></ButtonComp>
                 </div>
             </template>
         </div>

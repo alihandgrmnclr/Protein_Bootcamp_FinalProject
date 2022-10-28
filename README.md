@@ -76,4 +76,4 @@ After finishing the race you can see the finish times and final leaderboard. You
 
 If your selected horse win the race, you can see how much money you won! <b>GOOD LUCK!</b>
 
-![winning](./public/ReadmeAssets/Betwin.png)
+<img src="./public/ReadmeAssets/Betwin.png" alt="betwin" width="100%"/>
