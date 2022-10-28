@@ -48,8 +48,9 @@ Before the race start, you can select the horse that you think wins. <b>You can'
     1. Bet rate is 10x
     2. You can see the possible reward
 3. Click the accept button
+4. Accept the bet if you agree the values are correct.
 
-![betscreen](./public/ReadmeAssets/Bet.png)
+<img src="./public/ReadmeAssets/bet.gif" alt="betgif" width="100%"/>
 
 If you are <b>out of cash</b>, you can <b>restart the game</b> clicking the restart icon. In this way, the game will be restarted again.
 
