@@ -17,9 +17,20 @@ In this project, I developed a live-time horse race game that ran 8 horses and 8
 - 'btnprimary':'#473e3a',
 - 'bgprimary': '#7b584e',
 - 'bgsecondary': '#9b6753',
-- 'gold':'#ef912d',
+- 'bggreen': '#328827f0',
 - 'blackdark':'#9b6753',
 ```
+### Horses
+<div>
+<img src="./public/Images/HorsesPng/H1.png" alt="horse" width="50"/> <span style="margin-left:15px"><b>Name:</b> Gulbatur,<b> Color:</b> Red, <b> Racing Line:</b> 1 </span>  <br>
+<img src="./public/Images/HorsesPng/H2.png" alt="horse" width="50"/><span style="margin-left:15px"><b>Name:</b> Sahbatur,<b> Color:</b> Yellow, <b> Racing Line:</b> 2 </span>  <br>
+<img src="./public/Images/HorsesPng/H3.png" alt="horse" width="50"/><span style="margin-left:15px"><b>Name:</b> Boldpilot,<b> Color:</b> Light Green, <b> Racing Line:</b> 3 </span>  <br>
+<img src="./public/Images/HorsesPng/H4.png" alt="horse" width="50"/><span style="margin-left:15px"><b>Name:</b> Yagiz,<b> Color:</b> Light Turquoise, <b> Racing Line:</b> 4 </span>  <br>
+<img src="./public/Images/HorsesPng/H5.png" alt="horse" width="50"/><span style="margin-left:15px"><b>Name:</b> Yadigar,<b> Color:</b> Blue, <b> Racing Line:</b> 5 </span>  <br>
+<img src="./public/Images/HorsesPng/H6.png" alt="horse" width="50"/><span style="margin-left:15px"><b>Name:</b> Sipahi,<b> Color:</b> Purple, <b> Racing Line:</b> 6 </span>  <br>
+<img src="./public/Images/HorsesPng/H7.png" alt="horse" width="50"/><span style="margin-left:15px"><b>Name:</b> Elkizi,<b> Color:</b> Black, <b> Racing Line:</b> 7 </span>  <br>
+<img src="./public/Images/HorsesPng/H8.png" alt="horse" width="50"/><span style="margin-left:15px"><b>Name:</b> Unicorn,<b> Color:</b> Beige, <b> Racing Line:</b> 8 </span>  <br>
+</div>
 
 ## Live Demo
 
@@ -49,13 +60,19 @@ If you are <b>out of cash</b>, you can <b>restart the game</b> clicking the rest
 ## Race Screen
 
 Top of the screen you can see the leaderboard. At the bottom side, your bet shows. After clicking the start button 3 seconds countdown starts and the race begins.
+<b></b>
+<p><b>1-</b> You can follow the race from the live time leaderboard.</p>
+<p><b>2-</b> These are the race lines. You can see the horses.</p>
+<p><b>3-</b> Start button. Click it and the race starts.</p>
+<p><b>4-</b> Your bet screen. You can see the bet options.</p>
 
-![race](./public/ReadmeAssets/Hippodrome.png)
 
-After finishing the race you can see the finish times and final leaderboard.
 
-(This is <b>2x times faster</b> than the normal speed)
-![race](./public/ReadmeAssets/race.gif)
+![race](./public/ReadmeAssets/RaceScreen.png)
+
+After finishing the race you can see the finish times and final leaderboard. You can click the restart button to start the race again.
+
+<img src="./public/ReadmeAssets/Race.gif" alt="racegif" width="100%"/>
 
 If your selected horse win the race, you can see how much money you won! <b>GOOD LUCK!</b>
 
