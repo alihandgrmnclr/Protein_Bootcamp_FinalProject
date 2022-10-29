@@ -1,5 +1,13 @@
 export const betX = 10;	// bet rate
 
+export const setWallet = () => {
+	const walletData = localStorage.getItem("cash") || false;
+	if (walletData == 0 && first){
+		console.log("sifir");
+	}
+	return;
+}
+
 export const getLocalWallet = () => {	// getting wallet from localStorage
 	const data = localStorage.getItem('cash');
 	const cash = JSON.parse(data);

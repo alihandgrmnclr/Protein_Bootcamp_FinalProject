@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue"
-import { getLocalWallet, saveBet, clearBet, saveLocalWallet } from "./utils/wallet"
+import { getLocalWallet, saveBet, clearBet, saveLocalWallet, setWallet } from "./utils/wallet"
 import { horseData } from "./utils/race"
 
 import Race from './components/Race.vue';
@@ -14,6 +14,7 @@ onMounted(() => {
   const walletData = getLocalWallet() || false; // if walletData == null -> false
   checkWallet(walletData);
   clearBet();
+  setWallet();
 });
 
 function checkWallet(walletData) {

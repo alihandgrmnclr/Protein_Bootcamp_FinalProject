@@ -2,14 +2,15 @@
 import { computed, ref } from '@vue/reactivity';
 import { getBet, betX, addCash } from "../../utils/wallet"
 import LeaderboardItem from './LeaderboardItem.vue';
+import BetWin from "../Bet/BetWin.vue"
 
 const props = defineProps(["horses", "results", "leaderboard"]);
 
 const raceFinished = ref(false);
-const isBetWin = ref(false);
+const isBetWin = ref(null);
 
 const sortedHorses = computed(() => { // we are following the sorting 
-
+    
     const isRaceFinished = props.horses.every((horse) => horse.pos >= 100) // if all horses pos >= 95 then return true
 
     if (isRaceFinished) {
@@ -17,6 +18,8 @@ const sortedHorses = computed(() => { // we are following the sorting
         if (getBet().selectedHorse == props.leaderboard[0].name) {   // bet winning
             addCash(getBet().betAmount * betX);
             isBetWin.value = true;
+        }else{
+            isBetWin.value = false;
         }
         return props.leaderboard;
     } else {    // sorting continue till race finish
@@ -50,9 +53,20 @@ const sortedHorses = computed(() => { // we are following the sorting
         </div>
     </div>
     <template v-if="isBetWin">
-        <div class="betwin">
-            <p>CONGRATULATIONS, YOU WON {{ getBet().betAmount * betX }}$</p>
-        </div>
+        <!-- <div class="betwin"> -->
+            <!-- <div class="betwin__text"> -->
+                <BetWin :betresult="isBetWin"></BetWin>
+                <!-- <p>CONGRATULATIONS, YOU WON {{ getBet().betAmount * betX }}$</p> -->
+            <!-- </div> -->
+        <!-- </div> -->
+    </template>
+    <template v-if="isBetWin == false">
+        <!-- <div class="betwin">
+            <div class="betwin__text"> -->
+                <BetWin :betresult="isBetWin"></BetWin>
+                <!-- <p>YOU LOSE!</p> -->
+            <!-- </div>
+        </div> -->
     </template>
 </template>
 
@@ -78,7 +92,4 @@ const sortedHorses = computed(() => { // we are following the sorting
     }
 }
 
-.betwin {
-    @apply absolute ml-auto mr-auto left-0 right-0 text-center mt-[50vh] text-[36px] h-[100px] text-white;
-}
 </style>
