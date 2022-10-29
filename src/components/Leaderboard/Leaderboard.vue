@@ -53,20 +53,10 @@ const sortedHorses = computed(() => { // we are following the sorting
         </div>
     </div>
     <template v-if="isBetWin">
-        <!-- <div class="betwin"> -->
-            <!-- <div class="betwin__text"> -->
-                <BetWin :betresult="isBetWin"></BetWin>
-                <!-- <p>CONGRATULATIONS, YOU WON {{ getBet().betAmount * betX }}$</p> -->
-            <!-- </div> -->
-        <!-- </div> -->
+            <BetWin :betresult="isBetWin"></BetWin>
     </template>
     <template v-if="isBetWin == false">
-        <!-- <div class="betwin">
-            <div class="betwin__text"> -->
-                <BetWin :betresult="isBetWin"></BetWin>
-                <!-- <p>YOU LOSE!</p> -->
-            <!-- </div>
-        </div> -->
+            <BetWin :betresult="isBetWin"></BetWin>
     </template>
 </template>
 

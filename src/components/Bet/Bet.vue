@@ -163,7 +163,6 @@ const submitCoupon = (isAccepted) => {
             .bet-coupon {
                 @apply max-w-full max-h-full;
                 
-                
         }
         
         }

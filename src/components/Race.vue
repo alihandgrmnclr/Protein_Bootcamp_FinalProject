@@ -130,8 +130,6 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
 
 .track {
     @apply mt-5 w-full h-[600px] bg-no-repeat bg-cover overflow-hidden bg-bggreen;
-    // background-image: url(/Images/Pitch/Bushes.png);
-    // background: #328827f0;
 }
 .line-wrapper {
     @apply relative flex items-center h-[75px];
