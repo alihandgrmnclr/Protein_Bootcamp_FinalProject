@@ -72,7 +72,7 @@ Top of the screen you can see the leaderboard. At the bottom side, your bet show
 
 After finishing the race you can see the finish times and final leaderboard. You can click the restart button to start the race again.
 
-<img src="./public/ReadmeAssets/Race.gif" alt="racegif" width="100%"/>
+<img src="./public/ReadmeAssets/race.gif" alt="racegif" width="100%"/>
 
 If your selected horse win the race, you can see how much money you won! <b>GOOD LUCK!</b>
 
