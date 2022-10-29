@@ -51,7 +51,7 @@ const updateHorseHandler = (horse) => { // horse data is updated
 
 const updateLeaderboardHandler = (horse) => {   // leaderboard after race end -> it goes to results
     finalLeaderboard.value.push(horse);
-    if(finalLeaderboard.value.length>7){
+    if( finalLeaderboard.value.length > 7 ){
         isFinished.value = true; // for restart button
     } 
     return;

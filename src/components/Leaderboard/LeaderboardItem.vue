@@ -16,6 +16,7 @@ const rankClasses = computed(() => {    // class name matching with the ranking
 </script>
 
 <template>
+    
     <div class="leaderboard__profile">
         <p :class="rankClasses">{{props.rank+1}}-</p>
         <p class="horse-name">{{props.horse.name}}({{props.horse.id}})</p>
