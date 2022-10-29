@@ -4,6 +4,8 @@
 In this project, I developed a live-time horse race game that ran 8 horses and 8 straight lines. Before the race starts, you must select a horse and enter the bet amount. If you are out of cash, you can start the game from the beginning by pressing the restart button. After pressing the start button, 3 seconds countdown counts when finished the horses start running. During the run, the speed of the horses is determined randomly at specific intervals. This way, who will win is always determined by the luck factor. There is a leaderboard that changes instantly depending on the position of the horses during the race. The race that starts before all horses cross the line is not over. When the last horse crosses the finish line and the race ends, there is a restart button shows and when it is clicked, the race is ready to start again.
 
 ## Live Demo
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cdb19be8-7e07-4e19-9204-873bc5e079f6/deploy-status)](https://app.netlify.com/sites/alihan-horse-race/deploys) <br>
+<a href="https://alihan-horse-race.netlify.app/">Live Demo Link</a>
 
 ## Instructions
 - npm install
@@ -65,8 +67,6 @@ Top of the screen you can see the leaderboard. At the bottom side, your bet show
 <p><b>2-</b> These are the race lines. You can see the horses.</p>
 <p><b>3-</b> Start button. Click it and the race starts.</p>
 <p><b>4-</b> Your bet screen. You can see the bet options.</p>
-
-
 
 ![race](./public/ReadmeAssets/RaceScreen.png)
 
