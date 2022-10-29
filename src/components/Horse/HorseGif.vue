@@ -1,7 +1,7 @@
 <script setup>
 const props = defineProps(["img"]);
 
-const imgPath = new URL(`/Images/HorsesGif/${props.img}.gif`, import.meta.url).href
+const imgPath = `/Images/HorsesGif/${props.img}.gif`;
 
 </script>
 
