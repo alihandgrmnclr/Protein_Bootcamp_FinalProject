@@ -51,9 +51,9 @@ const updateHorseHandler = (horse) => { // horse data is updated
 
 const updateLeaderboardHandler = (horse) => {   // leaderboard after race end -> it goes to results
     finalLeaderboard.value.push(horse);
-    if( finalLeaderboard.value.length > (horseRef.value.length) - 1 ){
+    if (finalLeaderboard.value.length > (horseRef.value.length) - 1) {
         isFinished.value = true; // for restart button
-    } 
+    }
     return;
 };
 
@@ -66,10 +66,10 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     <template v-if="countDownTimer < 1">
         <div class="track">
             <div v-for="horse in props.horses" :key="horse.id">
-                <div class="start-line"></div>
-                <div class="finish-line"></div>
-                <div class="line-wrapper">
-                    <p class="line-id">{{ horse.id }}- <span>{{horse.name}}</span> </p>
+                <div class="track__start"></div>
+                <div class="track__finish"></div>
+                <div class="track__line">
+                    <p class="track__line__info">{{ horse.id }}- <span>{{ horse.name }}</span> </p>
                     <Horse
                       @updateHorse="updateHorseHandler"
                       @updateLeaderboard="updateLeaderboardHandler"
@@ -83,14 +83,13 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     <template v-else>
         <div class="track">
             <div v-for="horse in props.horses" :key="horse.id">
-                <div class="finish-line"></div>
-                <div class="start-line"></div>
-                <div class="line-wrapper">
-                    <p class="line-id">{{ horse.id }}- <span>{{horse.name}}</span> </p>
+                <div class="track__start"></div>
+                <div class="track__finish"></div>
+                <div class="track__line">
+                    <p class="track__line__info">{{ horse.id }}- <span>{{ horse.name }}</span> </p>
                     <Horse
                       :start="start"
-                      :horse="horse"
-                      >
+                      :horse="horse">
                       </Horse>
                 </div>
             </div>
@@ -99,13 +98,12 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
     <template v-if="isCountDown">
         <p class="countdown-timer">{{ countDownTimer }}</p>
     </template>
-    <div class="race-settings">
+    <div class="race">
         <template v-if="!start">
             <ButtonComp
               class="start-btn"
               @click="raceStart(), countDownSound()"
               :text="'Start'"></ButtonComp>
-            <!-- <button class="start-btn" @click="raceStart(), countDownSound()">Başla</button> -->
         </template>
         <template v-if="isFinished">
             <ButtonComp
@@ -113,62 +111,65 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
               @click="restart(), clickSound()"
               :text="'Restart'"></ButtonComp>
         </template>
-        <div class="bet-options">
-            <p class="bet-opt">Selected Horse: <span class="bet-select">{{ getBet().selectedHorse }}</span></p>
-            <p class="bet-opt">Bet Amount: <span class="bet-select">{{ getBet().betAmount }}$</span></p>
-            <p class="bet-opt">Reward Claim: <span class="bet-select">{{ getBet().betAmount * betX }}$</span></p>
+        <div class="race__options">
+            <p class="race__options__bet">Selected Horse: <span class="race__options__value">{{ getBet().selectedHorse }}</span></p>
+            <p class="race__options__bet">Bet Amount: <span class="race__options__value">{{ getBet().betAmount }}$</span></p>
+            <p class="race__options__bet">Reward Claim: <span class="race__options__value">{{ getBet().betAmount * betX }}$</span></p>
         </div>
     </div>
 
 </template>
 
 <style lang="scss" scoped>
+.results {
+    // leaderboard 
+    @apply flex justify-end;
+}
+
 .countdown-timer {
     @apply absolute left-[50%] bottom-[50%] translate-y-[50%] text-[6rem];
-
 }
 
 .track {
     @apply mt-5 w-full h-[600px] bg-no-repeat bg-cover overflow-hidden bg-bggreen;
-}
-.line-wrapper {
-    @apply relative flex items-center h-[75px];
-    border-bottom: solid;
-    border-color: rgba(240, 248, 255, 0.214);
+
+    &__start {
+        @apply absolute left-0 ml-[45px] h-[75px] w-1 bg-white opacity-30;
+        @apply sm:ml-[75px];
+    }
+
+    &__finish {
+        @apply absolute right-0 w-2 h-[75px] bg-white;
+        background-image: url(/Images/Pitch/finish.png);
+        background-size: 60px;
+    }
+
+    &__line {
+        @apply relative flex items-center h-[75px];
+        border-bottom: solid;
+        border-color: rgba(240, 248, 255, 0.214);
+
+        .track__line__info {
+            @apply flex text-white font-bold ml-2 w-0 text-3xl opacity-50;
+            @apply sm:ml-8;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+        }
+    }
 }
 
-.line-id {
-    @apply flex text-white font-bold ml-8 w-0 text-3xl opacity-50;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-}
-
-.race-settings {
+.race {
     @apply flex flex-col justify-center items-center mt-4 gap-3 h-[120px];
-}
 
-.finish-line {
-    @apply absolute right-0 w-2 h-[75px] bg-white;
-    background-image: url(/Images/Pitch/finish.png);
-    background-size: 60px;
-}
-.start-line{
-    @apply absolute left-0 ml-[75px] w-1 h-[75px] bg-white opacity-30;
-}
+    &__options {
+        @apply flex flex-col items-center justify-center bg-bgprimary text-white w-full h-full;
+    }
 
-
-.results {
-    @apply flex justify-end;
-}
-
-.bet-options {
-    @apply flex flex-col items-center justify-center bg-bgprimary text-white w-full h-full;
-
-    .bet-opt {
+    &__options__bet {
         @apply flex justify-between w-[250px];
     }
 
-    .bet-select {
+    &__options__value {
         @apply font-bold;
     }
 }

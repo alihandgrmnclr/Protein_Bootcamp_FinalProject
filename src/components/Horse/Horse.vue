@@ -44,10 +44,7 @@ raceStart;
           </HorseGif>
     </template>
     <template v-else>
-        <HorsePng
-        class="gif"
-        :img="horse.img">
-        </HorsePng>
+        <HorsePng class="gif" :img="horse.img"> </HorsePng>
     </template>
 
 

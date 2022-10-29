@@ -36,25 +36,24 @@ const setBet = (betValue, betHorse) => {  // setting the bet
 
 <template>
   <template v-if="!bet">
-    <div class="bet-app">
+    <div class="bet_app">
       <Bet
         :horses="horses"
         :cash="cash"
         @submitBet="setBet">
-      </Bet>
+        </Bet>
     </div>
   </template>
   <template v-else>
     <Race
       :horses="horses"
       @updateHorse="updateHorseHandler">
-    </Race>
+      </Race>
   </template>
 </template>
 
 <style scoped>
-.bet-app {
+.bet_app {
   @apply flex justify-center items-center h-full;
-
 }
 </style>

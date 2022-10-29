@@ -34,5 +34,5 @@ export const randomSpeed = (min = 1, max = 5) => {
 };
 
 export const getFinishTime = (start, finish) => {
-  return ((finish - start) / 1000).toFixed(2);
+  return ((finish - start) / 1000).toFixed(3);
 };

@@ -10,7 +10,7 @@ const raceFinished = ref(false);
 const isBetWin = ref(null);
 
 const sortedHorses = computed(() => { // we are following the sorting 
-    
+
     const isRaceFinished = props.horses.every((horse) => horse.pos >= 100) // if all horses pos >= 95 then return true
 
     if (isRaceFinished) {
@@ -18,7 +18,7 @@ const sortedHorses = computed(() => { // we are following the sorting
         if (getBet().selectedHorse == props.leaderboard[0].name) {   // bet winning
             addCash(getBet().betAmount * betX);
             isBetWin.value = true;
-        }else{
+        } else {
             isBetWin.value = false;
         }
         return props.leaderboard;
@@ -47,16 +47,15 @@ const sortedHorses = computed(() => { // we are following the sorting
               :horse="horse"
               :rank="index"
               :leaderboard="props.leaderboard"
-              :raceFinished="raceFinished"
-              >
+              :raceFinished="raceFinished">
               </LeaderboardItem>
         </div>
     </div>
     <template v-if="isBetWin">
-            <BetWin :betresult="isBetWin"></BetWin>
+        <BetWin :betresult="isBetWin"></BetWin>
     </template>
     <template v-if="isBetWin == false">
-            <BetWin :betresult="isBetWin"></BetWin>
+        <BetWin :betresult="isBetWin"></BetWin>
     </template>
 </template>
 
@@ -65,7 +64,8 @@ const sortedHorses = computed(() => { // we are following the sorting
     @apply flex justify-center items-center p-3 bg-bgprimary text-slate-50 w-full h-[200px];
 
     &__header {
-        @apply hidden md:flex flex-col justify-center items-center w-1/2;
+        @apply hidden flex-col justify-center items-center w-1/2;
+        @apply md:flex;
     }
 
     &__icon {
@@ -81,5 +81,4 @@ const sortedHorses = computed(() => { // we are following the sorting
         @apply md:w-1/2 md:text-lg lg:items-start;
     }
 }
-
 </style>
