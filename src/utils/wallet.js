@@ -35,6 +35,7 @@ export const clearBet = () => {	// clear the bet from localStorage
 };
 
 export const addCash = (value) => {	// works when you win the bet, adding cash to your wallet
+	value = Number(value);
 	let wallet = localStorage.getItem('cash');
 	wallet = Number(wallet);
 	wallet = value + wallet;
