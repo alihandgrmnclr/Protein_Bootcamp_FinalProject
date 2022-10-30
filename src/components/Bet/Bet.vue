@@ -39,7 +39,7 @@ const isModalOpen = () => {
 const submitCoupon = (isAccepted) => {
 
     isModalDisplay.value = false;
-    if (getLocalWallet() < 1) return alert("GAME OVER");
+    if (getLocalWallet() < 1) return alert("GAME OVER, you're out of cash. You can click the restart button");
     if (!isAccepted) return;
 
     emit("submitBet", betAmount.value, selectedHorse.value);
