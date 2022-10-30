@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue"
-import { getLocalWallet, saveBet, clearBet, saveLocalWallet, setWallet } from "./utils/wallet"
+import { getLocalWallet, saveBet, clearBet, saveLocalWallet } from "./utils/wallet"
 import { horseData } from "./utils/race"
 
 import Race from './components/Race.vue';
@@ -14,24 +14,24 @@ onMounted(() => {
   const walletData = getLocalWallet() || false; // if walletData == null -> false
   checkWallet(walletData);
   clearBet();
-  setWallet();
 });
 
 function checkWallet(walletData) {
   if (walletData) return;
   cash.value = saveLocalWallet(0);
-}
+};
 
 const updateHorseHandler = (updatedHorseData) => {
   const horseIndex = horses.value.findIndex(horse => horse.id === updatedHorseData.id); // updating the data (matching the indexes)
   horses.value[horseIndex] = updatedHorseData;
-}
+};
 
 const setBet = (betValue, betHorse) => {  // setting the bet
   bet.value = true;
   saveBet(betValue, betHorse);
   return;
-}
+};
+
 </script>
 
 <template>

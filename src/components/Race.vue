@@ -11,6 +11,7 @@ const emits = defineEmits(["updateHorse", "updateLeaderboard", "finishTime"]);
 
 const horseRef = ref(props.horses);
 const start = ref(false);
+const showStart = ref(true);
 const isFinished = ref(false);
 const isCountDown = ref(false);
 const countDownTimer = ref(3);
@@ -18,6 +19,7 @@ const finalLeaderboard = ref([]);
 const startTime = ref(0);
 
 const delay = (ms) => { // 3 seconds countDown
+    showStart.value = false;
     isCountDown.value = true;
     const countDown = setInterval(() => {
         if (countDownTimer.value <= 1) {
@@ -99,15 +101,15 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
         <p class="countdown-timer">{{ countDownTimer }}</p>
     </template>
     <div class="race">
-        <template v-if="!start">
+        <template v-if="showStart">
             <ButtonComp
-              class="start-btn"
+              class="start_btn"
               @click="raceStart(), countDownSound()"
               :text="'Start'"></ButtonComp>
         </template>
         <template v-if="isFinished">
             <ButtonComp
-              class="start-btn"
+              class="start_btn"
               @click="restart(), clickSound()"
               :text="'Restart'"></ButtonComp>
         </template>

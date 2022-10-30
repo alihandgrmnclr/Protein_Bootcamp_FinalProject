@@ -9,7 +9,7 @@ const props = defineProps(["horses", "cash", "bet"])
 const emit = defineEmits(["submitBet"])
 
 const selectedHorse = ref("");
-const betAmount = ref(1);
+const betAmount = ref("");
 const isModalDisplay = ref(false);
 const isBetAccepted = ref(false);
 
@@ -86,7 +86,8 @@ const submitCoupon = (isAccepted) => {
                   class="bet_amount"
                   type="number"
                   v-model="betAmount"
-                  @focusout="checkAmount">
+                  @focusout="checkAmount"
+                  >
                 </span>
                 <p class="details">Bet Rate: <span class="bet_values">{{ betX }}x</span></p>
                 <p class="details">Claim Reward: <span class="bet_values">{{ betAmount * 10 }}$</span> </p>

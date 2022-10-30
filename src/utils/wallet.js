@@ -1,13 +1,5 @@
 export const betX = 10;	// bet rate
 
-export const setWallet = () => {
-	const walletData = localStorage.getItem("cash") || false;
-	if (walletData == 0 && first){
-		console.log("sifir");
-	}
-	return;
-}
-
 export const getLocalWallet = () => {	// getting wallet from localStorage
 	const data = localStorage.getItem('cash');
 	const cash = JSON.parse(data);
@@ -34,13 +26,13 @@ export const getBet = () => {	// getting bet from localStorage
 		selectedHorse
 	}
 	return betData;
-}
+};
 
 export const clearBet = () => {	// clear the bet from localStorage
 	localStorage.removeItem("betAmount");
 	localStorage.removeItem("selectedHorse");
 	return;
-}
+};
 
 export const addCash = (value) => {	// works when you win the bet, adding cash to your wallet
 	let wallet = localStorage.getItem('cash');
