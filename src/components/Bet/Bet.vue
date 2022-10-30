@@ -89,12 +89,13 @@ const submitCoupon = (isAccepted) => {
                   v-model="betAmount"
                   @focusout="checkAmount"
                   min="1"
+                  onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" 
                   >
                 </span>
                 <p class="details">Bet Rate: <span class="bet_values">{{ betX }}x</span></p>
                 <p class="details">Claim Reward: <span class="bet_values">{{ betAmount * 10 }}$</span> </p>
             </div>
-            <template v-if="selectedHorse.length > 1">
+            <template v-if="selectedHorse.length > 1 && betAmount > 0">
                 <div class="submit">
                     <ButtonComp
                       :text="'Accept'"
