@@ -31,6 +31,7 @@ const setDefaultValues = () => {    // setting the default values
 };
 
 const isModalOpen = () => {
+    if(betAmount.value === "" ) return alert("Invalid value");
     isModalDisplay.value = true;
     return;
 };
@@ -87,6 +88,7 @@ const submitCoupon = (isAccepted) => {
                   type="number"
                   v-model="betAmount"
                   @focusout="checkAmount"
+                  min="1"
                   >
                 </span>
                 <p class="details">Bet Rate: <span class="bet_values">{{ betX }}x</span></p>
