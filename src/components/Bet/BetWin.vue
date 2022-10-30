@@ -27,7 +27,7 @@ const props = defineProps(["betresult"]);
   @apply absolute left-0 right-0 text-white z-20;
 
   &__wrapper {
-    @apply flex justify-center items-center w-full mt-[40vh];
+    @apply flex justify-center items-center w-full mt-[30vh];
 
   }
 
