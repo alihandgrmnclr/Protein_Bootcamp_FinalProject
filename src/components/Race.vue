@@ -31,9 +31,12 @@ const delay = (ms) => { // 3 seconds countDown
     return new Promise(resolve => { // waits till given seconds
         setTimeout(resolve, ms);
     });
-}
+};
 
 const restartGame = () => {
+    horseRef.value.map((item) => item.start = 0);
+    horseRef.value.map((item) => item.finish = null);
+    horseRef.value.map((item) => item.pos = 0);
     emits("restart", false)
     return;
 };
@@ -42,7 +45,7 @@ async function raceStart() {
     await delay(3000);  // race will not start before delay function
     start.value = true;
     startTime.value = Date.now();
-    horseRef.value.map((item) => item.start = startTime.value)
+    horseRef.value.map((item) => item.start = startTime.value);
     return;
 }
 

@@ -32,10 +32,11 @@ const setBet = (betValue, betHorse) => {  // setting the bet
   return;
 };
 
-const restartHandler = (value) => {
-  bet.value = value;
+const restartHandler = (betStatus) => {
+  cash.value = getLocalWallet() || false;
+  bet.value = betStatus;
   return;
-}
+};
 
 </script>
 
