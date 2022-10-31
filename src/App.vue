@@ -32,6 +32,11 @@ const setBet = (betValue, betHorse) => {  // setting the bet
   return;
 };
 
+const restartHandler = (value) => {
+  bet.value = value;
+  return;
+}
+
 </script>
 
 <template>
@@ -47,7 +52,8 @@ const setBet = (betValue, betHorse) => {  // setting the bet
   <template v-else>
     <Race
       :horses="horses"
-      @updateHorse="updateHorseHandler">
+      @updateHorse="updateHorseHandler"
+      @restart="restartHandler">
       </Race>
   </template>
 </template>

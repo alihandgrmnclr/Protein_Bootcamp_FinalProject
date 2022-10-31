@@ -7,7 +7,7 @@ import { betX, getBet } from '../utils/wallet';
 import { clickSound, countDownSound } from '../utils/sounds';
 
 const props = defineProps(["horses", "bet"]);
-const emits = defineEmits(["updateHorse", "updateLeaderboard", "finishTime"]);
+const emits = defineEmits(["updateHorse", "updateLeaderboard", "finishTime","restart"]);
 
 const horseRef = ref(props.horses);
 const start = ref(false);
@@ -33,8 +33,8 @@ const delay = (ms) => { // 3 seconds countDown
     });
 }
 
-const restart = () => {
-    window.location.reload();
+const restartGame = () => {
+    emits("restart", false)
     return;
 };
 
@@ -110,7 +110,7 @@ const updateLeaderboardHandler = (horse) => {   // leaderboard after race end ->
         <template v-if="isFinished">
             <ButtonComp
               class="start_btn"
-              @click="restart(), clickSound()"
+              @click="clickSound(), restartGame()"
               :text="'Restart'"></ButtonComp>
         </template>
         <div class="race__options">
